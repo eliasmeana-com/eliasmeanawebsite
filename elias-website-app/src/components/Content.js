@@ -3,7 +3,7 @@ import React from 'react';
 function Content() {
   return (
     <div className="content">
-      <h2>Key Skills and Competkbhjencies</h2>
+      <h2>Key Skills and Competencies</h2>
       <div className="skills-list">
         <ul>
           <li>Python</li>

@@ -92,12 +92,13 @@ a:hover {
 @media (max-width: 768px) {
   .container {
     flex-direction: column;  /* Stack the sidebar and content vertically */
-    padding: 20px;  /* Add padding for spacing */
+    padding: 0;  /* Remove padding to avoid unnecessary spacing */
+    margin: 0;   /* Remove margin to ensure content spans the entire width */
   }
 
   .sidebar {
     width: 100%;  /* Sidebar takes full width on small screens */
-    margin-bottom: 20px;  /* Add space between sidebar and content */
+    margin-bottom: 0;  /* Remove the space between sidebar and content */
   }
 
   .content {

@@ -6,7 +6,7 @@ body {
 }
 
 .container {
-  max-width: 900px;
+  max-width: 1300px;
   margin: 40px auto;
   background-color: white;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
@@ -44,6 +44,7 @@ body {
 .content {
   padding: 20px;
   flex-grow: 1;
+  hyphens: auto;
 }
 
 h2 {
@@ -128,4 +129,40 @@ a:hover {
   p {
     font-size: 14px;  /* Adjust text size for smaller devices */
   }
+}
+
+.home {
+  text-align: center;
+  padding: 40px;
+}
+
+.home h1 {
+  font-size: 2em;
+  color: #2C3E50;
+  margin-bottom: 20px;
+}
+
+.home p {
+  font-size: 1.2em;
+  color: #7f8c8d;
+  margin-bottom: 30px;
+}
+
+.home-links {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.home-button {
+  text-decoration: none;
+  background-color: #3498db;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+.home-button:hover {
+  background-color: #2980b9;
 }

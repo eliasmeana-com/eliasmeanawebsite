@@ -1,0 +1,62 @@
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const submitButton = document.getElementById('FSsubmit');
+        const q173Div = document.getElementById('q173');
+        const signatureInput = q173Div.querySelector('input[type="hidden"][id="RESULT_TextField-94_30"]');
+        const clearButton = q173Div.querySelector('.signature_clear span[role="button"]');
+        submitButton.disabled = true;
+        function updateButtonState() {
+            if (signatureInput.value.trim() !== '') {
+                submitButton.disabled = false;
+            } else {
+                submitButton.disabled = true;
+            }
+        }
+        setInterval(updateButtonState, 200);
+        if (clearButton) {
+            clearButton.addEventListener('click', function () {
+                signatureInput.value = '';
+                updateButtonState();
+            });
+        }
+    });
+</script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const submitButton = document.getElementById('FSsubmit');
+        const q176Div = document.getElementById('q176');
+        const paymentButton = q176Div.querySelector('a'); // Get the payment button (anchor inside q176 div)
+        const q173Div = document.getElementById('q173');
+        const signatureInput = q173Div.querySelector('input[type="hidden"][id="RESULT_TextField-94_30"]');
+        const clearButton = q173Div.querySelector('.signature_clear span[role="button"]');
+
+        submitButton.disabled = true;
+        paymentButton.style.pointerEvents = 'none';  // Disable clicking initially
+        paymentButton.style.backgroundColor = '#d3d3d3'; // Gray out the button
+
+        function updateButtonState() {
+            if (signatureInput.value.trim() !== '') {
+                submitButton.disabled = false;
+                paymentButton.style.pointerEvents = 'auto'; // Enable clicking
+                paymentButton.style.backgroundColor = 'rgb(155, 26, 41)'; // Restore original color
+                paymentButton.href = "https://connect.intuit.com/pay/RedEagleLawLc/scs-v1-7784ef3cdae047b9a1f3c8f01978991b092acfa50c214584b9eed614bc7acdc1ea9db4a78d2549c5a86d29b3237bc5aa?locale=EN_US&amp;cta=paylinkbuybutton"; // Set the actual payment link
+            } else {
+                submitButton.disabled = true;
+                paymentButton.style.pointerEvents = 'none'; // Disable clicking
+                paymentButton.style.backgroundColor = '#d3d3d3'; // Gray out the button
+                paymentButton.href = "#"; // Disable the link by changing its href
+            }
+        }
+
+        setInterval(updateButtonState, 200);
+
+        if (clearButton) {
+            clearButton.addEventListener('click', function () {
+                signatureInput.value = '';
+                updateButtonState();
+            });
+        }
+    });
+</script>

@@ -1,0 +1,58 @@
+/* SidebarLayout.css */
+
+.container {
+    display: flex; /* Sidebar and content side by side */
+    max-width: 1300px;
+    margin: 40px auto;
+    background-color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Hide overflow content */
+  }
+  
+  .sidebar {
+    background-color: #2C3E50;
+    color: white;
+    padding: 20px;
+    width: 250px;
+    flex-shrink: 0;
+  }
+  
+  .sidebar h1 {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+  }
+  
+  .sidebar p {
+    margin: 10px 0;
+    color: #ecf0f1;
+  }
+  
+  .sidebar a {
+    color: #ecdbff;
+    text-decoration: none;
+  }
+  
+  .sidebar a:hover {
+    text-decoration: underline;
+  }
+  
+  .content {
+    padding: 20px;
+    flex-grow: 1; /* Content takes the remaining space */
+  }
+  
+  /* Add responsiveness for SidebarLayout */
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column; /* Stack sidebar and content vertically */
+    }
+  
+    .sidebar {
+      width: 100%; /* Sidebar spans the full width */
+    }
+  
+    .content {
+      width: 100%; /* Content spans the full width */
+    }
+  }
+  

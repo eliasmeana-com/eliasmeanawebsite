@@ -1,0 +1,27 @@
+/* NoSidebarLayout.css */
+
+.container {
+    max-width: 1300px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .content {
+    padding: 20px;
+    width: 100%; /* Full-width content */
+    hyphens: auto; /* For responsive text */
+  }
+  
+  /* Add responsiveness for NoSidebarLayout */
+  @media (max-width: 768px) {
+    .container {
+      padding: 10px;
+    }
+  
+    .content {
+      width: 100%; /* Ensure full width on smaller screens */
+    }
+  }
+  

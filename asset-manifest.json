@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/eliasmeanawebsite/static/css/main.05e67865.css",
-    "main.js": "/eliasmeanawebsite/static/js/main.3e224183.js",
-    "static/js/453.930bd056.chunk.js": "/eliasmeanawebsite/static/js/453.930bd056.chunk.js",
-    "index.html": "/eliasmeanawebsite/index.html",
-    "main.05e67865.css.map": "/eliasmeanawebsite/static/css/main.05e67865.css.map",
-    "main.3e224183.js.map": "/eliasmeanawebsite/static/js/main.3e224183.js.map",
-    "453.930bd056.chunk.js.map": "/eliasmeanawebsite/static/js/453.930bd056.chunk.js.map"
+    "main.css": "/eliasmeanawebsite/home/static/css/main.05e67865.css",
+    "main.js": "/eliasmeanawebsite/home/static/js/main.e3385e3f.js",
+    "static/js/453.930bd056.chunk.js": "/eliasmeanawebsite/home/static/js/453.930bd056.chunk.js",
+    "index.html": "/eliasmeanawebsite/home/index.html",
+    "main.05e67865.css.map": "/eliasmeanawebsite/home/static/css/main.05e67865.css.map",
+    "main.e3385e3f.js.map": "/eliasmeanawebsite/home/static/js/main.e3385e3f.js.map",
+    "453.930bd056.chunk.js.map": "/eliasmeanawebsite/home/static/js/453.930bd056.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.05e67865.css",
-    "static/js/main.3e224183.js"
+    "static/js/main.e3385e3f.js"
   ]
 }

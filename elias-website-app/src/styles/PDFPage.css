@@ -1,0 +1,12 @@
+.pdf-page {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .pdf-viewer-container {
+    margin: 0 auto;
+    max-width: 800px;
+    height: 600px;
+    border: 1px solid #ddd;
+  }
+  

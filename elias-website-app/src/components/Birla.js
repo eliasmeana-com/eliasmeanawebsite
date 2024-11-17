@@ -1,21 +1,19 @@
-import { pdfjs } from 'react-pdf';
 import React from 'react';
-import { Viewer } from '@react-pdf-viewer/core';
-import '@react-pdf-viewer/core/lib/styles/index.css';
 
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+function PDFViewer() {
 
-function Birla() {
-  const pdfUrl = 'pdfs/BirlaPoster'; 
   return (
-    <div className="birla-page">
-      <h1>Birla PDF Viewer</h1>
-      <div className="pdf-viewer-container">
-        <Viewer fileUrl={pdfUrl} />
-      </div>
+    <div className="pdf-viewer">
+      <h1>PDF Viewer</h1>
+      <iframe
+        src={`https://docs.google.com/gview?url=https://drive.google.com/uc?id=1vj9vYSrcaZ7p1OLMdLYno9c1G8GVUtRN&embedded=true`}
+        width="100%"
+        height="600px"
+        frameBorder="0"
+        title="PDF Document"
+      />
     </div>
   );
 }
 
-export default Birla;
-
+export default PDFViewer;

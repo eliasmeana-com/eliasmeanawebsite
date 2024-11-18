@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Navbar.css'; // Optional: Add styles
 
@@ -11,7 +11,7 @@ function Dropdown({ title, items }) {
           <li key={index} className="dropdown-item">
             {item.submenu ? (
               <>
-                <span className="submenu-title">{item.title}</span>
+                <span className="dropdown-item">{item.title}</span>
                 <ul className="submenu">
                   {item.submenu.map((subitem, subIndex) => (
                     <li key={subIndex} className="submenu-item">
@@ -31,34 +31,34 @@ function Dropdown({ title, items }) {
 }
 
 function Navbar() {
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   const birlaMenuItems = [
-    // {
-    //   title: 'Birla Main',
-    //   link: '/birla-main',
-    // },
     {
       title: 'Research',
       submenu: [
         { title: 'Birla Poster', link: '/birla' },
-        { title: 'Subitem 2', link: '/subitem-2' },
-      ],
-    },
-    {
-      title: 'Submenu 2',
-      submenu: [
-        { title: 'Subitem A', link: '/subitem-a' },
-        { title: 'Subitem B', link: '/subitem-b' },
+        { title: 'D-wave Proposal', link: '/dwave' },
       ],
     },
   ];
 
   return (
     <nav className="navbar">
-      <ul className="navbar-links">
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/resume">Resume</Link></li>
-        <Dropdown title="Other Stuff" items={birlaMenuItems} />
-      </ul>
+      <div className="navbar-header">
+        <button className="hamburger" onClick={toggleMobileMenu}>
+          &#9776;
+        </button>
+        <ul className={`navbar-links ${isMobileMenuOpen ? 'active' : ''}`}>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/resume">Resume</Link></li>
+          <Dropdown title="Other Stuff" items={birlaMenuItems} />
+        </ul>
+      </div>
     </nav>
   );
 }

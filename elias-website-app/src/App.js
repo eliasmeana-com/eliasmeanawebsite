@@ -8,6 +8,7 @@ import Resume from './components/Resume';
 import './styles/App.css';
 import Navbar from './components/Navbar';
 import Birla from './components/Birla';
+import Dwave from './components/Dwave';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/" element={<NoSidebarLayout><Home /></NoSidebarLayout>} />
         <Route path="/resume" element={<SidebarLayout><Resume /></SidebarLayout>} />
         <Route path="/birla" element={<NoSidebarLayout><Birla /></NoSidebarLayout>} />
+        <Route path="/dwave" element={<NoSidebarLayout><Dwave /></NoSidebarLayout>} />
         {/* Routes without Sidebar
         <Route path="/about" element={<NoSidebarLayout><About /></NoSidebarLayout>} />
         <Route path="/contact" element={<NoSidebarLayout><Contact /></NoSidebarLayout>} /> */}

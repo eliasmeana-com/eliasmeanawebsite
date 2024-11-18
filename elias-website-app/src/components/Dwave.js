@@ -3,10 +3,11 @@ import '../styles/PDFPage.css';
 
 function PDFViewer() {
 
-  const pdfid='1vj9vYSrcaZ7p1OLMdLYno9c1G8GVUtRN'
+  const pdfid='1SHqMXz4oj9Oc89eHzcooO-KIaRF4f3Mt'
   return (
     <div className="pdf-viewer">
-      <h1>PDF Viewer</h1>
+      <h1>Proposal D-Wave Device
+      </h1>
       <iframe
         src={`https://docs.google.com/gview?url=https://drive.google.com/uc?id=${pdfid}&embedded=true`}
         width="100%"

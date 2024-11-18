@@ -6,9 +6,9 @@ function Home() {
       <h1>Welcome to My Website</h1>
       <p>Explore my projects, skills, and professional journey.</p>
       <div className="home-links">
-        <a href="/resume" className="home-button">Resume</a>
+        <a href="#/resume" className="home-button">Resume</a>
         <a href="#education" className="home-button">Music</a>
-        <a href="/birla" className="home-button">eNos Poster</a>
+        <a href="#/birla" className="home-button">eNos Poster</a>
       </div>
     </div>
   );

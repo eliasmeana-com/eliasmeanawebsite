@@ -1,4 +1,5 @@
 import React from 'react';
+import '../styles/Resume.css'
 
 function Content() {
   return (
@@ -16,8 +17,6 @@ function Content() {
           <li>Splunk</li>
           <li>Datadog</li>
           <li>RabbitMQ</li>
-        </ul>
-        <ul>
           <li>Elastic Search</li>
           <li>Postman</li>
           <li>Mathematica</li>
@@ -43,14 +42,14 @@ function Content() {
       <h2>Additional Information</h2>
       <div className="languages-list">
         <ul>
-          <li>Dual citizenship (US and Spain)</li>
-          <li>English - Native language</li>
-          <li>Spanish - Native command (fully bilingual)</li>
-          <li>Italian - Competent written and spoken</li>
-          <li>Valencian/Catalan - Competent spoken</li>
+          <li className='citizenship'>Dual citizenship (US and Spain)</li>
         </ul>
         <ul>
-          <li>French - Competent written and spoken</li>
+          <li>English - Native</li>
+          <li>Spanish - Native</li>
+          <li>Valencian/Catalan - Advanced written and spoken</li>
+          <li>Italian - Intermediate written and spoken</li>
+          <li>French - Intermediate written and spoken</li>
           <li>Russian - Familiarity with written language</li>
           <li>Farsi - Familiarity with spoken language</li>
         </ul>
@@ -82,12 +81,55 @@ function Content() {
         Virtual tutor for various levels of mathematics and physics.</p>
 
       <h2>Teaching Examples</h2>
-      <ul>
-        <li><a href="https://www.youtube.com/playlist?list=PLZaEjudfj3LWVtPkAQnGo13N-xhygKLgr" target="_blank" rel="noopener noreferrer">Series on Deriving Centers of Mass With Integral Formulations</a></li>
-        <li><a href="https://www.youtube.com/watch?v=ts_g7ADxP50&t=1707s" target="_blank" rel="noopener noreferrer">Solving Second Order Homogeneous Differential Equations</a></li>
-        <li><a href="https://www.youtube.com/watch?v=OAiHkcCSgf0&t=5931s" target="_blank" rel="noopener noreferrer">Solving First Order Nonhomogeneous Differential Equations With Integrating Factors</a></li>
-        <li><a href="https://youtu.be/kkxi3G2PPnU" target="_blank" rel="noopener noreferrer">Intuitive Development of the Second Derivative Test</a></li>
-        <li><a href="https://youtu.be/iTtU6JtLnVY" target="_blank" rel="noopener noreferrer">Intuitive Development of the Fundamental Theorem of Calculus</a></li>
+      <ul className="teaching-examples">
+        <li>
+          <a href="https://www.youtube.com/watch?v=qZeBoLYRdtA&ab_channel=EliasMeana" target="_blank" rel="noopener noreferrer">
+            <img src="https://img.youtube.com/vi/qZeBoLYRdtA/0.jpg" alt="Deriving Centers of Mass" />
+            Dynamics : Solving a classic mechanics problem involving inclined planes and pulleys
+          </a>
+        </li>
+        <li>
+          <a href="https://www.youtube.com/playlist?list=PLZaEjudfj3LWVtPkAQnGo13N-xhygKLgr" target="_blank" rel="noopener noreferrer">
+            <img src="https://img.youtube.com/vi/kyCsHftxT0Y/0.jpg" alt="Deriving Centers of Mass" />
+            Series on Deriving Centers of Mass With Integral Formulations
+          </a>
+        </li>
+        <li>
+          <a href="https://www.youtube.com/watch?v=ts_g7ADxP50&t=1707s" target="_blank" rel="noopener noreferrer">
+            <img src="https://img.youtube.com/vi/ts_g7ADxP50/0.jpg" alt="Solving Second Order Differential Equations" />
+            Solving Second Order Homogeneous Differential Equations
+          </a>
+        </li>
+        <li>
+          <a href="https://www.youtube.com/watch?v=OAiHkcCSgf0&t=5931s&ab_channel=EliasMeana" target="_blank" rel="noopener noreferrer">
+            <img src="https://img.youtube.com/vi/OAiHkcCSgf0/0.jpg" alt="Solving Second Order Differential Equations" />
+            Solving First Order Nonhomogeneous Differential Equations With Integrating Factors
+          </a>
+        </li>
+        <li>
+          <a href="https://www.youtube.com/watch?v=kkxi3G2PPnU&ab_channel=EliasMeana" target="_blank" rel="noopener noreferrer">
+            <img src="https://img.youtube.com/vi/kkxi3G2PPnU/0.jpg" alt="Solving Second Order Differential Equations" />
+            Intuitive Development of the Second Derivative Test
+          </a>
+        </li>
+        <li>
+          <a href="https://www.youtube.com/watch?v=iTtU6JtLnVY&ab_channel=EliasMeana" target="_blank" rel="noopener noreferrer">
+            <img src="https://img.youtube.com/vi/iTtU6JtLnVY/0.jpg" alt="Solving Second Order Differential Equations" />
+            Intuitive Development of the Fundamental Theorem of Calculus
+          </a>
+        </li>
+        <li>
+          <a href="https://www.youtube.com/watch?v=XcaFvFer4Hk&ab_channel=EliasMeana" target="_blank" rel="noopener noreferrer">
+            <img src="https://img.youtube.com/vi/XcaFvFer4Hk/0.jpg" alt="Solving Second Order Differential Equations" />
+            Introduction to Complex Numbers : From Edexcel AS further mathematics
+          </a>
+        </li>
+        <li>
+          <a href="https://www.youtube.com/watch?v=elIe2A4WP3k&feature=youtu.be" target="_blank" rel="noopener noreferrer">
+            <img src="https://img.youtube.com/vi/elIe2A4WP3k/0.jpg" alt="Solving Second Order Differential Equations" />
+            Telescoping series and the method of differences: From Edexcel A2 further mathematics
+          </a>
+        </li>
       </ul>
     </div>
   );

@@ -1,58 +1,208 @@
+/* Navbar container styling */
 .navbar {
-  background-color: #2C3E50;
-  padding: 10px 20px;
+  background-color: #2c3e50;
+  padding: 1rem 3rem;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  flex-wrap: wrap;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
+/* Navbar links container */
 .navbar-links {
   list-style-type: none;
+  display: flex;
+  gap: 30px;
   margin: 0;
   padding: 0;
-  display: flex;
-  gap: 20px;
 }
 
 .navbar-links li {
-  display: inline;
+  position: relative;
 }
 
-.navbar-links a {
-  color: #ecdbff;
+/* Styling for links and dropdown titles */
+.navbar-links a,
+.dropdown-title,
+.submenu-title {
+  color: #ecf0f1;
+  font-size: 18px;
+  font-weight: 500;
   text-decoration: none;
-  font-size: 1.1em;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 0px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
 }
 
-.navbar-links a:hover {
-  text-decoration: underline;
+/* Hover effect for links */
+.navbar-links a:hover,
+.dropdown-title:hover {
+  background-color: #2980b9;
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  color: #ecf0f1;
 }
 
-/* Mobile Responsiveness */
+/* Dropdown menu */
+.dropdown {
+  position: relative;
+}
+
+/* Show the dropdown menu when hovering over the dropdown */
+.dropdown:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Dropdown menu */
+.dropdown-menu {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #34495e;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  border-radius: 8px;
+  min-width: 220px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+}
+
+/* Styling for each dropdown item */
+.dropdown-item {
+  padding: 12px 0px;
+  font-size: 16px;
+  font-weight: 400;
+  border-bottom: 1px solid #ecf0f1;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+
+/* Hover effect for dropdown items */
+.dropdown-item:hover {
+  background-color: #2980b9;
+  transform: translateX(5px);
+}
+
+/* Submenu styling */
+.submenu {
+  display: none;
+  /* Hidden by default */
+  position: absolute;
+  top: 0;
+  left: 100%;
+  background-color: #16a085;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  border-radius: 8px;
+  min-width: 180px;
+  z-index: 998;
+}
+
+/* Show submenu when hovering over the parent dropdown or submenu */
+.dropdown:hover .submenu,
+.submenu-title:hover + .submenu,
+.submenu-item:hover + .submenu {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+
+.submenu:hover {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+
+.submenu-item {
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 400;
+  border-bottom: 1px solid #ecf0f1;
+  transition: background-color 0.3s ease;
+}
+
+.submenu-item:last-child {
+  border-bottom: none;
+}
+
+.submenu-item:hover {
+  background-color: #1abc9c;
+}
+.dropdown:hover .submenu {
+  display: none; /* Prevent submenu from appearing when hovering over the dropdown */
+}
+
+/* .submenu-item:hover{
+  display: block;
+} */
+
+.dropdown:hover .submenu-title:hover +.submenu{
+  display: block;
+}
+
+.dropdown:hover .submenu,
+.submenu-item:hover + .submenu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+
+
+/* Responsive design */
 @media (max-width: 768px) {
   .navbar {
-      flex-direction: column;
-      padding: 10px;
+    padding: 1rem 1.5rem;
+    justify-content: space-between;
   }
 
   .navbar-links {
-      display: block;
-      text-align: center;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
   }
 
   .navbar-links li {
-      margin-bottom: 10px;
+    width: 100%;
   }
 
-  .navbar-links a {
-      font-size: 1.2em;
+  .dropdown-menu {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
   }
-}
 
-/* Very small screens (e.g., phones) */
-@media (max-width: 480px) {
-  .navbar-links a {
-      font-size: 1em;
+  .dropdown:hover .dropdown-menu {
+    display: block;
+    transform: none;
+  }
+
+  .submenu {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+
+  .submenu-title:hover+.submenu {
+    display: block;
   }
 }

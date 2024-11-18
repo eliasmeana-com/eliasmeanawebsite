@@ -7,11 +7,10 @@ function SidebarLayout({ children }) {
   return (
     <div className="container">
       <Sidebar />
-      <div className="content">
-        {children}
-      </div>
+      {children}  {/* Directly render the children without extra wrapping */}
     </div>
   );
 }
+
 
 export default SidebarLayout;

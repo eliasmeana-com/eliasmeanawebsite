@@ -5,7 +5,8 @@ const StudioImages = () => {
   const images = [
     "/Images/Rack.jpg",
     "/Images/me.jpg",
-    "/Images/HSS.jpg", // Add more images as needed
+    "/Images/HSS.jpg",
+    "/Images/Oldrack.jpg",// Add more images as needed
   ];
 
   // State to track the index of the selected image

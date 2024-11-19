@@ -6,7 +6,7 @@ function PDFViewer() {
   const pdfid='1vj9vYSrcaZ7p1OLMdLYno9c1G8GVUtRN'
   return (
     <div className="pdf-viewer">
-      <h1>PDF Viewer</h1>
+      <h1>Birla Poster</h1>
       <iframe
         src={`https://docs.google.com/gview?url=https://drive.google.com/uc?id=${pdfid}&embedded=true`}
         width="100%"

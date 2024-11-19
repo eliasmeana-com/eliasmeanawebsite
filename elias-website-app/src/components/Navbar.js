@@ -1,31 +1,37 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/Navbar.css'; // Optional: Add styles
+import '../styles/Navbar.css';
 
 function Dropdown({ title, items }) {
   return (
     <li className="dropdown">
-      <span className="dropdown-title">{title}</span>
-      <ul className="dropdown-menu">
-        {items.map((item, index) => (
-          <li key={index} className="dropdown-item">
-            {item.submenu ? (
-              <>
-                <span className="dropdown-item">{item.title}</span>
-                <ul className="submenu">
-                  {item.submenu.map((subitem, subIndex) => (
-                    <li key={subIndex} className="submenu-item">
-                      <Link to={subitem.link}>{subitem.title}</Link>
-                    </li>
-                  ))}
-                </ul>
-              </>
-            ) : (
-              <Link to={item.link}>{item.title}</Link>
-            )}
-          </li>
-        ))}
-      </ul>
+      <span className="dropdown-title">
+        {items.link ? (<Link to={items.link}>{items.title}</Link>) : (items.title)}
+      </span>
+      {items.submenu && (
+        <ul className="dropdown-menu">
+          {items.submenu.map((item, index) => (
+            <li key={index} className="dropdown-item">
+              {item.submenu ? (
+                <>
+                  <span className="dropdown-item-title">
+                    {item.link ? (<Link to={item.link}>{item.title}</Link>) : (item.title)}
+                  </span>
+                  <ul className="submenu">
+                    {item.submenu.map((subitem, subIndex) => (
+                      <li key={subIndex} className="submenu-item">
+                        <span>{subitem.link ? (<Link to={subitem.link}>{subitem.title}</Link>) : (subitem.title)}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              ) : (
+                <Link to={item.link}>{item.title}</Link>
+              )}
+            </li>
+          ))}
+        </ul>
+      )}
     </li>
   );
 }
@@ -39,12 +45,22 @@ function Navbar() {
 
   const birlaMenuItems = [
     {
-      title: 'Research',
+      title: 'Other Stuff',
       submenu: [
-        { title: 'Birla Poster', link: '/birla' },
-        { title: 'D-wave Proposal', link: '/dwave' },
-      ],
-    },
+        {
+          title: 'Research',
+          link: '/research',
+          submenu: [
+            { title: 'Birla Poster', link: '/birla' },
+            { title: 'D-wave Proposal', link: '/dwave' }
+          ],
+        },
+        {
+          title: 'Music',
+          link: '/music'
+        }
+      ]
+    }
   ];
 
   return (
@@ -56,7 +72,7 @@ function Navbar() {
         <ul className={`navbar-links ${isMobileMenuOpen ? 'active' : ''}`}>
           <li><Link to="/">Home</Link></li>
           <li><Link to="/resume">Resume</Link></li>
-          <Dropdown title="Other Stuff" items={birlaMenuItems} />
+          <Dropdown title="Other Stuff" items={birlaMenuItems[0]} />
         </ul>
       </div>
     </nav>

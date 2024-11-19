@@ -92,42 +92,53 @@ a:hover {
 /* Adjust for smaller screen sizes (up to 768px) */
 @media (max-width: 768px) {
   .container {
-    flex-direction: column;  /* Stack the sidebar and content vertically */
-    padding: 0;  /* Remove padding to avoid unnecessary spacing */
-    margin: 0;   /* Remove margin to ensure content spans the entire width */
+    flex-direction: column;
+    /* Stack the sidebar and content vertically */
+    padding: 0;
+    /* Remove padding to avoid unnecessary spacing */
+    margin: 0;
+    /* Remove margin to ensure content spans the entire width */
   }
 
   .sidebar {
-    width: 100%;  /* Sidebar takes full width on small screens */
-    margin-bottom: 0;  /* Remove the space between sidebar and content */
+    width: 100%;
+    /* Sidebar takes full width on small screens */
+    margin-bottom: 0;
+    /* Remove the space between sidebar and content */
   }
 
   .content {
-    width: 100%;  /* Content takes full width */
+    width: 100%;
+    /* Content takes full width */
   }
 
   .skills-list ul,
   .languages-list ul {
-    width: 100%;  /* Make the lists take full width on smaller screens */
+    width: 100%;
+    /* Make the lists take full width on smaller screens */
   }
 
   h2 {
-    font-size: 1.2em;  /* Adjust heading font size for smaller screens */
+    font-size: 1.2em;
+    /* Adjust heading font size for smaller screens */
   }
 }
 
 /* Further adjustments for very small screens (up to 480px) */
 @media (max-width: 480px) {
   .sidebar {
-    padding: 10px;  /* Reduce padding in sidebar for very small screens */
+    padding: 10px;
+    /* Reduce padding in sidebar for very small screens */
   }
 
   h1 {
-    font-size: 1.5em;  /* Adjust heading font size */
+    font-size: 1.5em;
+    /* Adjust heading font size */
   }
 
   p {
-    font-size: 14px;  /* Adjust text size for smaller devices */
+    font-size: 14px;
+    /* Adjust text size for smaller devices */
   }
 }
 

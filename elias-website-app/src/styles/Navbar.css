@@ -9,15 +9,16 @@ body {
 }
 
 .hamburger {
-  display: none; /* Show hamburger button on mobile */
+  display: none; /* Hide hamburger by default */
 }
+
 .navbar {
   background-color: #1c1c1c; /* Sleek black background */
   padding: 0.8rem 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid #333333;
+  border-bottom: 2px solid #333;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -54,7 +55,7 @@ body {
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: #222222; /* Dark gray for dropdown */
+  background-color: #222; /* Dark gray for dropdown */
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
   padding: 0.5rem 0;
@@ -71,12 +72,12 @@ body {
 
 .dropdown-item {
   padding: 0.8rem 1rem;
-  color: #ffffff;
+  color: #fff;
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .dropdown-item:hover {
-  background-color: #333333; /* Slightly lighter gray for hover */
+  background-color: #333; /* Slightly lighter gray for hover */
   transform: scale(1.02);
 }
 
@@ -97,7 +98,7 @@ body {
   position: absolute;
   top: 0;
   left: 100%;
-  background-color: #333333;
+  background-color: #333;
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
   padding: 0.5rem 0;
@@ -112,14 +113,16 @@ body {
 
 .submenu-item a {
   text-decoration: none;
-  color: #eaeaea;
+  padding: 0.8rem 1rem;
+  color: #fff;
+  font-size: 0.8em;
   display: block;
   padding: 0.8rem 1rem;
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .submenu-item a:hover {
-  background-color: #444444;
+  background-color: #444;
   color: #4caf50;
   transform: scale(1.02);
 }
@@ -155,6 +158,10 @@ body {
     font-size: 1.2rem;
   }
 
+  .dropdown {
+    position: relative;
+  }
+
   .dropdown-menu {
     position: static;
     width: 100%;
@@ -164,7 +171,33 @@ body {
   }
 
   .dropdown-item {
-    width: 100%;
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  .dropdown-item-title {
+    font-weight: bold;
+    color: #333;
+  }
+
+  .submenu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: #f9f9f9;
+  }
+
+  .submenu-item {
+    padding: 5px 10px;
+  }
+
+  .submenu-item a {
+    text-decoration: none;
+    color: #007bff;
+  }
+
+  .submenu-item a:hover {
+    text-decoration: underline;
   }
 
   .submenu {

@@ -2,7 +2,7 @@ import React from "react";
 
 const MusicGallery = () => {
   const tracks = [
-    { title: "Song 1", url: "https://drive.google.com/file/d/1R3oEXRl-ZziaCu05mwcwqZd5kMB2FP_6/view?usp=drive_link" }
+    { title: "Song 1", url: "https://drive.google.com/uc?id=1R3oEXRl-ZziaCu05mwcwqZd5kMB2FP_6" }
   ];
 
   return (

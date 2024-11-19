@@ -1,0 +1,140 @@
+/* Studio Image Section */
+.studio-images {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  /* Gallery Grid */
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Adjust columns for smaller screens */
+    gap: 15px;
+    padding: 20px;
+  }
+  
+  .image-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .image-item img:hover {
+    transform: scale(1.05);
+  }
+  /* Modal Styling */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modal-content {
+    position: relative;
+    max-width: 90%; /* Allow modal to be more responsive */
+    max-height: 80%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+  
+  .modal-content img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    max-height: 70vh; /* Restrict image height for better scaling */
+  }
+  
+  /* Close Button */
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ff4c4c;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 5px;
+  }
+  
+  .close-btn:hover {
+    background-color: #ff3333;
+  }
+  
+  /* Arrow Buttons */
+  .prev-btn,
+  .next-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    font-size: 30px;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 1001;
+  }
+  
+  .prev-btn {
+    left: 10px;
+  }
+  
+  .next-btn {
+    right: 10px;
+  }
+  
+  .prev-btn:hover,
+  .next-btn:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  
+  /* Responsiveness for small screens */
+  @media (max-width: 768px) {
+    .modal-content {
+      max-width: 95%;
+    }
+  
+    .prev-btn,
+    .next-btn {
+      font-size: 25px; /* Adjust arrow size for smaller screens */
+      padding: 8px;
+    }
+  
+    .close-btn {
+      font-size: 16px;
+      padding: 8px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .modal-content {
+      max-width: 95%;
+      padding: 15px; /* Smaller padding for mobile */
+    }
+  
+    .prev-btn,
+    .next-btn {
+      font-size: 20px; /* Even smaller arrows for mobile */
+      padding: 5px;
+    }
+  
+    .close-btn {
+      font-size: 14px;
+      padding: 6px;
+    }
+  }
+  

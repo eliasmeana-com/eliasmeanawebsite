@@ -1,15 +1,33 @@
 {
   "files": {
-    "main.css": "/static/css/main.eea5ccb0.css",
-    "main.js": "/static/js/main.dc031f7a.js",
+    "main.css": "/static/css/main.1631c200.css",
+    "main.js": "/static/js/main.399c8a67.js",
     "static/js/453.930bd056.chunk.js": "/static/js/453.930bd056.chunk.js",
+    "static/media/House Music.mp3": "/static/media/House Music.7e874cfb4aa41939f173.mp3",
+    "static/media/NoteTo2-10.mp3": "/static/media/NoteTo2-10.2301390e17f16d4fba46.mp3",
+    "static/media/LiminalSong.mp3": "/static/media/LiminalSong.4355e1e4f2148d83187d.mp3",
+    "static/media/PanoStudio.jpg": "/static/media/PanoStudio.c62a1f1238609bb05ea9.jpg",
+    "static/media/Cobalt Theme Main.mp3": "/static/media/Cobalt Theme Main.af9d95a41e8cf26302c2.mp3",
+    "static/media/StratClassical.jpg": "/static/media/StratClassical.25c4c27f88b8ac1ef21f.jpg",
+    "static/media/Martin.jpg": "/static/media/Martin.35ee0856788307a156ab.jpg",
+    "static/media/RackTopView.jpg": "/static/media/RackTopView.5c921bee60fa927de426.jpg",
+    "static/media/FrontViewStudio.jpg": "/static/media/FrontViewStudio.6d9b3bebf2714f857690.jpg",
+    "static/media/Rack.jpg": "/static/media/Rack.5712c91a25b766c2746a.jpg",
+    "static/media/RackFront.jpg": "/static/media/RackFront.2b81512f76c241302c78.jpg",
+    "static/media/MicSet.jpg": "/static/media/MicSet.c2ef3d6335356a2ec410.jpg",
+    "static/media/me.jpg": "/static/media/me.d822ded667346945a6af.jpg",
+    "static/media/HSS.jpg": "/static/media/HSS.8dd19d1e15f8d6895aad.jpg",
+    "static/media/Voice 8 1.mp3": "/static/media/Voice 8 1.01e2e8436225d38903b5.mp3",
+    "static/media/Oldrack.jpg": "/static/media/Oldrack.50ce14693dd08cfd80cc.jpg",
+    "static/media/vlcsnap-2022-06-29-22h56m41s288.png": "/static/media/vlcsnap-2022-06-29-22h56m41s288.cdd6ff4a0e3302e7a147.png",
+    "static/media/Screenshot 2024-11-15 at 3.13.22 PM.png": "/static/media/Screenshot 2024-11-15 at 3.13.22 PM.130706aa2f7aca0fe1e7.png",
     "index.html": "/index.html",
-    "main.eea5ccb0.css.map": "/static/css/main.eea5ccb0.css.map",
-    "main.dc031f7a.js.map": "/static/js/main.dc031f7a.js.map",
+    "main.1631c200.css.map": "/static/css/main.1631c200.css.map",
+    "main.399c8a67.js.map": "/static/js/main.399c8a67.js.map",
     "453.930bd056.chunk.js.map": "/static/js/453.930bd056.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.eea5ccb0.css",
-    "static/js/main.dc031f7a.js"
+    "static/css/main.1631c200.css",
+    "static/js/main.399c8a67.js"
   ]
 }

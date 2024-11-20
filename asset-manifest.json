@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.1631c200.css",
-    "main.js": "/static/js/main.cf7aec7d.js",
+    "main.js": "/static/js/main.0294ccf7.js",
     "static/js/453.930bd056.chunk.js": "/static/js/453.930bd056.chunk.js",
     "static/media/House Music.mp3": "/static/media/House Music.7e874cfb4aa41939f173.mp3",
     "static/media/NoteTo2-10.mp3": "/static/media/NoteTo2-10.2301390e17f16d4fba46.mp3",
@@ -17,17 +17,20 @@
     "static/media/MicSet.jpg": "/static/media/MicSet.c2ef3d6335356a2ec410.jpg",
     "static/media/me.jpg": "/static/media/me.d822ded667346945a6af.jpg",
     "static/media/HSS.jpg": "/static/media/HSS.8dd19d1e15f8d6895aad.jpg",
+    "static/media/IMG_3420.jpg": "/static/media/IMG_3420.e90e7e54eee001a550b7.jpg",
     "static/media/Voice 8 1.mp3": "/static/media/Voice 8 1.01e2e8436225d38903b5.mp3",
+    "static/media/IMG_2907.jpg": "/static/media/IMG_2907.ee9aa916b333a91db8bc.jpg",
     "static/media/Oldrack.jpg": "/static/media/Oldrack.50ce14693dd08cfd80cc.jpg",
+    "static/media/BC4278FB-D7B7-4E9E-8C8C-DAFC59D29034.jpg": "/static/media/BC4278FB-D7B7-4E9E-8C8C-DAFC59D29034.d864aa5a65ab3784e526.jpg",
     "static/media/vlcsnap-2022-06-29-22h56m41s288.png": "/static/media/vlcsnap-2022-06-29-22h56m41s288.cdd6ff4a0e3302e7a147.png",
     "static/media/Screenshot 2024-11-15 at 3.13.22 PM.png": "/static/media/Screenshot 2024-11-15 at 3.13.22 PM.130706aa2f7aca0fe1e7.png",
     "index.html": "/index.html",
     "main.1631c200.css.map": "/static/css/main.1631c200.css.map",
-    "main.cf7aec7d.js.map": "/static/js/main.cf7aec7d.js.map",
+    "main.0294ccf7.js.map": "/static/js/main.0294ccf7.js.map",
     "453.930bd056.chunk.js.map": "/static/js/453.930bd056.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.1631c200.css",
-    "static/js/main.cf7aec7d.js"
+    "static/js/main.0294ccf7.js"
   ]
 }

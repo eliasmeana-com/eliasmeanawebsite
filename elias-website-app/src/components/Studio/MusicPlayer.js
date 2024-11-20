@@ -39,7 +39,7 @@ const MusicPlayer = () => {
     setProgress(0);
     if (isPlaying) newSound.play();
 
-    setupWaveformVisualizer(newSound);
+    // setupWaveformVisualizer(newSound); // Commented out visualizer setup
 
     return () => {
       newSound.unload();
@@ -88,48 +88,49 @@ const MusicPlayer = () => {
     }
   };
 
-  const setupWaveformVisualizer = (soundInstance) => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    const analyser = Howler.ctx.createAnalyser();
-    const source = Howler.ctx.createMediaElementSource(soundInstance._sounds[0]._node);
+  // Waveform visualizer setup (commented out)
+  // const setupWaveformVisualizer = (soundInstance) => {
+  //   const canvas = canvasRef.current;
+  //   const ctx = canvas.getContext('2d');
+  //   const analyser = Howler.ctx.createAnalyser();
+  //   const source = Howler.ctx.createMediaElementSource(soundInstance._sounds[0]._node);
 
-    source.connect(analyser);
-    analyser.connect(Howler.ctx.destination);
-    analyser.fftSize = 512;
+  //   source.connect(analyser);
+  //   analyser.connect(Howler.ctx.destination);
+  //   analyser.fftSize = 512;
 
-    const bufferLength = analyser.frequencyBinCount;
-    const dataArray = new Uint8Array(bufferLength);
+  //   const bufferLength = analyser.frequencyBinCount;
+  //   const dataArray = new Uint8Array(bufferLength);
 
-    const drawWaveform = () => {
-      analyser.getByteFrequencyData(dataArray);
+  //   const drawWaveform = () => {
+  //     analyser.getByteFrequencyData(dataArray);
 
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = '#222';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+  //     ctx.clearRect(0, 0, canvas.width, canvas.height);
+  //     ctx.fillStyle = '#222';
+  //     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      const barWidth = (canvas.width / bufferLength) * 2.5;
-      let x = 0;
+  //     const barWidth = (canvas.width / bufferLength) * 2.5;
+  //     let x = 0;
 
-      for (let i = 0; i < bufferLength; i++) {
-        const barHeight = dataArray[i] / 2;
-        ctx.fillStyle = `rgb(${barHeight + 100}, 50, 50)`;
-        ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
-        x += barWidth + 1;
-      }
+  //     for (let i = 0; i < bufferLength; i++) {
+  //       const barHeight = dataArray[i] / 2;
+  //       ctx.fillStyle = `rgb(${barHeight + 100}, 50, 50)`;
+  //       ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
+  //       x += barWidth + 1;
+  //     }
 
-      animationRef.current = requestAnimationFrame(drawWaveform);
-    };
+  //     animationRef.current = requestAnimationFrame(drawWaveform);
+  //   };
 
-    drawWaveform();
-  };
+  //   drawWaveform();
+  // };
 
   return (
     <div className="music-player">
       <h2 className="track-title">{currentTrack.title}</h2>
 
-      {/* Waveform Visualizer */}
-      <canvas ref={canvasRef} className="waveform" width="500" height="100" />
+      {/* Waveform Visualizer (commented out) */}
+      {/* <canvas ref={canvasRef} className="waveform" width="500" height="100" /> */}
 
       {/* Progress Bar */}
       <div className="progress-bar-container">

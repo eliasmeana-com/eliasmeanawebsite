@@ -58,6 +58,10 @@ function Navbar() {
         {
           title: 'Music',
           link: '/music'
+        },
+        {
+          title: 'Trip',
+          link: '/trip'
         }
       ]
     }

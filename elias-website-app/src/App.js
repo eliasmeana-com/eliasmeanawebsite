@@ -11,6 +11,7 @@ import Birla from './components/Birla';
 import Dwave from './components/Dwave';
 import Research from './components/Research'
 import Music from './components/Studio/Music'
+import Trip from './components/TripGallery/TripGallery'
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/research" element={<NoSidebarLayout><Research /></NoSidebarLayout>} />
         <Route path="/music" element={<NoSidebarLayout><Music /></NoSidebarLayout>} />
         <Route path="/" element={<NoSidebarLayout><Home /></NoSidebarLayout>} />
+        <Route path="/trip" element={<NoSidebarLayout><Trip /></NoSidebarLayout>} />
       </Routes>
     </Router>
   );

@@ -3,7 +3,7 @@ import Gallery from '../Gallery';
 import '../../styles/Studio.css';
 
 const StudioImages = () => {
-  const images = require.context('../../Images/TripImages', false, /\.(jpg|jpeg|png|svg)$/);
+  const images = require.context('../../Images/TripImages', false, /\.(jpg|JPG|jpeg|png|svg)$/);
   const imagePaths = images.keys().map(image => images(image));
   return (
     <div className="studio-images">

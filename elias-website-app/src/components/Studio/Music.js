@@ -1,12 +1,13 @@
 import React from "react";
-import MusicGallery from "./MusicGallery";
+// import MusicGallery from "./MusicGallery";
+import MusicPlayer from "./MusicPlayer"
 import StudioImages from "./StudioImages";
 
 const App = () => {
   return (
-    <div className="app-container">
+    <div>
       <h1>Welcome to My Music Showcase</h1>
-      <MusicGallery />
+      <MusicPlayer />
       <StudioImages />
     </div>
   );

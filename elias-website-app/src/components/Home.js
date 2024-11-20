@@ -16,12 +16,6 @@ function Home() {
           But it's not all code and equations for me. I'm an avid musician and composer. I thrive outdoors, whether it’s running, hiking, swimming, or anything else that presents itself. Fluent in several languages, I enjoy connecting with people and cultures, constantly seeking new experiences that challenge and inspire me.
         </p>
       </div>
-
-      {/* <div className="home-links">
-        <a href="#/resume" className="home-button">Resume</a>
-        <a href="#education" className="home-button">Music</a>
-        <a href="#/birla" className="home-button">eNos Poster</a>
-      </div> */}
     </div>
   );
 }

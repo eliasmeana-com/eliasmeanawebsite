@@ -1,7 +1,8 @@
 import { gapi } from 'gapi-script';
+require('dotenv').config();
 
 // Replace 'YOUR_API_KEY' with the valid API key
-const API_KEY = 'AIzaSyCV_acvNBBsqTAmoHguFz_s3SB-QSPx4Rg'; // Make sure this is your valid API Key
+const API_KEY = process.env.REACT_APP_API_KEY;; // Make sure this is your valid API Key
 
 export const loadGapi = async () => {
   return new Promise((resolve, reject) => {

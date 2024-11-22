@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import '../styles/Gallery.css';
 
 const Gallery = ({ images }) => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
   const [imagesToShow, setImagesToShow] = useState(12); 
+  const loaderRef = useRef(null);
 
   const openModal = (index) => {
     setSelectedImageIndex(index);
   };
-
 
   const closeModal = () => {
     setSelectedImageIndex(null);
@@ -28,8 +28,29 @@ const Gallery = ({ images }) => {
   };
 
   const loadMoreImages = () => {
-    setImagesToShow(imagesToShow + 12); 
+    setImagesToShow((prev) => Math.min(prev + 12, images.length));
   };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          loadMoreImages();
+        }
+      },
+      { threshold: 1.0 }
+    );
+
+    if (loaderRef.current) {
+      observer.observe(loaderRef.current);
+    }
+
+    return () => {
+      if (loaderRef.current) {
+        observer.unobserve(loaderRef.current);
+      }
+    };
+  }, [loaderRef]);
 
   return (
     <div className="gallery-container">
@@ -43,7 +64,7 @@ const Gallery = ({ images }) => {
       </div>
 
       {imagesToShow < images.length && (
-        <div className="show-more-container">
+        <div className="show-more-container" ref={loaderRef}>
           <button className="show-more-btn" onClick={loadMoreImages}>
             Show More
           </button>

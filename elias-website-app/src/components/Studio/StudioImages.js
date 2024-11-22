@@ -1,14 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from 'react';
 import Gallery from '../Gallery';
-import '../../styles/Studio.css';
+import '../../styles/Gallery.css';
+import { initGoogleDriveClient, listImagesInFolder } from '../../API/googleDrive';
 
 const StudioImages = () => {
-  const images = require.context('../../Images/StudioImages', false, /\.(jpg|jpeg|png|svg)$/);
-  const imagePaths = images.keys().map(image => images(image));
+  const [imagePaths, setImagePaths] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Google Drive folder ID (replace with your actual folder ID)
+  const folderId = '1LsanyvMoY7ohh6c727CsOw1sBbcKaqW1'; // Replace with your Google Drive folder ID
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        await initGoogleDriveClient(); // Initialize Google Drive API client
+        const images = await listImagesInFolder(folderId); // Fetch image URLs
+        setImagePaths(images);
+      } catch (err) {
+        setError('Failed to load images from Google Drive.');
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchImages();
+  }, [folderId]);
+
   return (
-    <div className="studio-images">
-      <h2>My Studio & Equipment</h2>
-      <Gallery images={imagePaths} />
+    <div className="gallery-images-text">
+      <h2>My Studio Pics</h2>
+      {loading ? (
+        <p>Loading images...</p>
+      ) : error ? (
+        <p>{error}</p>
+      ) : (
+        <Gallery images={imagePaths} />
+      )}
     </div>
   );
 };

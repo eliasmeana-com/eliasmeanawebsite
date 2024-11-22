@@ -6,6 +6,10 @@
   align-items: center;
   width: 100%; /* Ensure full width */
 }
+.gallery-images-text {
+  text-align: center;
+  padding: 20px;
+}
 
 /* Gallery styling */
 .gallery {

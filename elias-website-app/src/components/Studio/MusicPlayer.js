@@ -3,7 +3,6 @@ import { Howl, Howler } from 'howler';
 import { FaPlay, FaPause, FaStepBackward, FaStepForward } from 'react-icons/fa';
 import '../../styles/MusicPlayer.css';
 
-// Import songs dynamically
 const songs = require.context('../../Music', false, /\.mp3$/);
 const songPaths = songs.keys().map(song => ({
   title: song.replace('./', '').replace('.mp3', ''),
@@ -22,7 +21,6 @@ const MusicPlayer = () => {
 
   const currentTrack = songPaths[currentTrackIndex];
 
-  // Load the sound and set up visualizer
   useEffect(() => {
     if (sound) {
       sound.unload();
@@ -39,7 +37,6 @@ const MusicPlayer = () => {
     setProgress(0);
     if (isPlaying) newSound.play();
 
-    // setupWaveformVisualizer(newSound); // Commented out visualizer setup
 
     return () => {
       newSound.unload();
@@ -47,7 +44,6 @@ const MusicPlayer = () => {
     };
   }, [currentTrackIndex]);
 
-  // Play/pause functionality
   const handlePlayPause = () => {
     if (!sound) return;
 

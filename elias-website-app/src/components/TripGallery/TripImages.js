@@ -3,19 +3,18 @@ import Gallery from '../Gallery';
 import '../../styles/Gallery.css';
 import { initGoogleDriveClient, listImagesInFolder } from '../../API/googleDrive';
 
-const StudioImages = () => {
+const TripImages = () => {
   const [imagePaths, setImagePaths] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Google Drive folder ID (replace with your actual folder ID)
-  const folderId = '1T71KFg7tEDvpXyqBfUQsiK1jE0SA3pwP'; // Replace with your Google Drive folder ID
+  const folderId = '1T71KFg7tEDvpXyqBfUQsiK1jE0SA3pwP';
 
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        await initGoogleDriveClient(); // Initialize Google Drive API client
-        const images = await listImagesInFolder(folderId); // Fetch image URLs
+        await initGoogleDriveClient();
+        const images = await listImagesInFolder(folderId);
         setImagePaths(images);
       } catch (err) {
         setError('Failed to load images from Google Drive.');
@@ -42,4 +41,4 @@ const StudioImages = () => {
   );
 };
 
-export default StudioImages;
+export default TripImages;

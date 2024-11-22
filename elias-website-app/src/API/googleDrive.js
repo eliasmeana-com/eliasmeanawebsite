@@ -2,7 +2,7 @@ import { gapi } from 'gapi-script';
 
 
 // Replace 'YOUR_API_KEY' with the valid API key
-const API_KEY = "AIzaSyCV_acvNBBsqTAmoHguFz_s3SB-QSPx4Rg"; // Make sure this is your valid API Key
+const API_KEY = process.env.REACT_APP_API_KEY; // Make sure this is your valid API Key
 
 export const loadGapi = async () => {
   return new Promise((resolve, reject) => {
@@ -32,21 +32,25 @@ export const initGoogleDriveClient = async () => {
 
 // List images in a folder
 export const listImagesInFolder = async (folderId) => {
-  try {
+  const images = [];
+  let nextPageToken = null;
+
+  do {
     const response = await gapi.client.drive.files.list({
       q: `'${folderId}' in parents and mimeType contains 'image/'`,
-      fields: 'files(id, name)',
-      key: API_KEY, // Use the valid API key here
+      fields: 'nextPageToken, files(id, name)',
+      pageSize: 100, // Fetch up to 100 files per request
+      pageToken: nextPageToken, // For pagination
     });
 
-    const files = response.result.files;
-    // Map over the files and create a proper URL for each image
-    return files.map(file => {
-      // Generate the proper image URL for embedding
-      return `https://drive.google.com/thumbnail?id=${file.id}&sz=w1000`;
-    });
-  } catch (error) {
-    console.error('Error fetching images from Google Drive:', error);
-    throw error;
-  }
+    if (response.result.files) {
+      images.push(...response.result.files);
+    }
+
+    nextPageToken = response.result.nextPageToken; // Update the page token for the next iteration
+  } while (nextPageToken); // Continue fetching until there is no nextPageToken
+
+  // Generate proper URLs for the images
+  return images.map(file => `https://drive.google.com/thumbnail?id=${file.id}&sz=w1000`);
 };
+

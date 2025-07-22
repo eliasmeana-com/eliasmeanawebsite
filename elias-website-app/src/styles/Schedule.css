@@ -1,0 +1,403 @@
+.schedule-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.schedule-header {
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative; /* For absolute positioning if needed */
+}
+
+.week-navigation-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 15px;
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+.nav-button {
+    padding: 8px 15px;
+    background-color: #4a6fa5;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 17%;
+}
+
+.nav-button:hover {
+    background-color: #3a5a80;
+}
+
+/* Optional: Different styles for different buttons */
+.prev-week {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.current-week {
+    justify-self: center;
+}
+
+.next-week {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+@media (max-width: 768px) {
+    .week-navigation-container {
+        grid-template-columns: 1fr; /* Stack buttons vertically on mobile */
+        gap: 10px;
+        padding: 0 20px; /* Add some padding on sides */
+    }
+
+    .nav-button {
+        width: 100%; /* Full width buttons on mobile */
+        padding: 10px 15px; /* Slightly larger for touch targets */
+    }
+
+    .prev-week, .current-week, .next-week {
+        position: static; /* Reset absolute positioning */
+        transform: none; /* Remove transform */
+        justify-self: stretch; /* Stretch to full width */
+    }
+
+    .schedule-header h2 {
+        font-size: 1.5rem; /* Slightly smaller heading */
+    }
+
+    .schedule-header h3 {
+        font-size: 1.1rem; /* Slightly smaller subheading */
+    }
+}
+.schedule-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.schedule-day {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.schedule-day:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.schedule-day h4 {
+    margin-top: 0;
+    color: #2c3e50;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+.schedule-day.has-classes {
+    border-top: 4px solid #4a6fa5;
+}
+
+.schedule-day.no-classes {
+    border-top: 4px solid #95a5a6;
+    opacity: 0.8;
+}
+
+.schedule-day ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0;
+}
+
+.schedule-day li {
+    margin-bottom: 10px;
+    padding: 8px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+}
+
+.class-name {
+    font-weight: bold;
+    display: block;
+}
+
+.class-time {
+    font-size: 0.9em;
+    color: #7f8c8d;
+}
+
+.more-classes {
+    text-align: center;
+    font-style: italic;
+    color: #4a6fa5;
+}
+
+/* Modal Styles */
+.day-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.day-modal-content {
+    background-color: white;
+    padding: 25px;
+    border-radius: 8px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.2em;
+    cursor: pointer;
+    color: #7f8c8d;
+}
+
+.class-list {
+    list-style: none;
+    padding: 0;
+}
+
+.class-item {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.class-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.class-time {
+    color: #4a6fa5;
+    font-weight: bold;
+}
+
+.class-location {
+    background-color: #e3f2fd;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.8em;
+}
+
+.class-instructor {
+    color: #7f8c8d;
+    font-size: 0.9em;
+    margin: 5px 0;
+}
+
+.class-description {
+    font-size: 0.9em;
+    color: #555;
+}
+
+.loading-container {
+    text-align: center;
+    padding: 40px;
+    font-size: 1.2em;
+    color: #7f8c8d;
+}
+.schedule-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.month-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    padding: 12px;
+    background-color: #fff;
+    border-radius: 8px;
+    user-select: none;
+}
+
+/* Day headers */
+
+.month-day-header {
+    text-align: center;
+    font-weight: 600;
+    color: #4a6fa5;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #d0d7e0;
+    font-size: 0.9rem;
+}
+
+/* Individual day cells */
+
+.month-cell {
+    background-color: #f9fbfd;
+    border: 1px solid #d6dce5;
+    border-radius: 8px;
+    width: 130px;
+    height: 130px;
+    padding: 12px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.month-cell:hover,
+.month-cell:focus {
+    background-color: #e8f0fe;
+    border-color: #4a6fa5;
+    outline: none;
+}
+
+.month-cell.empty {
+    background: transparent;
+    border: none;
+    cursor: default;
+    pointer-events: none;
+}
+
+/* Day number styling */
+
+.day-number {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #33475b;
+    position: absolute;
+    top: 10px;
+    right: 12px;
+}
+
+/* Mini class list inside cells */
+
+.mini-class-list {
+    margin-top: 28px;
+    list-style: none;
+    padding-left: 0;
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+.mini-class-item {
+    font-size: 0.85rem;
+    color: #2c3e50;
+    padding: 4px 6px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background-color: #dde6f7;
+}
+
+/* Time next to mini-class */
+
+.mini-class-time {
+    font-weight: 600;
+    margin-left: 6px;
+    color: #556a8a;
+}
+
+/* "More classes" link */
+
+.more-classes {
+    font-size: 0.75rem;
+    color: #4a6fa5;
+    text-align: center;
+    font-style: italic;
+    margin-top: auto;
+}
+
+/* Responsive adjustments */
+
+@media (max-width: 900px) {
+    /* Adjust grid columns on tablet size */
+    .month-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+    }
+
+    .month-cell {
+        width: 100%;
+        height: 110px;
+        padding: 10px;
+    }
+
+    .day-number {
+        font-size: 1rem;
+        top: 8px;
+        right: 10px;
+    }
+
+    .mini-class-item {
+        font-size: 0.8rem;
+        padding: 3px 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* For mobile: fewer columns, smaller cells, better text sizes */
+
+    .month-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6px;
+        padding: 8px;
+    }
+
+    .month-cell {
+        width: 100%;
+        height: 90px;
+        padding: 8px;
+    }
+
+    .day-number {
+        font-size: 0.9rem;
+        top: 6px;
+        right: 8px;
+    }
+
+    .mini-class-list {
+        margin-top: 20px;
+    }
+
+    .mini-class-item {
+        font-size: 0.75rem;
+        padding: 2px 4px;
+        margin-bottom: 3px;
+    }
+
+    .more-classes {
+        font-size: 0.7rem;
+        margin-top: 6px;
+    }
+}

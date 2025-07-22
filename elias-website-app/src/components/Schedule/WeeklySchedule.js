@@ -1,0 +1,48 @@
+import React from 'react';
+
+const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+const WeeklySchedule = ({ schedule, setSelectedDay }) => {
+    const formatTime = (timeString) => {
+        if (!timeString) return '';
+        const [hours, minutes] = timeString.split(':');
+        const hourNum = parseInt(hours, 10);
+        const ampm = hourNum >= 12 ? 'PM' : 'AM';
+        const displayHour = hourNum % 12 || 12;
+        return `${displayHour}:${minutes} ${ampm}`;
+    };
+
+    return (
+        <div className="schedule-grid">
+            {days.map(day => {
+                const daySchedule = schedule.find(item => item.day === day) || { classes: [] };
+                return (
+                    <div
+                        key={day}
+                        className={`schedule-day ${daySchedule.classes.length ? 'has-classes' : 'no-classes'}`}
+                        onClick={() => setSelectedDay(day)}
+                    >
+                        <h4>{day}</h4>
+                        {daySchedule.classes.length > 0 ? (
+                            <ul>
+                                {daySchedule.classes.slice(0, 2).map((cls, idx) => (
+                                    <li key={idx}>
+                                        <span className="class-name">{cls.name}</span>
+                                        <span className="class-time">{formatTime(cls.startTime)} - {formatTime(cls.endTime)}</span>
+                                    </li>
+                                ))}
+                                {daySchedule.classes.length > 2 && (
+                                    <li className="more-classes">+{daySchedule.classes.length - 2} more</li>
+                                )}
+                            </ul>
+                        ) : (
+                            <p>No classes scheduled</p>
+                        )}
+                    </div>
+                );
+            })}
+        </div>
+    );
+};
+
+export default WeeklySchedule;

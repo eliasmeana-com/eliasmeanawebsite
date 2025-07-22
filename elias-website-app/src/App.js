@@ -8,6 +8,7 @@ import Resume from './components/Resume';
 import './styles/App.css';
 import Navbar from './components/Navbar';
 import Birla from './components/Birla';
+import Schedule from './components/Schedule/Schedule'
 import Dwave from './components/Dwave';
 import Research from './components/Research'
 import Music from './components/Studio/Music'
@@ -23,7 +24,8 @@ function App() {
 
         {/* Routes without Sidebar*/}
         <Route path="/birla" element={<NoSidebarLayout><Birla /></NoSidebarLayout>} />
-        <Route path="/dwave" element={<NoSidebarLayout><Dwave /></NoSidebarLayout>} />
+          <Route path="/schedule" element={<NoSidebarLayout><Schedule /></NoSidebarLayout>} />
+          <Route path="/dwave" element={<NoSidebarLayout><Dwave /></NoSidebarLayout>} />
         <Route path="/research" element={<NoSidebarLayout><Research /></NoSidebarLayout>} />
         <Route path="/music" element={<NoSidebarLayout><Music /></NoSidebarLayout>} />
         <Route path="/" element={<NoSidebarLayout><Home /></NoSidebarLayout>} />

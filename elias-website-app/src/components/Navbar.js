@@ -62,6 +62,10 @@ function Navbar() {
         {
           title: 'Trip',
           link: '/trip'
+        },
+        {
+          title: 'Schedule',
+          link: '/schedule'
         }
       ]
     }

@@ -1,0 +1,245 @@
+{
+  "scheduleData": [
+    {
+      "className": "Seminario de álgebra 44077",
+      "startDate": "2026-01-26",
+      "endDate": "2026-05-24",
+      "times": [
+        {
+          "day": "Tuesday",
+          "timeRange": "18:00-20:10",
+          "timezone": "CET",
+          "location": "Aula 0.2",
+          "campus":"UV",
+          "instructor": "RAMON ESTEBAN ROMERO",
+          "description": "",
+          "courseHomePage":"https://aulavirtual.uv.es/course/view.php?id=98702"
+        }
+      ]
+    },
+    {
+      "className": "Iniciación a la investigación matemática 43981",
+      "startDate": "2025-09-08",
+      "endDate": "2025-12-28",
+      "times": [
+        {
+          "day": "Thursday",
+          "timeRange": "11:30-13:40",
+          "timezone": "CET",
+          "location": "Aula Inf V",
+          "campus" : "UV",
+          "instructor": "CORDERO CARRION ISABEL & MARTI RAGA MARIA CARMEN",
+          "description": "",
+          "courseHomePage": "https://aulavirtual.uv.es/course/view.php?id=98697"
+        }
+      ]
+    },
+    {
+      "className": "Herramientas metodológicas en la Investigación matemática 43983",
+      "startDate": "2025-09-09",
+      "endDate": "2025-12-28",
+      "times": [
+        {
+          "day": "Wednesday",
+          "timeRange": "11:30-13:40",
+          "timezone": "CET",
+          "location": "Aula Inf - Ed. 7A",
+          "campus":"UPV",
+          "instructor": "unknown",
+          "description": "",
+          "courseHomePage" : "https://aulavirtual.uv.es/course/view.php?id=98699"
+        }
+      ]
+    },
+    {
+      "className": "Fundamentos de matemática avanzada 44076",
+      "startDate": "2025-09-09",
+      "endDate": "2025-12-22",
+      "times": [
+        {
+          "day": "Tuesday",
+          "timeRange": "18:00-20:10",
+          "timezone": "UTC",
+          "location": "Aula 0.2",
+          "campus" : "UV",
+          "instructor": "RUEDA SEGADO MARIA PILAR & FALCO BENAVENT FRANCISCO JAVIER",
+          "description": "",
+          "courseHomePage" : "https://aulavirtual.uv.es/course/view.php?id=98701"
+        },
+        {
+          "day": "Thursday",
+          "timeRange": "15:30-17:40",
+          "timezone": "CET",
+          "location": "Aula 0.2",
+          "campus" : "UV",
+          "instructor": "RUEDA SEGADO MARIA PILAR & FALCO BENAVENT FRANCISCO JAVIER",
+          "description": "",
+          "courseHomePage" : "https://aulavirtual.uv.es/course/view.php?id=98701"
+        }
+      ]
+    },
+    {
+      "className": "Seminario de análisis matemático 44078",
+      "startDate": "2025-09-09",
+      "endDate": "2025-12-25",
+      "times": [
+        {
+          "day": "Thursday",
+          "timeRange": "18:00-20:10",
+          "timezone": "UTC",
+          "location": "Aula 0.2",
+          "campus" : "UV",
+          "instructor": "GARCIA FALSET JESUS & SEGURA DE LEON SERGIO",
+          "description": "",
+          "courseHomePage" : "https://aulavirtual.uv.es/course/view.php?id=98701"
+        }
+      ]
+    },
+    {
+      "className": "Análisis matemático y aplicaciones 44079",
+      "startDate": "2026-01-26",
+      "endDate": "2026-05-24",
+      "times": [
+        {
+          "day": "Thursday",
+          "timeRange": "18:00-20:10",
+          "timezone": "CET",
+          "location": "Aula 0.2",
+          "campus" : "UV",
+          "instructor": "BLASCO DE LA CRUZ OSCAR FCO",
+          "description": "",
+          "courseHomePage" : "https://aulavirtual.uv.es/course/view.php?id=98704"
+        }
+      ]
+    },
+    {
+      "className": "Seminario de geometría y topología 44080",
+      "startDate": "2026-01-28",
+      "endDate": "2026-05-19",
+      "times": [
+        {
+          "day": "Tuesday",
+          "timeRange": "15:30-17:40",
+          "timezone": "CET",
+          "location": "Aula 0.2",
+          "campus" : "UV",
+          "instructor": "PEÑAFORT SANCHIS GUILLERMO",
+          "description": "",
+          "courseHomePage" : "https://aulavirtual.uv.es/course/view.php?id=98705"
+        }
+      ]
+    },
+    {
+      "className": "Física matemática 44929",
+      "startDate": "2026-01-28",
+      "endDate": "2026-05-19",
+      "times": [
+        {
+          "day": "Wednesday",
+          "timeRange": "09:00-11:00",
+          "timezone": "CET",
+          "location": "Sem. B4 - Ed. 7A",
+          "campus" : "UPV",
+          "instructor": "",
+          "description": "",
+          "courseHomePage" : "https://aulavirtual.uv.es/course/view.php?id=98714"
+        }
+      ]
+    },
+    {
+      "className": "Espacios de funciones y sus duales 46956",
+      "startDate": "2025-09-09",
+      "endDate": "2025-12-25",
+      "times": [
+        {
+          "day": "Tuesday",
+          "timeRange": "09:00-11:00",
+          "timezone": "CET",
+          "location": "Sem. B4 - Ed. 7A",
+          "campus" : "UPV",
+          "instructor": "",
+          "description": "",
+          "courseHomePage" : "https://aulavirtual.uv.es/course/view.php?id=98716"
+        }
+      ]
+    },
+    {
+      "className": "Ecuaciones diferenciales con incertidumbre y modelización 46957",
+      "startDate": "2025-09-09",
+      "endDate": "2025-12-25",
+      "times": [
+        {
+          "day": "Monday",
+          "timeRange": "17:30-19:40",
+          "timezone": "CET",
+          "location": "Aula Inf - Ed. 7A",
+          "campus" : "UPV",
+          "instructor": "",
+          "description": "",
+          "courseHomePage" : "https://aulavirtual.uv.es/course/view.php?id=98717"
+        }
+      ]
+    },
+    {
+      "className": "Teoría de operadores 46961",
+      "startDate": "2026-01-20",
+      "endDate": "2026-05-25",
+      "times": [
+        {
+          "day": "Monday",
+          "timeRange": "11:30-13:40",
+          "timezone": "CET",
+          "location": "Sem. B4 - Ed. 7A",
+          "campus" : "UPV",
+          "instructor": "",
+          "description": "",
+          "courseHomePage" : "https://aulavirtual.uv.es/course/view.php?id=98720"
+        }
+      ]
+    },
+    {
+      "className": "Modelización matemática en la Industria 43982",
+      "startDate": "2025-09-18",
+      "endDate": "2025-12-25",
+      "times": [
+        {
+          "day": "Monday",
+          "timeRange": "15:00-17:10",
+          "timezone": "CET",
+          "location": "Aula Inf - Ed. 7A",
+          "campus" : "UPV",
+          "instructor": "",
+          "description": "",
+          "courseHomePage" : "https://aulavirtual.uv.es/course/view.php?id=98698"
+        },
+        {
+          "day": "Friday",
+          "timeRange": "09:00-11:00",
+          "timezone": "CET",
+          "location": "Aula Inf - Ed. 7A",
+          "campus" : "UPV",
+          "instructor": "",
+          "description": "",
+          "courseHomePage" : "https://aulavirtual.uv.es/course/view.php?id=98698"
+        }
+      ]
+    },
+    {
+      "className": "Métodos algebraicos y sus aplicaciones 44085",
+      "startDate": "2026-01-18",
+      "endDate": "2026-05-25",
+      "times": [
+        {
+          "day": "Tuesday",
+          "timeRange": "09:00-11:00",
+          "timezone": "CET",
+          "location": "Aula Inf - Ed. 7A",
+          "campus" : "UPV",
+          "instructor": "",
+          "description": "",
+          "courseHomePage" : "https://aulavirtual.uv.es/course/view.php?id=98707"
+        }
+      ]
+    }
+  ]
+}

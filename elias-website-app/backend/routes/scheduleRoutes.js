@@ -3,23 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const ScheduleAsset = require('../models/ScheduleAsset');
 
-// GET document by _id
-router.get('object/:id', async (req, res) => {
-  try {
-    const id = req.params.id;
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(400).json({ error: 'Invalid MongoDB ObjectId' });
-    }
-
-    const result = await ScheduleAsset.findById(id);
-    if (!result) return res.status(404).json({ message: 'Asset not found' });
-
-    res.json(result);
-  } catch (err) {
-    res.status(500).json({ error: 'Query failed', details: err.message });
-  }
-});
 router.get('object/range', async (req, res) => {
     try {
       const { start, end } = req.query;
@@ -54,6 +38,23 @@ router.post('object/add', async (req, res) => {
   } catch (err) {
     console.error('Error saving schedule asset:', err);
     res.status(400).json({ error: 'Failed to add schedule asset', details: err.message });
+  }
+});
+// GET document by _id
+router.get('object/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ error: 'Invalid MongoDB ObjectId' });
+    }
+
+    const result = await ScheduleAsset.findById(id);
+    if (!result) return res.status(404).json({ message: 'Asset not found' });
+
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ error: 'Query failed', details: err.message });
   }
 });
 module.exports = router;

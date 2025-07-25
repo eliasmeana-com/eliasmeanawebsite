@@ -6,4 +6,4 @@ const assignmentSchema = new mongoose.Schema({
   assignmentName : String,
   dueDate : String
 }, { collection: 'CLASS_ASSIGNMENTS' }); 
-module.exports = mongoose.model('LatexCode', assignmentSchema);
+module.exports = mongoose.model('assignment', assignmentSchema);

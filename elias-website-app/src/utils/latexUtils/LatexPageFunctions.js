@@ -26,9 +26,9 @@ export default function useLatexDocument(routeInfo) {
             const cc = encodeURIComponent(routeInfo.classCode);
             const ac = encodeURIComponent(routeInfo.assignmentCode);
             return {
-                fetchUrl: `test/endpoint1/${cc}/${ac}`,
-                updateUrl: (id) => `test/endpoint2/${id}`,
-                createUrl: `test/endpoint3/${cc}/${ac}`,
+                fetchUrl: `https://eliasmeanawebsite.onrender.com/api/assignments/object/id/${ac}`,
+                updateUrl: (id) => `https://eliasmeanawebsite.onrender.com/api/assignments/object/update/${id}`,
+                createUrl: `https://eliasmeanawebsite.onrender.com/api/assignments/object/create/${cc}`,
             };
         }
         return {};

@@ -108,6 +108,24 @@ router.get('/object/id/:id', async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch assignment by ID', details: err.message });
   }
 });
+router.delete('/object/delete/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
 
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ error: 'Invalid MongoDB ObjectId' });
+    }
+
+    const deleted = await AssignmentCode.findByIdAndDelete(id);
+
+    if (!deleted) {
+      return res.status(404).json({ message: 'Assignment not found' });
+    }
+
+    res.json({ message: 'Assignment deleted successfully', deleted });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to delete assignment', details: err.message });
+  }
+});
 
 module.exports = router;

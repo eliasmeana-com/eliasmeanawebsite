@@ -133,7 +133,17 @@ function ClassCard({ cls }) {
               Class Notes
             </a>
           </p>
-
+          {cls.assignments?.length > 0 && (
+            <p>
+              <a
+                href={`/#/assignments/${encodeURIComponent(cls.class_code)}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Assignments
+              </a>
+            </p>
+          )}
           <div>
             <strong>Timeslots:</strong>
             <ul>
@@ -154,16 +164,6 @@ function ClassCard({ cls }) {
             </div>
           )}
 
-          {cls.assignments?.length > 0 && (
-            <div>
-              <strong>Assignments:</strong>
-              <ul>
-                {cls.assignments.map((a) => (
-                  <li key={a._id}><a href={a.link} target="_blank" rel="noreferrer">{a.name}</a></li>
-                ))}
-              </ul>
-            </div>
-          )}
         </div>
       )}
     </div>

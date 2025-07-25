@@ -1,18 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useParams,useLocation } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import LatexDocumentRenderer from '../../utils/latexUtils/LatexDocumentRenderer';
-import useLatexDocument from '../../utils/latexUtils/LatexPageFunctions'; // your existing hook
+import useLatexDocument from '../../utils/latexUtils/LatexPageFunctions';
 import '../../styles/latexPage.css';
 
 function LatexTestPage() {
-    const { pageCode } = useParams();
     const location = useLocation().pathname.split('/');
-    // console.log(location)
-    // console.log(location.pathname.split('/'))
-    // Your existing hook for LaTeX document
-    const classCode=location[2]
-    const assignmentCode=location[3]
-    // console.log(classCode,assignmentCode)
+    const classCode = location[2];
+    const assignmentCode = location[3];
+
     const {
         latexScript,
         inputValue,
@@ -22,26 +18,28 @@ function LatexTestPage() {
         setEditMode,
         saveLatex,
     } = useLatexDocument({ type: 'assignment', classCode, assignmentCode });
-    const [className, setClassName] = useState('');
-    const [classNameStatus, setClassNameStatus] = useState('');
 
+    const [className, setClassName] = useState('');
+    const [assignmentName, setAssignmentName] = useState('');
+    const [classNameStatus, setClassNameStatus] = useState('');
+    const [assignmentStatus, setAssignmentStatus] = useState('');
+
+    // Fetch class name
     useEffect(() => {
-        if (!pageCode) return;
+        if (!classCode) return;
+
         const fetchClassName = async () => {
             try {
                 setClassNameStatus('Loading class name...');
                 const response = await fetch(
                     `https://eliasmeanawebsite.onrender.com/api/schedule/object/classcode/${encodeURIComponent(classCode)}`
                 );
-                console.log(response)
                 if (!response.ok) {
                     setClassNameStatus('Failed to load class name');
                     setClassName('');
                     return;
                 }
                 const data = await response.json();
-
-                // data should be the object containing the class info, including 'name'
                 setClassName(data.name || 'Unnamed Class');
                 setClassNameStatus('');
             } catch (error) {
@@ -52,7 +50,35 @@ function LatexTestPage() {
         };
 
         fetchClassName();
-    }, [pageCode]);
+    }, [classCode]);
+
+    // Fetch assignment name
+    useEffect(() => {
+        if (!assignmentCode) return;
+
+        const fetchAssignmentName = async () => {
+            try {
+                setAssignmentStatus('Loading assignment name...');
+                const response = await fetch(
+                    `https://eliasmeanawebsite.onrender.com/api/assignments/object/id/${encodeURIComponent(assignmentCode)}`
+                );
+                if (!response.ok) {
+                    setAssignmentStatus('Failed to load assignment name');
+                    setAssignmentName('');
+                    return;
+                }
+                const data = await response.json();
+                setAssignmentName(data.assignmentName || 'Untitled Assignment');
+                setAssignmentStatus('');
+            } catch (error) {
+                console.error('Error fetching assignment name:', error);
+                setAssignmentStatus('Error loading assignment name');
+                setAssignmentName('');
+            }
+        };
+
+        fetchAssignmentName();
+    }, [assignmentCode]);
 
     return (
         <div className="latex-container">
@@ -99,11 +125,21 @@ function LatexTestPage() {
                 {classNameStatus}
             </p>
 
+            <p
+                className="assignment-name-status"
+                style={{ color: assignmentStatus.startsWith('Error') ? 'crimson' : 'green' }}
+            >
+                {assignmentStatus}
+            </p>
+
             <hr className="latex-divider" />
 
             <h2 className="latex-output-heading">
-                Notes For {className || 'Loading...'}
+                Assignment For {className || 'Loading...'}
             </h2>
+            <h3 className="latex-output-heading">
+                {assignmentName || 'Loading assignment name...'}
+            </h3>
 
             <LatexDocumentRenderer latexScript={latexScript} />
         </div>

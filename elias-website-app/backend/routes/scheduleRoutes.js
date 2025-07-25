@@ -57,4 +57,27 @@ router.get('/object/:id', async (req, res) => {
     res.status(500).json({ error: 'Query failed', details: err.message });
   }
 });
+router.put('/object/update/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    const updates = req.body;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ error: 'Invalid MongoDB ObjectId' });
+    }
+
+    const updatedAsset = await ScheduleAsset.findByIdAndUpdate(id, updates, {
+      new: true, // return updated document
+      runValidators: true // validate against schema
+    });
+
+    if (!updatedAsset) {
+      return res.status(404).json({ message: 'Asset not found' });
+    }
+
+    res.json(updatedAsset);
+  } catch (err) {
+    res.status(500).json({ error: 'Update failed', details: err.message });
+  }
+});
 module.exports = router;

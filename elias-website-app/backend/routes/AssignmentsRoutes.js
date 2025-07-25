@@ -89,6 +89,25 @@ router.post('/object/create/:classCode', async (req, res) => {
     });
   }
 });
+router.get('/object/id/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ error: 'Invalid MongoDB ObjectId' });
+    }
+
+    const assignment = await AssignmentCode.findById(id);
+
+    if (!assignment) {
+      return res.status(404).json({ message: 'Assignment not found' });
+    }
+
+    res.json(assignment);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch assignment by ID', details: err.message });
+  }
+});
 
 
 module.exports = router;

@@ -16,6 +16,7 @@ import Trip from './components/TripGallery/TripGallery'
 import SchoolHome from './components/SchoolPortal/SchoolHome'
 import SomePage from './components/SchoolPortal/classnotes'
 import AssignmentsHome from './components/SchoolPortal/assignmentsHome'
+import SingleAssignment from './components/SchoolPortal/assignmentSingle'
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path="/schoolhome" element={<NoSidebarLayout><SchoolHome /></NoSidebarLayout>} />
         <Route path="/latexpage/classnotes/:pageCode" element={<NoSidebarLayout><SomePage /></NoSidebarLayout>} />
         <Route path="/assignments/:classCode" element={<NoSidebarLayout><AssignmentsHome /></NoSidebarLayout>} />
+        <Route path="/assignment/:classCode/:assignmentId" element={<NoSidebarLayout><SingleAssignment /></NoSidebarLayout>} />
         <Route path="/dwave" element={<NoSidebarLayout><Dwave /></NoSidebarLayout>} />
         <Route path="/research" element={<NoSidebarLayout><Research /></NoSidebarLayout>} />
         <Route path="/music" element={<NoSidebarLayout><Music /></NoSidebarLayout>} />

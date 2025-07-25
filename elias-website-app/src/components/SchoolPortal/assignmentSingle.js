@@ -6,9 +6,13 @@ import '../../styles/latexPage.css';
 
 function LatexTestPage() {
     const { pageCode } = useParams();
-    const location = useLocation();
-    console.log(location.pathname.split('/')[2])
+    const location = useLocation().pathname.split('/');
+    // console.log(location)
+    // console.log(location.pathname.split('/'))
     // Your existing hook for LaTeX document
+    const classCode=location[2]
+    const assignmentCode=location[3]
+    // console.log(classCode,assignmentCode)
     const {
         latexScript,
         inputValue,
@@ -17,7 +21,7 @@ function LatexTestPage() {
         editMode,
         setEditMode,
         saveLatex,
-    } = useLatexDocument({ type: 'classnotes', pageCode });
+    } = useLatexDocument({ type: 'assignment', classCode, assignmentCode });
     const [className, setClassName] = useState('');
     const [classNameStatus, setClassNameStatus] = useState('');
 
@@ -27,8 +31,9 @@ function LatexTestPage() {
             try {
                 setClassNameStatus('Loading class name...');
                 const response = await fetch(
-                    `https://eliasmeanawebsite.onrender.com/api/schedule/object/classcode/${encodeURIComponent(pageCode)}`
+                    `https://eliasmeanawebsite.onrender.com/api/schedule/object/classcode/${encodeURIComponent(classCode)}`
                 );
+                console.log(response)
                 if (!response.ok) {
                     setClassNameStatus('Failed to load class name');
                     setClassName('');

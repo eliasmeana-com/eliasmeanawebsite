@@ -14,7 +14,7 @@ import Research from './components/Research'
 import Music from './components/Studio/Music'
 import Trip from './components/TripGallery/TripGallery'
 import SchoolHome from './components/SchoolPortal/SchoolHome'
-import SomePage from './components/LatexPage'
+import SomePage from './components/classnotes'
 
 function App() {
   return (
@@ -28,7 +28,7 @@ function App() {
         <Route path="/birla" element={<NoSidebarLayout><Birla /></NoSidebarLayout>} />
         <Route path="/schedule" element={<NoSidebarLayout><Schedule /></NoSidebarLayout>} />
         <Route path="/schoolhome" element={<NoSidebarLayout><SchoolHome /></NoSidebarLayout>} />
-        <Route path="/latexpage/:pageCode" element={<NoSidebarLayout><SomePage /></NoSidebarLayout>} />
+        <Route path="/latexpage/classnotes/:pageCode" element={<NoSidebarLayout><SomePage /></NoSidebarLayout>} />
         <Route path="/dwave" element={<NoSidebarLayout><Dwave /></NoSidebarLayout>} />
         <Route path="/research" element={<NoSidebarLayout><Research /></NoSidebarLayout>} />
         <Route path="/music" element={<NoSidebarLayout><Music /></NoSidebarLayout>} />

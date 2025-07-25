@@ -109,20 +109,28 @@ function ClassCard({ cls }) {
           <p><strong>Professor:</strong> {cls.professor}</p>
 
           {cls.course_page && (
-            <p><strong>Course Page:</strong> <a href={cls.course_page} target="_blank" rel="noreferrer">{cls.course_page}</a></p>
+            <p>
+              <a href={cls.course_page} target="_blank" rel="noreferrer">
+                Course Page
+              </a>
+            </p>
           )}
           {cls.syllabus && (
-            <p><strong>Syllabus:</strong> <a href={cls.syllabus} target="_blank" rel="noreferrer">{cls.syllabus}</a></p>
+            <p>
+              <a href={cls.syllabus} target="_blank" rel="noreferrer">
+                Syllabus
+              </a>
+            </p>
           )}
 
+
           <p>
-            <strong>Class Notes:</strong>{' '}
             <a
-              href={`/#/latexpage/${encodeURIComponent(cls.class_code)}`}
+              href={`/#/latexpage/classnotes/${encodeURIComponent(cls.class_code)}`}
               target="_blank"
               rel="noreferrer"
             >
-              Open
+              Class Notes
             </a>
           </p>
 

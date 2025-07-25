@@ -93,4 +93,19 @@ router.put('/object/update/:id', async (req, res) => {
     res.status(500).json({ error: 'Update failed', details: err.message });
   }
 });
+router.get('/object/classCode/:classCode', async (req, res) => {
+  try {
+    const classCode = req.params.classCode;
+
+    const asset = await ScheduleAsset.findOne({ class_code: classCode });
+
+    if (!asset) {
+      return res.status(404).json({ message: 'Asset not found' });
+    }
+
+    res.json(asset);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch asset by classCode', details: err.message });
+  }
+});
 module.exports = router;

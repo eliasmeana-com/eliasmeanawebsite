@@ -1,17 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import LatexDocumentRenderer from '../utils/latexUtils/LatexDocumentRenderer';
-import '../styles/classNotes.css';
+import { useState, useEffect } from 'react';
 
-function LatexTestPage() {
-  const { pageCode } = useParams();
-
+export default function useLatexDocument(pageCode) {
   const [latexScript, setLatexScript] = useState('');
   const [inputValue, setInputValue] = useState('');
   const [status, setStatus] = useState('');
   const [documentId, setDocumentId] = useState(null);
   const [editMode, setEditMode] = useState(false);
-  const [docExists, setDocExists] = useState(true); // track if document exists
+  const [docExists, setDocExists] = useState(true);
 
   useEffect(() => {
     if (!pageCode) {
@@ -59,7 +54,6 @@ function LatexTestPage() {
       let response;
 
       if (docExists && documentId) {
-        // PUT (update existing)
         response = await fetch(
           `https://eliasmeanawebsite.onrender.com/api/latex/object/update/${documentId}`,
           {
@@ -69,7 +63,6 @@ function LatexTestPage() {
           }
         );
       } else {
-        // POST (create new)
         response = await fetch(
           `https://eliasmeanawebsite.onrender.com/api/latex/object/create/${encodeURIComponent(pageCode)}`,
           {
@@ -91,7 +84,6 @@ function LatexTestPage() {
       setLatexScript(result.latexCode || inputValue);
       setEditMode(false);
 
-      // If new doc, update internal state
       if (!docExists) {
         setDocExists(true);
         setDocumentId(result.document?._id ?? null);
@@ -102,50 +94,13 @@ function LatexTestPage() {
     }
   };
 
-  return (
-    <div className="latex-container">
-      <div className="latex-header-bar">
-        {!editMode && (
-          <button onClick={() => setEditMode(true)} className="latex-edit-button">
-            Edit Document
-          </button>
-        )}
-      </div>
-
-      {editMode && (
-        <>
-          <textarea
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            rows={15}
-            className="latex-textarea"
-            placeholder="Edit your LaTeX code here..."
-          />
-
-          <div className="button-container">
-            <button onClick={saveLatex} className="latex-save-button">
-              Save Document
-            </button>
-            <button onClick={() => setEditMode(false)} className="latex-cancel-button">
-              Cancel
-            </button>
-          </div>
-        </>
-      )}
-
-      <p
-        className="latex-status"
-        style={{ color: status.startsWith('Error') ? 'crimson' : 'green' }}
-      >
-        {status}
-      </p>
-
-      <hr className="latex-divider" />
-
-      <h2 className="latex-output-heading">Notes For </h2>
-      <LatexDocumentRenderer latexScript={latexScript} />
-    </div>
-  );
+  return {
+    latexScript,
+    inputValue,
+    setInputValue,
+    status,
+    editMode,
+    setEditMode,
+    saveLatex,
+  };
 }
-
-export default LatexTestPage;

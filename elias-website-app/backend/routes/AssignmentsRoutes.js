@@ -52,9 +52,9 @@ router.get('/object/classCode/:classCode', async (req, res) => {
   }
 });
 
-router.post('/object/create/:pageCode', async (req, res) => {
+router.post('/object/create/:classCode', async (req, res) => {
   try {
-    const { pageCode } = req.params;
+    const { classCode } = req.params;
     const { latexCode, assignmentName, dueDate } = req.body;
 
     // Basic validation
@@ -69,14 +69,14 @@ router.post('/object/create/:pageCode', async (req, res) => {
     }
 
     // Check if a document with the same pageCode already exists
-    const existing = await AssignmentCode.findOne({ pageCode });
+    const existing = await AssignmentCode.findOne({ classCode });
     if (existing) {
       return res.status(409).json({ error: 'A document with this pageCode already exists.' });
     }
 
     // Create and save the new assignment
     const newDoc = new AssignmentCode({
-      pageCode,
+      classCode,
       latexCode,
       assignmentName,
       dueDate,

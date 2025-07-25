@@ -35,4 +35,20 @@ router.put('/object/update/:id', async (req, res) => {
     res.status(500).json({ error: 'Update failed', details: err.message });
   }
 });
+router.get('/object/pageCode/:pageCode', async (req, res) => {
+  try {
+    const pageCode = req.params.pageCode;
+
+    const asset = await LatexCode.findOne({ pageCode: pageCode });
+
+    if (!asset) {
+      return res.status(404).json({ message: 'Asset not found' });
+    }
+
+    res.json(asset);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch asset by pageCode', details: err.message });
+  }
+});
+
 module.exports = router;

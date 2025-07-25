@@ -26,6 +26,5 @@ const scheduleAssetSchema = new mongoose.Schema({
   textbooks: [String],
   syllabus: String,
   assignments: [assignmentSchema]
-}, { collection: 'SCHEDULE_ASSETS' }); // 👈 important
-
+}, { collection: 'SCHEDULE_ASSETS' }); 
 module.exports = mongoose.model('ScheduleAsset', scheduleAssetSchema);

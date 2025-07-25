@@ -35,21 +35,23 @@ router.put('/object/update/:id', async (req, res) => {
     res.status(500).json({ error: 'Update failed', details: err.message });
   }
 });
-router.get('/object/pageCode/:pageCode', async (req, res) => {
+router.get('/object/classCode/:classCode', async (req, res) => {
   try {
-    const pageCode = req.params.pageCode;
+    const classCode = req.params.classCode;
 
-    const asset = await AssignmentCode.findOne({ pageCode: pageCode });
+    // Find all documents matching classCode
+    const assets = await AssignmentCode.find({ classCode });
 
-    if (!asset) {
-      return res.status(404).json({ message: 'Asset not found' });
+    if (!assets || assets.length === 0) {
+      return res.status(404).json({ message: 'No assets found' });
     }
 
-    res.json(asset);
+    res.json(assets);
   } catch (err) {
-    res.status(500).json({ error: 'Failed to fetch asset by pageCode', details: err.message });
+    res.status(500).json({ error: 'Failed to fetch assets by classCode', details: err.message });
   }
 });
+
 router.post('/object/create/:pageCode', async (req, res) => {
   try {
     const { pageCode } = req.params;

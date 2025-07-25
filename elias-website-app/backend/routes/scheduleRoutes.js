@@ -1,17 +1,23 @@
 const express = require('express');
 const router = express.Router();
-const Schedule = require('../models/Schedule');
+const mongoose = require('mongoose');
+const ScheduleAsset = require('../models/ScheduleAsset');
 
-// ✅ Test DB query route
-router.get('/test', async (req, res) => {
+// GET document by _id
+router.get('/asset/:id', async (req, res) => {
   try {
-    const sample = await Schedule.findOne(); // fetch any document
-    res.json({
-      message: 'Query successful!',
-      result: sample || 'No data found',
-    });
+    const id = req.params.id;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ error: 'Invalid MongoDB ObjectId' });
+    }
+
+    const result = await ScheduleAsset.findById(id);
+    if (!result) return res.status(404).json({ message: 'Asset not found' });
+
+    res.json(result);
   } catch (err) {
-    res.status(500).json({ error: 'DB query failed', details: err.message });
+    res.status(500).json({ error: 'Query failed', details: err.message });
   }
 });
 

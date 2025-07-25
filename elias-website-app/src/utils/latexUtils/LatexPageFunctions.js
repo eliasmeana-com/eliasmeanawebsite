@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
 
-export default function useLatexDocument(pageCode) {
+export default function useLatexDocument(routeInfo) {
+  // routeInfo can be:
+  // { type: 'classnotes', pageCode }
+  // or { type: 'assignment', classCode, assignmentCode }
+
   const [latexScript, setLatexScript] = useState('');
   const [inputValue, setInputValue] = useState('');
   const [status, setStatus] = useState('');
@@ -8,17 +12,40 @@ export default function useLatexDocument(pageCode) {
   const [editMode, setEditMode] = useState(false);
   const [docExists, setDocExists] = useState(true);
 
+  // Helper to build URLs dynamically:
+  const buildUrls = () => {
+    if (routeInfo.type === 'classnotes' && routeInfo.pageCode) {
+      const pc = encodeURIComponent(routeInfo.pageCode);
+      return {
+        fetchUrl: `https://eliasmeanawebsite.onrender.com/api/classnotes/object/pageCode/${pc}`,
+        updateUrl: (id) => `https://eliasmeanawebsite.onrender.com/api/classnotes/object/update/${id}`,
+        createUrl: `https://eliasmeanawebsite.onrender.com/api/classnotes/object/create/${pc}`,
+      };
+    }
+    if (routeInfo.type === 'assignment' && routeInfo.classCode && routeInfo.assignmentCode) {
+      // Replace these with your real assignment endpoints
+      const cc = encodeURIComponent(routeInfo.classCode);
+      const ac = encodeURIComponent(routeInfo.assignmentCode);
+      return {
+        fetchUrl: `test/endpoint1/${cc}/${ac}`,
+        updateUrl: (id) => `test/endpoint2/${id}`,
+        createUrl: `test/endpoint3/${cc}/${ac}`,
+      };
+    }
+    return {};
+  };
+
+  const { fetchUrl, updateUrl, createUrl } = buildUrls();
+
   useEffect(() => {
-    if (!pageCode) {
-      setStatus('No page code provided in URL.');
+    if (!fetchUrl) {
+      setStatus('Invalid route info.');
       return;
     }
 
     const fetchLatex = async () => {
       try {
-        const response = await fetch(
-          `https://eliasmeanawebsite.onrender.com/api/latex/object/pageCode/${encodeURIComponent(pageCode)}`
-        );
+        const response = await fetch(fetchUrl);
 
         if (response.status === 404) {
           setStatus('Document does not exist yet.');
@@ -45,7 +72,7 @@ export default function useLatexDocument(pageCode) {
     };
 
     fetchLatex();
-  }, [pageCode]);
+  }, [fetchUrl]);
 
   const saveLatex = async () => {
     setStatus('Saving...');
@@ -54,23 +81,17 @@ export default function useLatexDocument(pageCode) {
       let response;
 
       if (docExists && documentId) {
-        response = await fetch(
-          `https://eliasmeanawebsite.onrender.com/api/latex/object/update/${documentId}`,
-          {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ latexCode: inputValue }),
-          }
-        );
+        response = await fetch(updateUrl(documentId), {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ latexCode: inputValue }),
+        });
       } else {
-        response = await fetch(
-          `https://eliasmeanawebsite.onrender.com/api/latex/object/create/${encodeURIComponent(pageCode)}`,
-          {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ latexCode: inputValue }),
-          }
-        );
+        response = await fetch(createUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ latexCode: inputValue }),
+        });
       }
 
       if (!response.ok) {

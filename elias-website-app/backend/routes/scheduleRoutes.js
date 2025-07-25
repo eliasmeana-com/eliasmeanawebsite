@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const ScheduleAsset = require('../models/ScheduleAsset');
 
 
-router.get('/object/range', async (req, res) => {
+router.get('/object/daterange', async (req, res) => {
     try {
       const { start, end } = req.query;
   
@@ -41,20 +41,20 @@ router.post('/object/add', async (req, res) => {
   }
 });
 // GET document by _id
-// router.get('object/:id', async (req, res) => {
-//   try {
-//     const id = req.params.id;
+router.get('/object/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
 
-//     if (!mongoose.Types.ObjectId.isValid(id)) {
-//       return res.status(400).json({ error: 'Invalid MongoDB ObjectId' });
-//     }
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ error: 'Invalid MongoDB ObjectId' });
+    }
 
-//     const result = await ScheduleAsset.findById(id);
-//     if (!result) return res.status(404).json({ message: 'Asset not found' });
+    const result = await ScheduleAsset.findById(id);
+    if (!result) return res.status(404).json({ message: 'Asset not found' });
 
-//     res.json(result);
-//   } catch (err) {
-//     res.status(500).json({ error: 'Query failed', details: err.message });
-//   }
-// });
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ error: 'Query failed', details: err.message });
+  }
+});
 module.exports = router;

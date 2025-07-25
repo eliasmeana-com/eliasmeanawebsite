@@ -16,7 +16,9 @@ function AssignmentPage() {
   useEffect(() => {
     const fetchAssignments = async () => {
       try {
-        const response = await fetch(`https://eliasmeanawebsite.onrender.com/api/assignments/object/classCode/${encodeURIComponent(classCode)}`);
+        const response = await fetch(
+          `https://eliasmeanawebsite.onrender.com/api/assignments/object/classCode/${encodeURIComponent(classCode)}`
+        );
         if (!response.ok) throw new Error('Failed to fetch assignments');
         const data = await response.json();
         setAssignments(data);
@@ -27,7 +29,9 @@ function AssignmentPage() {
 
     const fetchClassName = async () => {
       try {
-        const response = await fetch(`https://eliasmeanawebsite.onrender.com/api/schedule/object/classcode/${encodeURIComponent(classCode)}`);
+        const response = await fetch(
+          `https://eliasmeanawebsite.onrender.com/api/schedule/object/classcode/${encodeURIComponent(classCode)}`
+        );
         if (!response.ok) throw new Error('Failed to fetch class info');
         const data = await response.json();
         setClassName(data.name);
@@ -44,26 +48,45 @@ function AssignmentPage() {
 
   const createAssignment = async () => {
     try {
-        console.log(newName)
-        console.log(newDueDate)
-      const response = await fetch(`https://eliasmeanawebsite.onrender.com/api/assignments/object/create/${encodeURIComponent(classCode)}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          latexCode: 'Enter your code here',
-          assignmentName: newName,
-          dueDate: newDueDate
-        })
-      });
+      const response = await fetch(
+        `https://eliasmeanawebsite.onrender.com/api/assignments/object/create/${encodeURIComponent(classCode)}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            latexCode: 'Enter your code here',
+            assignmentName: newName,
+            dueDate: newDueDate
+          })
+        }
+      );
 
       if (!response.ok) throw new Error('Failed to create assignment');
       const result = await response.json();
-      setAssignments(prev => [...prev, result.document]);
+      setAssignments((prev) => [...prev, result.document]);
       setShowModal(false);
       setNewName('');
       setNewDueDate('');
     } catch (err) {
       console.error('Error creating assignment:', err);
+    }
+  };
+
+  const deleteAssignment = async (id) => {
+    const confirmDelete = window.confirm('Are you sure you want to delete this assignment?');
+    if (!confirmDelete) return;
+
+    try {
+      const response = await fetch(
+        `https://eliasmeanawebsite.onrender.com/api/assignments/object/delete/${id}`,
+        { method: 'DELETE' }
+      );
+      if (!response.ok) throw new Error('Failed to delete assignment');
+
+      setAssignments((prev) => prev.filter((a) => a._id !== id));
+    } catch (err) {
+      console.error('Error deleting assignment:', err);
+      alert('Error deleting assignment.');
     }
   };
 
@@ -103,48 +126,47 @@ function AssignmentPage() {
       ) : (
         <div className="card-grid">
           {filteredAssignments.map((a) => (
-            <AssignmentCard key={a._id} assignment={a} />
+            <AssignmentCard key={a._id} assignment={a} onDelete={deleteAssignment} />
           ))}
         </div>
       )}
 
       {showModal && (
-  <div className="modal-overlay">
-    <div className="modal">
-      <h2>New Assignment</h2>
-      <div className="modal-body">
-        <label>
-          Assignment Name
-          <input
-            type="text"
-            value={newName}
-            onChange={(e) => setNewName(e.target.value)}
-            placeholder="Assignment Name"
-          />
-        </label>
-        <label>
-          Due Date
-          <input
-            type="text"
-            value={newDueDate}
-            onChange={(e) => setNewDueDate(e.target.value)}
-            placeholder="YYYY-MM-DD"
-          />
-        </label>
-      </div>
-      <div className="modal-buttons">
-        <button className="save" onClick={createAssignment}>Save</button>
-        <button className="cancel" onClick={() => setShowModal(false)}>Cancel</button>
-      </div>
-    </div>
-  </div>
-)}
-
+        <div className="modal-overlay">
+          <div className="modal">
+            <h2>New Assignment</h2>
+            <div className="modal-body">
+              <label>
+                Assignment Name
+                <input
+                  type="text"
+                  value={newName}
+                  onChange={(e) => setNewName(e.target.value)}
+                  placeholder="Assignment Name"
+                />
+              </label>
+              <label>
+                Due Date
+                <input
+                  type="text"
+                  value={newDueDate}
+                  onChange={(e) => setNewDueDate(e.target.value)}
+                  placeholder="YYYY-MM-DD"
+                />
+              </label>
+            </div>
+            <div className="modal-buttons">
+              <button className="save" onClick={createAssignment}>Save</button>
+              <button className="cancel" onClick={() => setShowModal(false)}>Cancel</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
 
-function AssignmentCard({ assignment }) {
+function AssignmentCard({ assignment, onDelete }) {
   const [expanded, setExpanded] = useState(false);
 
   return (
@@ -153,6 +175,7 @@ function AssignmentCard({ assignment }) {
         <h2>{assignment.assignmentName}</h2>
         <span className="toggle-icon">{expanded ? '−' : '+'}</span>
       </div>
+
       {expanded && (
         <div className="card-details">
           <p><strong>Due Date:</strong> {assignment.dueDate}</p>
@@ -166,6 +189,12 @@ function AssignmentCard({ assignment }) {
               Open LaTeX Page
             </a>
           </p>
+          <button
+            className="delete-assignment-button"
+            onClick={() => onDelete(assignment._id)}
+          >
+            Delete Assignment
+          </button>
         </div>
       )}
     </div>

@@ -205,6 +205,22 @@
   background-color: #cbd5e1;
 }
 
+.delete-assignment-button {
+  margin-top: 1rem;
+  position: inherit;
+  padding: 8px 12px;
+  background-color: #e63946;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.delete-assignment-button:hover {
+  background-color: #c92a35;
+}
+
+
 /* RESPONSIVE TEXT */
 @media (max-width: 480px) {
   .assignment-page h1 {

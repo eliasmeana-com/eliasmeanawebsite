@@ -68,12 +68,6 @@ router.post('/object/create/:classCode', async (req, res) => {
       return res.status(400).json({ error: 'dueDate is required and must be a string.' });
     }
 
-    // Check if a document with the same pageCode already exists
-    const existing = await AssignmentCode.findOne({ classCode });
-    if (existing) {
-      return res.status(409).json({ error: 'A document with this pageCode already exists.' });
-    }
-
     // Create and save the new assignment
     const newDoc = new AssignmentCode({
       classCode,

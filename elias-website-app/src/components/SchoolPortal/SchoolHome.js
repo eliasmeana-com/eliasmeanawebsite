@@ -25,7 +25,6 @@ function SchoolHome() {
     loadSchedule();
   }, []);
 
-  // Helper: Check if today is between start and end dates (inclusive)
   const isOngoing = (cls) => {
     if (!cls.start_date || !cls.end_date) return false;
     const today = new Date();
@@ -34,18 +33,14 @@ function SchoolHome() {
     return today >= start && today <= end;
   };
 
-  // Filter schedule using memo for performance
   const filteredSchedule = useMemo(() => {
     return schedule.filter((cls) => {
-      // Filter ongoing if checked
       if (filterOngoing && !isOngoing(cls)) {
         return false;
       }
-      // Filter by name substring (case insensitive)
       if (filterName && !cls.name.toLowerCase().includes(filterName.toLowerCase())) {
         return false;
       }
-      // Filter by code substring (case insensitive)
       if (filterCode && !cls.class_code.toLowerCase().includes(filterCode.toLowerCase())) {
         return false;
       }
@@ -104,6 +99,7 @@ function ClassCard({ cls }) {
         <h2>{cls.name}</h2>
         <span className="toggle-icon">{expanded ? '−' : '+'}</span>
       </div>
+
       {expanded && (
         <div className="card-details">
           <p><strong>Code:</strong> {cls.class_code}</p>
@@ -119,11 +115,24 @@ function ClassCard({ cls }) {
             <p><strong>Syllabus:</strong> <a href={cls.syllabus} target="_blank" rel="noreferrer">{cls.syllabus}</a></p>
           )}
 
+          <p>
+            <strong>Class Notes:</strong>{' '}
+            <a
+              href={`/#/latextest/${encodeURIComponent(cls.class_code)}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Open
+            </a>
+          </p>
+
           <div>
             <strong>Timeslots:</strong>
             <ul>
               {cls.timeslots.map((slot, i) => (
-                <li key={i}>{slot.days} {slot.start_time}–{slot.end_time} ({slot.timezone}) — {slot.location}, {slot.campus}</li>
+                <li key={i}>
+                  {slot.days} {slot.start_time}–{slot.end_time} ({slot.timezone}) — {slot.location}, {slot.campus}
+                </li>
               ))}
             </ul>
           </div>

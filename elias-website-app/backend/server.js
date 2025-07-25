@@ -6,6 +6,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 const connectDB = require('./config/db');
 const scheduleRoutes = require('./routes/scheduleRoutes.js');
+const latexRoutes = require('./routes/LatexRoutes.js');
 
 const app = express();
 const PORT = process.env.PORT || 6000;
@@ -19,6 +20,8 @@ connectDB();
 
 // Routes
 app.use('/api/schedule', scheduleRoutes);
+
+app.use('/api/latex', latexRoutes);
 
 // Test Route
 app.get('/test-connection', (req, res) => {

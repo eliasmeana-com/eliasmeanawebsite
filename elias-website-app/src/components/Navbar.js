@@ -66,6 +66,10 @@ function Navbar() {
         {
           title: 'Schedule',
           link: '/schedule'
+        },
+        {
+          title: 'Classes',
+          link: '/schoolhome'
         }
       ]
     }

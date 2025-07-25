@@ -18,7 +18,7 @@ app.use(express.json());
 connectDB();
 
 // Routes
-app.use('/api/schedule', scheduleRoutes);
+app.use('/api/schedule/object', scheduleRoutes);
 
 // Test Route
 app.get('/test-connection', (req, res) => {

@@ -20,5 +20,22 @@ router.get('/asset/:id', async (req, res) => {
     res.status(500).json({ error: 'Query failed', details: err.message });
   }
 });
-
+router.get('/range', async (req, res) => {
+    try {
+      const { start, end } = req.query;
+  
+      if (!start || !end) {
+        return res.status(400).json({ error: 'Please provide start and end query parameters' });
+      }
+  
+      const results = await ScheduleAsset.find({
+        start_date: { $gte: start },
+        end_date: { $lte: end }
+      });
+  
+      res.json(results);
+    } catch (err) {
+      res.status(500).json({ error: 'Query failed', details: err.message });
+    }
+  });
 module.exports = router;

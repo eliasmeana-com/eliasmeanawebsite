@@ -38,4 +38,12 @@ router.get('/range', async (req, res) => {
       res.status(500).json({ error: 'Query failed', details: err.message });
     }
   });
+  router.get('/all', async (req, res) => {
+    try {
+      const assets = await ScheduleAsset.find({});
+      res.json(assets);
+    } catch (err) {
+      res.status(500).json({ error: 'Failed to fetch schedule assets', details: err.message });
+    }
+  });
 module.exports = router;

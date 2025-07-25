@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import LatexDocumentRenderer from '../utils/latexUtils/LatexDocumentRenderer';
-import useLatexDocument from '../utils/latexUtils/LatexPageFunctions'; // your existing hook
-import '../styles/classNotes.css';
+import { useParams,useLocation } from 'react-router-dom';
+import LatexDocumentRenderer from '../../utils/latexUtils/LatexDocumentRenderer';
+import useLatexDocument from '../../utils/latexUtils/LatexPageFunctions'; // your existing hook
+import '../../styles/latexPage.css';
 
 function LatexTestPage() {
     const { pageCode } = useParams();
-
+    const location = useLocation();
+    console.log(location.pathname.split('/')[2])
     // Your existing hook for LaTeX document
     const {
         latexScript,
@@ -16,7 +17,7 @@ function LatexTestPage() {
         editMode,
         setEditMode,
         saveLatex,
-    } = useLatexDocument(pageCode);
+    } = useLatexDocument({ type: 'classnotes', pageCode });
     const [className, setClassName] = useState('');
     const [classNameStatus, setClassNameStatus] = useState('');
 

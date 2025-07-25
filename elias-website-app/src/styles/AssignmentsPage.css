@@ -1,0 +1,74 @@
+/* AssignmentsPage.css */
+
+.assignment-page {
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+}
+
+.filter-bar {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-bar input[type="text"] {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  min-width: 200px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.assignment-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  transition: box-shadow 0.3s ease;
+}
+
+.assignment-card:hover {
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.card-header h2 {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.toggle-icon {
+  font-size: 1.5rem;
+  color: #666;
+}
+
+.card-details {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+}
+
+.card-details p {
+  margin: 0.3rem 0;
+}
+
+.card-details a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+.card-details a:hover {
+  text-decoration: underline;
+}

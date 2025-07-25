@@ -55,10 +55,17 @@ router.get('/object/classCode/:classCode', async (req, res) => {
 router.post('/object/create/:pageCode', async (req, res) => {
   try {
     const { pageCode } = req.params;
-    const { latexCode } = req.body;
+    const { latexCode, assignmentName, dueDate } = req.body;
 
+    // Basic validation
     if (!latexCode || typeof latexCode !== 'string') {
       return res.status(400).json({ error: 'latexCode is required and must be a string.' });
+    }
+    if (!assignmentName || typeof assignmentName !== 'string') {
+      return res.status(400).json({ error: 'assignmentName is required and must be a string.' });
+    }
+    if (!dueDate || typeof dueDate !== 'string') {
+      return res.status(400).json({ error: 'dueDate is required and must be a string.' });
     }
 
     // Check if a document with the same pageCode already exists
@@ -67,23 +74,27 @@ router.post('/object/create/:pageCode', async (req, res) => {
       return res.status(409).json({ error: 'A document with this pageCode already exists.' });
     }
 
+    // Create and save the new assignment
     const newDoc = new AssignmentCode({
       pageCode,
-      latexCode
+      latexCode,
+      assignmentName,
+      dueDate,
     });
 
     await newDoc.save();
 
     res.status(201).json({
-      message: 'LaTeX document created successfully.',
-      document: newDoc
+      message: 'Assignment document created successfully.',
+      document: newDoc,
     });
   } catch (err) {
     res.status(500).json({
-      error: 'Failed to create LaTeX document.',
-      details: err.message
+      error: 'Failed to create assignment document.',
+      details: err.message,
     });
   }
 });
+
 
 module.exports = router;

@@ -12,29 +12,39 @@ const WeeklySchedule = ({ schedule, setSelectedDay }) => {
         return `${displayHour}:${minutes} ${ampm}`;
     };
 
+    const sortByStartTime = (classes) => {
+        return [...classes].sort((a, b) => a.startTime.localeCompare(b.startTime));
+    };
+
     return (
         <div className="schedule-grid">
             {days.map(day => {
                 const daySchedule = schedule.find(item => item.day === day) || { classes: [] };
+                const sortedClasses = sortByStartTime(daySchedule.classes);
+
                 return (
                     <div
                         key={day}
-                        className={`schedule-day ${daySchedule.classes.length ? 'has-classes' : 'no-classes'}`}
+                        className={`schedule-day ${sortedClasses.length ? 'has-classes' : 'no-classes'}`}
                         onClick={() => setSelectedDay(day)}
                     >
                         <h4>{day}</h4>
-                        {daySchedule.classes.length > 0 ? (
-                            <ul>
-                                {daySchedule.classes.slice(0, 2).map((cls, idx) => (
-                                    <li key={idx}>
-                                        <span className="class-name">{cls.name}</span>
-                                        <span className="class-time">{formatTime(cls.startTime)} - {formatTime(cls.endTime)}</span>
-                                    </li>
-                                ))}
-                                {daySchedule.classes.length > 2 && (
-                                    <li className="more-classes">+{daySchedule.classes.length - 2} more</li>
-                                )}
-                            </ul>
+                        {sortedClasses.length > 0 ? (
+                            <>
+                                <ul>
+                                    {sortedClasses.slice(0, 2).map((cls, idx) => (
+                                        <li key={idx}>
+                                            <span className="class-name">{cls.name}</span>
+                                            <span className="class-time">
+                                                {formatTime(cls.startTime)} - {formatTime(cls.endTime)}
+                                            </span>
+                                        </li>
+                                    ))}
+                                    {sortedClasses.length > 2 && (
+                                        <li className="more-classes">+{sortedClasses.length - 2} more</li>
+                                    )}
+                                </ul>
+                            </>
                         ) : (
                             <p>No classes scheduled</p>
                         )}

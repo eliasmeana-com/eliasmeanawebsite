@@ -31,7 +31,6 @@ const MonthlySchedule = ({ schedule, currentDate, setSelectedDay }) => {
         return days;
     };
 
-
     const formatTime = (timeString) => {
         if (!timeString) return '';
         const [h, m] = timeString.split(':');
@@ -39,6 +38,10 @@ const MonthlySchedule = ({ schedule, currentDate, setSelectedDay }) => {
         const ampm = hour >= 12 ? 'PM' : 'AM';
         const hour12 = hour % 12 || 12;
         return `${hour12}:${m} ${ampm}`;
+    };
+
+    const sortByStartTime = (classes) => {
+        return [...classes].sort((a, b) => a.startTime.localeCompare(b.startTime));
     };
 
     const monthDays = getMonthDays();
@@ -51,6 +54,7 @@ const MonthlySchedule = ({ schedule, currentDate, setSelectedDay }) => {
             {monthDays.map((day, i) => {
                 const dateKey = day ? day.toISOString().split('T')[0] : null;
                 const dayClasses = day ? schedule[dateKey] || [] : [];
+                const sortedClasses = sortByStartTime(dayClasses);
 
                 return (
                     <div
@@ -63,14 +67,14 @@ const MonthlySchedule = ({ schedule, currentDate, setSelectedDay }) => {
                             <>
                                 <div className="day-number">{day.getDate()}</div>
                                 <ul className="mini-class-list">
-                                    {dayClasses.slice(0, 2).map((cls, idx) => (
+                                    {sortedClasses.slice(0, 2).map((cls, idx) => (
                                         <li key={idx} className="mini-class-item">
                                             <span className="mini-class-name">{cls.name}</span>
                                             <span className="mini-class-time">{formatTime(cls.startTime)}</span>
                                         </li>
                                     ))}
-                                    {dayClasses.length > 2 && (
-                                        <li className="more-classes">+{dayClasses.length - 2} more</li>
+                                    {sortedClasses.length > 2 && (
+                                        <li className="more-classes">+{sortedClasses.length - 2} more</li>
                                     )}
                                 </ul>
                             </>

@@ -5,31 +5,31 @@ const ScheduleAsset = require('../models/ScheduleAsset');
 
 
 router.get('/object/daterange', async (req, res) => {
-    try {
-      const { start, end } = req.query;
-  
-      if (!start || !end) {
-        return res.status(400).json({ error: 'Please provide start and end query parameters' });
-      }
-  
-      const results = await ScheduleAsset.find({
-        start_date: { $lte: start },
-        end_date: { $gte: end }
-      });
-  
-      res.json(results);
-    } catch (err) {
-      res.status(500).json({ error: 'Query failed', details: err.message });
+  try {
+    const { start, end } = req.query;
+
+    if (!start || !end) {
+      return res.status(400).json({ error: 'Please provide start and end query parameters' });
     }
-  });
-  router.get('/object/all', async (req, res) => {
-    try {
-      const assets = await ScheduleAsset.find({});
-      res.json(assets);
-    } catch (err) {
-      res.status(500).json({ error: 'Failed to fetch schedule assets', details: err.message });
-    }
-  });
+
+    const results = await ScheduleAsset.find({
+      start_date: { $lte: end },
+      end_date: { $gte: start }
+    });
+
+    res.json(results);
+  } catch (err) {
+    res.status(500).json({ error: 'Query failed', details: err.message });
+  }
+});
+router.get('/object/all', async (req, res) => {
+  try {
+    const assets = await ScheduleAsset.find({});
+    res.json(assets);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch schedule assets', details: err.message });
+  }
+});
 router.post('/object/add', async (req, res) => {
   try {
     const newAsset = new ScheduleAsset(req.body);

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const LatexCode = require('../models/LatexCode');
+const LatexCode = require('../models/ClassNotesLatex');
 
 
 router.get('/object/all', async (req, res) => {

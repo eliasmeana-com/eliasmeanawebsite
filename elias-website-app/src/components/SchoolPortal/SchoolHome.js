@@ -118,7 +118,7 @@ function ClassCard({ cls }) {
           <p>
             <strong>Class Notes:</strong>{' '}
             <a
-              href={`/#/latextest/${encodeURIComponent(cls.class_code)}`}
+              href={`/#/latexpage/${encodeURIComponent(cls.class_code)}`}
               target="_blank"
               rel="noreferrer"
             >

@@ -13,6 +13,7 @@ import Dwave from './components/Dwave';
 import Research from './components/Research'
 import Music from './components/Studio/Music'
 import Trip from './components/TripGallery/TripGallery'
+import SchoolHome from './components/SchoolPortal/SchoolHome'
 
 function App() {
   return (
@@ -24,8 +25,9 @@ function App() {
 
         {/* Routes without Sidebar*/}
         <Route path="/birla" element={<NoSidebarLayout><Birla /></NoSidebarLayout>} />
-          <Route path="/schedule" element={<NoSidebarLayout><Schedule /></NoSidebarLayout>} />
-          <Route path="/dwave" element={<NoSidebarLayout><Dwave /></NoSidebarLayout>} />
+        <Route path="/schedule" element={<NoSidebarLayout><Schedule /></NoSidebarLayout>} />
+        <Route path="/schoolhome" element={<NoSidebarLayout><SchoolHome /></NoSidebarLayout>} />
+        <Route path="/dwave" element={<NoSidebarLayout><Dwave /></NoSidebarLayout>} />
         <Route path="/research" element={<NoSidebarLayout><Research /></NoSidebarLayout>} />
         <Route path="/music" element={<NoSidebarLayout><Music /></NoSidebarLayout>} />
         <Route path="/" element={<NoSidebarLayout><Home /></NoSidebarLayout>} />

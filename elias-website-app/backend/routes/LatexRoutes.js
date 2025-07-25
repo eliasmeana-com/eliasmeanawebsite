@@ -50,5 +50,38 @@ router.get('/object/pageCode/:pageCode', async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch asset by pageCode', details: err.message });
   }
 });
+router.post('/object/create/:pageCode', async (req, res) => {
+  try {
+    const { pageCode } = req.params;
+    const { latexCode } = req.body;
+
+    if (!latexCode || typeof latexCode !== 'string') {
+      return res.status(400).json({ error: 'latexCode is required and must be a string.' });
+    }
+
+    // Check if a document with the same pageCode already exists
+    const existing = await LatexCode.findOne({ pageCode });
+    if (existing) {
+      return res.status(409).json({ error: 'A document with this pageCode already exists.' });
+    }
+
+    const newDoc = new LatexCode({
+      pageCode,
+      latexCode
+    });
+
+    await newDoc.save();
+
+    res.status(201).json({
+      message: 'LaTeX document created successfully.',
+      document: newDoc
+    });
+  } catch (err) {
+    res.status(500).json({
+      error: 'Failed to create LaTeX document.',
+      details: err.message
+    });
+  }
+});
 
 module.exports = router;

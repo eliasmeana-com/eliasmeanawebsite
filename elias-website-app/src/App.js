@@ -28,7 +28,7 @@ function App() {
         <Route path="/birla" element={<NoSidebarLayout><Birla /></NoSidebarLayout>} />
         <Route path="/schedule" element={<NoSidebarLayout><Schedule /></NoSidebarLayout>} />
         <Route path="/schoolhome" element={<NoSidebarLayout><SchoolHome /></NoSidebarLayout>} />
-        <Route path="/latextest" element={<NoSidebarLayout><SomePage /></NoSidebarLayout>} />
+        <Route path="/latextest/:pageCode" element={<NoSidebarLayout><SomePage /></NoSidebarLayout>} />
         <Route path="/dwave" element={<NoSidebarLayout><Dwave /></NoSidebarLayout>} />
         <Route path="/research" element={<NoSidebarLayout><Research /></NoSidebarLayout>} />
         <Route path="/music" element={<NoSidebarLayout><Music /></NoSidebarLayout>} />

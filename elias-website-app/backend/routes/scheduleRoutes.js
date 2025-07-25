@@ -20,7 +20,7 @@ router.get('/asset/:id', async (req, res) => {
     res.status(500).json({ error: 'Query failed', details: err.message });
   }
 });
-router.get('/range', async (req, res) => {
+router.get('/asset/daterange', async (req, res) => {
     try {
       const { start, end } = req.query;
   
@@ -38,12 +38,22 @@ router.get('/range', async (req, res) => {
       res.status(500).json({ error: 'Query failed', details: err.message });
     }
   });
-  router.get('/all', async (req, res) => {
+  router.get('/asset/all', async (req, res) => {
     try {
       const assets = await ScheduleAsset.find({});
       res.json(assets);
     } catch (err) {
       res.status(500).json({ error: 'Failed to fetch schedule assets', details: err.message });
+    }
+  });
+  router.post('/asset/add', async (req, res) => {
+    try {
+      const newAsset = new ScheduleAsset(req.body);
+      const savedAsset = await newAsset.save();
+      res.status(201).json(savedAsset);
+    } catch (err) {
+      console.error('Error saving schedule asset:', err);
+      res.status(400).json({ error: 'Failed to add schedule asset', details: err.message });
     }
   });
 module.exports = router;

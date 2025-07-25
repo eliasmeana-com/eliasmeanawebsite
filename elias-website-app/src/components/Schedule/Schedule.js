@@ -38,7 +38,7 @@ const fetchSchedule = async (targetDate, view) => {
     `https://eliasmeanawebsite.onrender.com/api/schedule/object/daterange?start=${startStr}&end=${endStr}`
   );
   const classData = await response.json();
-
+  console.log(classData)
   if (view === 'week') {
     const scheduleByDay = {};
     const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];

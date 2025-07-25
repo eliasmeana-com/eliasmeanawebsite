@@ -16,6 +16,7 @@ const timeslotSchema = new mongoose.Schema({
 
 const scheduleAssetSchema = new mongoose.Schema({
   name : String,
+  class_code : String,
   type: String,
   start_date: String,
   end_date: String,

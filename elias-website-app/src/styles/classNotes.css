@@ -1,0 +1,157 @@
+/* Container for the full page - make it centered and a vertical flex column */
+.latex-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* Header bar to place edit button top-right */
+.latex-header-bar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.latex-edit-button {
+  position: relative;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  font-size: 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  z-index: 9999;
+}
+
+.latex-edit-button:hover {
+  background-color: #0056b3;
+}
+
+/* Textarea styling */
+.latex-textarea {
+  display: block;       /* ensures block layout */
+  width: 100%;
+  margin-bottom: 12px;  /* gap below textarea */
+  min-height: 300px;
+  padding: 12px;
+  box-sizing: border-box;
+  font-family: monospace;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  resize: vertical;
+  background-color: #f9f9f9;
+}
+
+/* Button row to layout Save and Cancel buttons horizontally, spaced apart */
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+  margin-top: 10px;
+  flex-wrap: wrap; /* allow buttons to wrap on small screens */
+}
+
+.latex-save-button,
+.latex-cancel-button {
+  padding: 10px 20px;
+  position: relative;
+  font-size: 15px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  /* Fix overlapping issues */
+  flex-shrink: 0;
+  background-color: #28a745;
+  color: white;
+}
+
+.latex-cancel-button {
+  background-color: #6c757d;
+}
+
+.latex-save-button:hover {
+  background-color: #218838;
+}
+
+.latex-cancel-button:hover {
+  background-color: #5a6268;
+}
+
+/* Status message */
+.latex-status {
+  margin-top: 10px;
+  font-style: italic;
+  color: #444;
+}
+
+/* Divider */
+.latex-divider {
+  margin: 30px 0;
+  border: none;
+  border-top: 1px solid #ddd;
+}
+
+/* Output heading */
+.latex-output-heading {
+  margin-top: 0;
+  font-size: 20px;
+  font-weight: bold;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 8px;
+  margin-bottom: 20px;
+}
+
+/* Rendered LaTeX container */
+.latex-output {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+  .latex-container {
+    margin: 20px 15px;
+    padding: 15px;
+  }
+
+  .latex-edit-button {
+    padding: 8px 14px;
+    font-size: 14px;
+  }
+
+  .latex-textarea {
+    min-height: 200px;
+    font-size: 14px;
+  }
+
+  .button-container {
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .latex-save-button,
+  .latex-cancel-button {
+    flex: 1 1 45%; /* allow buttons to take half width and wrap */
+    padding: 10px 0;
+    font-size: 14px;
+    white-space: normal; /* allow button text to wrap if needed */
+  }
+
+  .latex-output-heading {
+    font-size: 18px;
+  }
+
+  .latex-output {
+    padding: 15px;
+  }
+}

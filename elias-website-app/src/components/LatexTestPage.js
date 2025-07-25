@@ -1,81 +1,110 @@
-// pages/LatexTestPage.js
 import React, { useEffect, useState } from 'react';
 import LatexDocumentRenderer from '../utils/latexUtils/LatexDocumentRenderer';
+import '../styles/classNotes.css';
 
 function LatexTestPage() {
-  const [latexScript, setLatexScript] = useState('');
-  const [inputValue, setInputValue] = useState('');
-  const [status, setStatus] = useState(''); // for save feedback
+    const [latexScript, setLatexScript] = useState('');
+    const [inputValue, setInputValue] = useState('');
+    const [status, setStatus] = useState('');
+    const [documentId, setDocumentId] = useState(null);
+    const [editMode, setEditMode] = useState(false);
 
-  useEffect(() => {
-    const fetchLatex = async () => {
-      try {
-        const response = await fetch('https://eliasmeanawebsite.onrender.com/api/latex/object/all');
-        const data = await response.json();
+    useEffect(() => {
+        const fetchLatex = async () => {
+            try {
+                const response = await fetch('https://eliasmeanawebsite.onrender.com/api/latex/object/all');
+                const data = await response.json();
 
-        if (data.length > 0) {
-          setLatexScript(data[0].latexCode);
-          setInputValue(data[0].latexCode);
-        } else {
-          setLatexScript('No LaTeX documents found.');
-          setInputValue('');
+                if (data.length > 0) {
+                    setLatexScript(data[0].latexCode);
+                    setInputValue(data[0].latexCode);
+                    setDocumentId(data[0]._id);
+                } else {
+                    setLatexScript('No LaTeX documents found.');
+                    setInputValue('');
+                }
+            } catch (error) {
+                console.error('Failed to fetch LaTeX:', error);
+                setLatexScript('Error loading LaTeX document.');
+                setInputValue('');
+            }
+        };
+
+        fetchLatex();
+    }, []);
+
+    const saveLatex = async () => {
+        if (!documentId) {
+            setStatus('No document ID found. Cannot update.');
+            return;
         }
-      } catch (error) {
-        console.error('Failed to fetch LaTeX:', error);
-        setLatexScript('Error loading LaTeX document.');
-        setInputValue('');
-      }
+
+        setStatus('Saving...');
+        try {
+            const response = await fetch(`https://eliasmeanawebsite.onrender.com/api/latex/object/update/${documentId}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ latexCode: inputValue }),
+            });
+
+            if (!response.ok) throw new Error('Failed to save LaTeX');
+
+            const result = await response.json();
+            setStatus('Saved successfully!');
+            setLatexScript(result.latexCode);
+            setEditMode(false);
+        } catch (error) {
+            setStatus('Error saving LaTeX');
+            console.error(error);
+        }
     };
 
-    fetchLatex();
-  }, []);
+    return (
+        <div className="latex-container">
+            <div className="latex-header-bar">
+                {!editMode ? (
+                    <button onClick={() => setEditMode(true)} className="latex-edit-button">
+                        Edit Document
+                    </button>
+                ) : null}
+            </div>
+            
 
-  // Function to save the edited LaTeX back to your backend
-  const saveLatex = async () => {
-    setStatus('Saving...');
-    try {
-      const response = await fetch('https://eliasmeanawebsite.onrender.com/api/latex/object', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ latexCode: inputValue }),
-      });
+            {editMode && (
+                <>
+                    <textarea
+                        value={inputValue}
+                        onChange={(e) => setInputValue(e.target.value)}
+                        rows={15}
+                        className="latex-textarea"
+                        placeholder="Edit your LaTeX code here..."
+                    />
 
-      if (!response.ok) throw new Error('Failed to save LaTeX');
+                    <div className="button-container">
+                        <button onClick={saveLatex} className="latex-save-button">
+                            Save Document
+                        </button>
+                        <button onClick={() => setEditMode(false)} className="latex-cancel-button">
+                            Cancel
+                        </button>
+                    </div>
+                </>
+            )}
 
-      const result = await response.json();
-      setStatus('Saved successfully!');
-      setLatexScript(inputValue); // update rendered latex to saved version
-      console.log('Save result:', result);
-    } catch (error) {
-      setStatus('Error saving LaTeX');
-      console.error(error);
-    }
-  };
+            <p
+                className="latex-status"
+                style={{ color: status.startsWith('Error') ? 'crimson' : 'green' }}
+            >
+                {status}
+            </p>
 
-  return (
-    <div style={{ maxWidth: '800px', margin: 'auto', padding: '20px' }}>
-      <h1>Latex Document Renderer Test</h1>
+            <hr className="latex-divider" />
 
-      <textarea
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-        rows={15}
-        style={{ width: '100%', fontFamily: 'monospace', fontSize: '16px', marginBottom: '12px' }}
-        placeholder="Type your LaTeX code here..."
-      />
+            <h2 className="latex-output-heading">Rendered Output:</h2>
+            <LatexDocumentRenderer latexScript={latexScript} />
+        </div>
+    );
 
-      <button onClick={saveLatex} style={{ padding: '8px 16px', fontSize: '16px' }}>
-        Save LaTeX
-      </button>
-
-      <p style={{ marginTop: '8px', fontStyle: 'italic' }}>{status}</p>
-
-      <hr style={{ margin: '24px 0' }} />
-
-      <h2>Rendered LaTeX Output:</h2>
-      <LatexDocumentRenderer latexScript={latexScript} />
-    </div>
-  );
 }
 
 export default LatexTestPage;

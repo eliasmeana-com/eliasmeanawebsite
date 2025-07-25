@@ -1,4 +1,4 @@
-// utils/latexUtils/LatexParser.js
+// utils/parseLatex.js
 export function parseLatex(latex) {
   const lines = latex.split('\n');
   const blocks = [];
@@ -9,26 +9,45 @@ export function parseLatex(latex) {
   for (let line of lines) {
     const trimmed = line.trim();
 
+    // Section
     if (/^\\section\*?{/.test(trimmed)) {
       flushBuffer();
       blocks.push({ type: 'section', content: extractBraces(trimmed) });
-    } else if (/^\\subsection\*?{/.test(trimmed)) {
+    }
+
+    // Subsection
+    else if (/^\\subsection\*?{/.test(trimmed)) {
       flushBuffer();
       blocks.push({ type: 'subsection', content: extractBraces(trimmed) });
-    } else if (/^\\begin{(equation\*?|gather\*?|align\*?)}/.test(trimmed)) {
+    }
+
+    // Math block
+    else if (/^\\begin{(equation\*?|gather\*?|align\*?)}/.test(trimmed)) {
       flushBuffer();
       mode = 'blockMath';
-    } else if (/^\\end{(equation\*?|gather\*?|align\*?)}/.test(trimmed)) {
+    }
+
+    else if (/^\\end{(equation\*?|gather\*?|align\*?)}/.test(trimmed)) {
       blocks.push({ type: 'blockMath', content: buffer.trim() });
       buffer = '';
       mode = 'text';
-    } else if (/^\$.*\$/.test(trimmed)) {
-      blocks.push({ type: 'inlineMath', content: trimmed.slice(1, -1) });
-    } else {
-      if (mode === 'blockMath') {
-        buffer += line + '\n';
-      } else if (trimmed !== '') {
-        blocks.push({ type: 'paragraph', content: trimmed });
+    }
+
+    // Inside a block math section
+    else if (mode === 'blockMath') {
+      buffer += line + '\n';
+    }
+
+    // General paragraph line (may contain inline math)
+    else if (trimmed !== '') {
+      const parts = trimmed.split(/(\$[^$]+\$)/); // captures $...$
+
+      for (let part of parts) {
+        if (part.startsWith('$') && part.endsWith('$')) {
+          blocks.push({ type: 'inlineMath', content: part.slice(1, -1) });
+        } else if (part.trim()) {
+          blocks.push({ type: 'paragraph', content: part });
+        }
       }
     }
   }

@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const ScheduleAsset = require('../models/ScheduleAsset');
 
 
-router.get('object/range', async (req, res) => {
+router.get('/object/range', async (req, res) => {
     try {
       const { start, end } = req.query;
   
@@ -22,7 +22,7 @@ router.get('object/range', async (req, res) => {
       res.status(500).json({ error: 'Query failed', details: err.message });
     }
   });
-  router.get('object/all', async (req, res) => {
+  router.get('/object/all', async (req, res) => {
     try {
       const assets = await ScheduleAsset.find({});
       res.json(assets);
@@ -30,7 +30,7 @@ router.get('object/range', async (req, res) => {
       res.status(500).json({ error: 'Failed to fetch schedule assets', details: err.message });
     }
   });
-router.post('object/add', async (req, res) => {
+router.post('/object/add', async (req, res) => {
   try {
     const newAsset = new ScheduleAsset(req.body);
     const savedAsset = await newAsset.save();

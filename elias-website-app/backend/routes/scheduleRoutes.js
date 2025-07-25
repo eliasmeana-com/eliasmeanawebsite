@@ -14,7 +14,7 @@ router.get('/object/daterange', async (req, res) => {
   
       const results = await ScheduleAsset.find({
         start_date: { $gte: start },
-        end_date: { $lte: end }
+        end_date: { $gte: end }
       });
   
       res.json(results);

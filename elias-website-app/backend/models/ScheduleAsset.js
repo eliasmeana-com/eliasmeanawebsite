@@ -9,7 +9,8 @@ const timeslotSchema = new mongoose.Schema({
   days: String,
   start_time: String,
   end_time: String,
-  location: String
+  location: String,
+  campus: String
 });
 
 const scheduleAssetSchema = new mongoose.Schema({

@@ -53,12 +53,12 @@ const fetchSchedule = async (targetDate, view) => {
           if (!scheduleByDay[day]) scheduleByDay[day] = { day, classes: [] };
 
           scheduleByDay[day].classes.push({
-            name: classItem.type,
+            name: classItem.name,
             startTime: slot.start_time,
             endTime: slot.end_time,
-            location: slot.location || 'TBD',
-            campus: '',
-            instructor: classItem.professor || 'TBD',
+            location: slot.location || '',
+            campus: slot.campus || '',
+            instructor: classItem.professor || '',
             description: '',
             courseHomePage: classItem.course_page || '',
           });

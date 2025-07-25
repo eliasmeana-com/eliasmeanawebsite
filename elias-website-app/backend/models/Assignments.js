@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const assignmentSchema = new mongoose.Schema({
   latexCode : String,
-  pageCode : String,
+  classCode : String,
   assignmentName : String,
   dueDate : String
 }, { collection: 'CLASS_ASSIGNMENTS' }); 

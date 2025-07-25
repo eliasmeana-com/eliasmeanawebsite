@@ -7,6 +7,7 @@ const assignmentSchema = new mongoose.Schema({
 
 const timeslotSchema = new mongoose.Schema({
   days: String,
+  timezone: String,
   start_time: String,
   end_time: String,
   location: String,

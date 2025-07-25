@@ -13,6 +13,7 @@ const timeslotSchema = new mongoose.Schema({
 });
 
 const scheduleAssetSchema = new mongoose.Schema({
+  name : String,
   type: String,
   start_date: String,
   end_date: String,

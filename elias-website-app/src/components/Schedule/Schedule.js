@@ -35,7 +35,7 @@ const fetchSchedule = async (targetDate, view) => {
   const endStr = end.toISOString().split('T')[0];
 
   const response = await fetch(
-    `https://eliasmeanawebsite.onrender.com/api/schedule/range?start=${startStr}&end=${endStr}`
+    `https://eliasmeanawebsite.onrender.com/api/schedule/object/daterange?start=${startStr}&end=${endStr}`
   );
   const classData = await response.json();
 

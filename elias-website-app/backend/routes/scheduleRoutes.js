@@ -22,6 +22,20 @@ router.get('/object/daterange', async (req, res) => {
     res.status(500).json({ error: 'Query failed', details: err.message });
   }
 });
+router.get('/object/active', async (req, res) => {
+  try {
+    const today = new Date().toISOString().split('T')[0]; // "YYYY-MM-DD"
+
+    const results = await ScheduleAsset.find({
+      start_date: { $lte: today },
+      end_date: { $gte: today }
+    });
+
+    res.json(results);
+  } catch (err) {
+    res.status(500).json({ error: 'Query failed', details: err.message });
+  }
+});
 router.get('/object/all', async (req, res) => {
   try {
     const assets = await ScheduleAsset.find({});

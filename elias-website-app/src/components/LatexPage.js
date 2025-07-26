@@ -23,7 +23,7 @@ function LatexTestPage() {
     const fetchLatex = async () => {
       try {
         const response = await fetch(
-          `{BASE_URL}/api/latex/object/pageCode/${encodeURIComponent(pageCode)}`
+          `${BASE_URL}/api/latex/object/pageCode/${encodeURIComponent(pageCode)}`
         );
 
         if (response.status === 404) {
@@ -62,7 +62,7 @@ function LatexTestPage() {
       if (docExists && documentId) {
         // PUT (update existing)
         response = await fetch(
-          `{BASE_URL}/api/latex/object/update/${documentId}`,
+          `${BASE_URL}/api/latex/object/update/${documentId}`,
           {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
@@ -72,7 +72,7 @@ function LatexTestPage() {
       } else {
         // POST (create new)
         response = await fetch(
-          `{BASE_URL}/api/latex/object/create/${encodeURIComponent(pageCode)}`,
+          `${BASE_URL}/api/latex/object/create/${encodeURIComponent(pageCode)}`,
           {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

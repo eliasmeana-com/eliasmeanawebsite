@@ -9,8 +9,6 @@ import {BASE_URL} from '../../API/baseUrl'
 function LatexTestPage() {
     const { pageCode } = useParams();
     const location = useLocation();
-    console.log(location.pathname.split('/')[2])
-    // Your existing hook for LaTeX document
     const {
         latexScript,
         inputValue,

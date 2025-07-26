@@ -17,9 +17,9 @@ export default function useLatexDocument(routeInfo) {
         if (routeInfo.type === 'classnotes' && routeInfo.pageCode) {
             const pc = encodeURIComponent(routeInfo.pageCode);
             return {
-                fetchUrl: `{BASE_URL}/api/classnotes/object/pageCode/${pc}`,
-                updateUrl: (id) => `{BASE_URL}/api/classnotes/object/update/${id}`,
-                createUrl: `{BASE_URL}/api/classnotes/object/create/${pc}`,
+                fetchUrl: `${BASE_URL}/api/classnotes/object/pageCode/${pc}`,
+                updateUrl: (id) => `${BASE_URL}/api/classnotes/object/update/${id}`,
+                createUrl: `${BASE_URL}/api/classnotes/object/create/${pc}`,
             };
         }
         if (routeInfo.type === 'assignment' && routeInfo.classCode && routeInfo.assignmentCode) {
@@ -27,9 +27,9 @@ export default function useLatexDocument(routeInfo) {
             const cc = encodeURIComponent(routeInfo.classCode);
             const ac = encodeURIComponent(routeInfo.assignmentCode);
             return {
-                fetchUrl: `{BASE_URL}/api/assignments/object/id/${ac}`,
-                updateUrl: (id) => `{BASE_URL}/api/assignments/object/update/${id}`,
-                createUrl: `{BASE_URL}/api/assignments/object/create/${cc}`,
+                fetchUrl: `${BASE_URL}/api/assignments/object/id/${ac}`,
+                updateUrl: (id) => `${BASE_URL}/api/assignments/object/update/${id}`,
+                createUrl: `${BASE_URL}/api/assignments/object/create/${cc}`,
             };
         }
         return {};

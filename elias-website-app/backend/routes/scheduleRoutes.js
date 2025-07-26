@@ -24,7 +24,7 @@ router.get('/object/daterange', async (req, res) => {
 });
 router.get('/object/active', async (req, res) => {
   try {
-    const today = new Date().toISOString().split('T')[0]; // "YYYY-MM-DD"
+    const today = new Date().toISOString().split('T')[0]; 
 
     const results = await ScheduleAsset.find({
       end_date: { $gte: today }

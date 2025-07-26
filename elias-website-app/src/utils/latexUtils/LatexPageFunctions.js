@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import {BASE_URL} from '../../API/baseUrl';
 
 export default function useLatexDocument(routeInfo) {
     // routeInfo can be:
@@ -16,9 +17,9 @@ export default function useLatexDocument(routeInfo) {
         if (routeInfo.type === 'classnotes' && routeInfo.pageCode) {
             const pc = encodeURIComponent(routeInfo.pageCode);
             return {
-                fetchUrl: `https://eliasmeanawebsite.onrender.com/api/classnotes/object/pageCode/${pc}`,
-                updateUrl: (id) => `https://eliasmeanawebsite.onrender.com/api/classnotes/object/update/${id}`,
-                createUrl: `https://eliasmeanawebsite.onrender.com/api/classnotes/object/create/${pc}`,
+                fetchUrl: `{BASE_URL}/api/classnotes/object/pageCode/${pc}`,
+                updateUrl: (id) => `{BASE_URL}/api/classnotes/object/update/${id}`,
+                createUrl: `{BASE_URL}/api/classnotes/object/create/${pc}`,
             };
         }
         if (routeInfo.type === 'assignment' && routeInfo.classCode && routeInfo.assignmentCode) {
@@ -26,9 +27,9 @@ export default function useLatexDocument(routeInfo) {
             const cc = encodeURIComponent(routeInfo.classCode);
             const ac = encodeURIComponent(routeInfo.assignmentCode);
             return {
-                fetchUrl: `https://eliasmeanawebsite.onrender.com/api/assignments/object/id/${ac}`,
-                updateUrl: (id) => `https://eliasmeanawebsite.onrender.com/api/assignments/object/update/${id}`,
-                createUrl: `https://eliasmeanawebsite.onrender.com/api/assignments/object/create/${cc}`,
+                fetchUrl: `{BASE_URL}/api/assignments/object/id/${ac}`,
+                updateUrl: (id) => `{BASE_URL}/api/assignments/object/update/${id}`,
+                createUrl: `{BASE_URL}/api/assignments/object/create/${cc}`,
             };
         }
         return {};

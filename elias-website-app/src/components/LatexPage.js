@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import LatexDocumentRenderer from '../utils/latexUtils/LatexDocumentRenderer';
 import '../styles/classNotes.css';
+import {BASE_URL} from '../API/baseUrl'
 
 function LatexTestPage() {
   const { pageCode } = useParams();
@@ -22,7 +23,7 @@ function LatexTestPage() {
     const fetchLatex = async () => {
       try {
         const response = await fetch(
-          `https://eliasmeanawebsite.onrender.com/api/latex/object/pageCode/${encodeURIComponent(pageCode)}`
+          `{BASE_URL}/api/latex/object/pageCode/${encodeURIComponent(pageCode)}`
         );
 
         if (response.status === 404) {
@@ -61,7 +62,7 @@ function LatexTestPage() {
       if (docExists && documentId) {
         // PUT (update existing)
         response = await fetch(
-          `https://eliasmeanawebsite.onrender.com/api/latex/object/update/${documentId}`,
+          `{BASE_URL}/api/latex/object/update/${documentId}`,
           {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
@@ -71,7 +72,7 @@ function LatexTestPage() {
       } else {
         // POST (create new)
         response = await fetch(
-          `https://eliasmeanawebsite.onrender.com/api/latex/object/create/${encodeURIComponent(pageCode)}`,
+          `{BASE_URL}/api/latex/object/create/${encodeURIComponent(pageCode)}`,
           {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

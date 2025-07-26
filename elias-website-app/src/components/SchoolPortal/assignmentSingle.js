@@ -3,6 +3,7 @@ import { useParams, useLocation } from 'react-router-dom';
 import LatexDocumentRenderer from '../../utils/latexUtils/LatexDocumentRenderer';
 import useLatexDocument from '../../utils/latexUtils/LatexPageFunctions';
 import '../../styles/latexPage.css';
+import {BASE_URL} from '../../API/baseUrl'
 
 function LatexTestPage() {
     const location = useLocation().pathname.split('/');
@@ -32,7 +33,7 @@ function LatexTestPage() {
             try {
                 setClassNameStatus('Loading class name...');
                 const response = await fetch(
-                    `https://eliasmeanawebsite.onrender.com/api/schedule/object/classcode/${encodeURIComponent(classCode)}`
+                    `${BASE_URL}/api/schedule/object/classcode/${encodeURIComponent(classCode)}`
                 );
                 if (!response.ok) {
                     setClassNameStatus('Failed to load class name');
@@ -60,7 +61,7 @@ function LatexTestPage() {
             try {
                 setAssignmentStatus('Loading assignment name...');
                 const response = await fetch(
-                    `https://eliasmeanawebsite.onrender.com/api/assignments/object/id/${encodeURIComponent(assignmentCode)}`
+                    `${BASE_URL}/api/assignments/object/id/${encodeURIComponent(assignmentCode)}`
                 );
                 if (!response.ok) {
                     setAssignmentStatus('Failed to load assignment name');

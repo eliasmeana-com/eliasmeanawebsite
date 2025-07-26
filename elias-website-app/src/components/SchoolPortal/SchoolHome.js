@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import '../../styles/SchoolHome.css';
+import {BASE_URL} from '../../API/baseUrl'
 
 const fetchSchedule = async () => {
-  const response = await fetch('https://eliasmeanawebsite.onrender.com/api/schedule/object/active');
+  const response = await fetch(`${BASE_URL}/api/schedule/object/active`);
   return await response.json();
 };
 
@@ -35,15 +36,9 @@ function SchoolHome() {
 
   const filteredSchedule = useMemo(() => {
     return schedule.filter((cls) => {
-      if (filterOngoing && !isOngoing(cls)) {
-        return false;
-      }
-      if (filterName && !cls.name.toLowerCase().includes(filterName.toLowerCase())) {
-        return false;
-      }
-      if (filterCode && !cls.class_code.toLowerCase().includes(filterCode.toLowerCase())) {
-        return false;
-      }
+      if (filterOngoing && !isOngoing(cls)) return false;
+      if (filterName && !cls.name.toLowerCase().includes(filterName.toLowerCase())) return false;
+      if (filterCode && !cls.class_code.toLowerCase().includes(filterCode.toLowerCase())) return false;
       return true;
     });
   }, [schedule, filterOngoing, filterName, filterCode]);
@@ -123,7 +118,6 @@ function ClassCard({ cls }) {
             </p>
           )}
 
-
           <p>
             <a
               href={`/#/latexpage/classnotes/${encodeURIComponent(cls.class_code)}`}
@@ -133,6 +127,7 @@ function ClassCard({ cls }) {
               Class Notes
             </a>
           </p>
+
           {cls.assignments?.length > 0 && (
             <p>
               <a
@@ -144,6 +139,7 @@ function ClassCard({ cls }) {
               </a>
             </p>
           )}
+
           <div>
             <strong>Timeslots:</strong>
             <ul>
@@ -163,7 +159,6 @@ function ClassCard({ cls }) {
               </ul>
             </div>
           )}
-
         </div>
       )}
     </div>

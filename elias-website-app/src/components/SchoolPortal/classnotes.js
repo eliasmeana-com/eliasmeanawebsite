@@ -3,6 +3,8 @@ import { useParams,useLocation } from 'react-router-dom';
 import LatexDocumentRenderer from '../../utils/latexUtils/LatexDocumentRenderer';
 import useLatexDocument from '../../utils/latexUtils/LatexPageFunctions'; // your existing hook
 import '../../styles/latexPage.css';
+import {BASE_URL} from '../../API/baseUrl'
+
 
 function LatexTestPage() {
     const { pageCode } = useParams();
@@ -27,7 +29,7 @@ function LatexTestPage() {
             try {
                 setClassNameStatus('Loading class name...');
                 const response = await fetch(
-                    `https://eliasmeanawebsite.onrender.com/api/schedule/object/classcode/${encodeURIComponent(pageCode)}`
+                    `${BASE_URL}/api/schedule/object/classcode/${encodeURIComponent(pageCode)}`
                 );
                 if (!response.ok) {
                     setClassNameStatus('Failed to load class name');

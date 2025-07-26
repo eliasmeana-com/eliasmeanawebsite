@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import WeeklySchedule from './WeeklySchedule';
 import MonthlySchedule from './MonthlySchedule';
 import '../../styles/Schedule.css';
+import {BASE_URL} from '../../API/baseUrl'
 
 const getMonthViewRange = (date) => {
   const year = date.getFullYear();
@@ -35,7 +36,7 @@ const fetchSchedule = async (targetDate, view) => {
   const endStr = end.toISOString().split('T')[0];
 
   const response = await fetch(
-    `https://eliasmeanawebsite.onrender.com/api/schedule/object/daterange?start=${startStr}&end=${endStr}`
+    `${BASE_URL}/api/schedule/object/daterange?start=${startStr}&end=${endStr}`
   );
   const classData = await response.json();
   console.log(classData)

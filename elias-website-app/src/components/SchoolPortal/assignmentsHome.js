@@ -2,6 +2,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import '../../styles/AssignmentsPage.css';
+import {BASE_URL} from '../../API/baseUrl'
 
 function AssignmentPage() {
   const { classCode } = useParams();
@@ -17,7 +18,7 @@ function AssignmentPage() {
     const fetchAssignments = async () => {
       try {
         const response = await fetch(
-          `https://eliasmeanawebsite.onrender.com/api/assignments/object/classCode/${encodeURIComponent(classCode)}`
+          `${BASE_URL}/api/assignments/object/classCode/${encodeURIComponent(classCode)}`
         );
         if (!response.ok) throw new Error('Failed to fetch assignments');
         const data = await response.json();
@@ -30,7 +31,7 @@ function AssignmentPage() {
     const fetchClassName = async () => {
       try {
         const response = await fetch(
-          `https://eliasmeanawebsite.onrender.com/api/schedule/object/classcode/${encodeURIComponent(classCode)}`
+          `${BASE_URL}/api/schedule/object/classcode/${encodeURIComponent(classCode)}`
         );
         if (!response.ok) throw new Error('Failed to fetch class info');
         const data = await response.json();
@@ -49,7 +50,7 @@ function AssignmentPage() {
   const createAssignment = async () => {
     try {
       const response = await fetch(
-        `https://eliasmeanawebsite.onrender.com/api/assignments/object/create/${encodeURIComponent(classCode)}`,
+        `${BASE_URL}/api/assignments/object/create/${encodeURIComponent(classCode)}`,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -78,7 +79,7 @@ function AssignmentPage() {
 
     try {
       const response = await fetch(
-        `https://eliasmeanawebsite.onrender.com/api/assignments/object/delete/${id}`,
+        `${BASE_URL}/api/assignments/object/delete/${id}`,
         { method: 'DELETE' }
       );
       if (!response.ok) throw new Error('Failed to delete assignment');

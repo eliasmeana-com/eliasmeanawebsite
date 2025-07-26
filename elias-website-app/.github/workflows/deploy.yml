@@ -19,10 +19,21 @@ jobs:
           node-version: '16'
 
       - name: Inject Environment Variables
-        run: echo "REACT_APP_API_KEY=${{ secrets.GAPI_API_KEY }}" >> .env
+        run: |
+          echo "REACT_APP_API_KEY=${{ secrets.GAPI_API_KEY }}" >> .env
+          echo "REACT_APP_API_BASE_URL=https://eliasmeanawebsite.onrender.com" >> .env
+
+      - name: Install Dependencies
+        run: npm install
 
       - name: Build Application
         run: npm run build
 
-      - name: Deploy
-        # Deploy step here
+      - name: Add custom domain (CNAME)
+        run: echo "www.eliasmeana.com" > build/CNAME
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build

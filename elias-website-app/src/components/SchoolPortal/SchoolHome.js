@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import '../../styles/SchoolHome.css';
 import {BASE_URL} from '../../API/baseUrl'
+import ClassCard from './SchoolComponents/ClassCard';
 
 const fetchSchedule = async () => {
+  console.log(BASE_URL)
   const response = await fetch(`${BASE_URL}/api/schedule/object/active`);
   return await response.json();
 };
@@ -79,86 +81,6 @@ function SchoolHome() {
           {filteredSchedule.map((cls) => (
             <ClassCard key={cls._id} cls={cls} />
           ))}
-        </div>
-      )}
-    </div>
-  );
-}
-
-function ClassCard({ cls }) {
-  const [expanded, setExpanded] = useState(false);
-
-  return (
-    <div className={`class-card ${expanded ? 'expanded' : ''}`}>
-      <div className="card-header" onClick={() => setExpanded(!expanded)}>
-        <h2>{cls.name}</h2>
-        <span className="toggle-icon">{expanded ? '−' : '+'}</span>
-      </div>
-
-      {expanded && (
-        <div className="card-details">
-          <p><strong>Code:</strong> {cls.class_code}</p>
-          <p><strong>Type:</strong> {cls.type}</p>
-          <p><strong>Start:</strong> {cls.start_date}</p>
-          <p><strong>End:</strong> {cls.end_date}</p>
-          <p><strong>Professor:</strong> {cls.professor}</p>
-
-          {cls.course_page && (
-            <p>
-              <a href={cls.course_page} target="_blank" rel="noreferrer">
-                Course Page
-              </a>
-            </p>
-          )}
-          {cls.syllabus && (
-            <p>
-              <a href={cls.syllabus} target="_blank" rel="noreferrer">
-                Syllabus
-              </a>
-            </p>
-          )}
-
-          <p>
-            <a
-              href={`/#/latexpage/classnotes/${encodeURIComponent(cls.class_code)}`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Class Notes
-            </a>
-          </p>
-
-          {cls.assignments?.length > 0 && (
-            <p>
-              <a
-                href={`/#/assignments/${encodeURIComponent(cls.class_code)}`}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Assignments
-              </a>
-            </p>
-          )}
-
-          <div>
-            <strong>Timeslots:</strong>
-            <ul>
-              {cls.timeslots.map((slot, i) => (
-                <li key={i}>
-                  {slot.days} {slot.start_time}–{slot.end_time} ({slot.timezone}) — {slot.location}, {slot.campus}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {cls.textbooks?.length > 0 && (
-            <div>
-              <strong>Textbooks:</strong>
-              <ul>
-                {cls.textbooks.map((book, i) => <li key={i}>{book}</li>)}
-              </ul>
-            </div>
-          )}
         </div>
       )}
     </div>

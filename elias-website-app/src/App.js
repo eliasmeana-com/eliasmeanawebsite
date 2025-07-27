@@ -30,7 +30,7 @@ function App() {
         <Route path="/birla" element={<NoSidebarLayout><Birla /></NoSidebarLayout>} />
         <Route path="/schedule" element={<NoSidebarLayout><Schedule /></NoSidebarLayout>} />
         <Route path="/schoolhome" element={<NoSidebarLayout><SchoolHome /></NoSidebarLayout>} />
-        <Route path="/latexpage/classnotes/:pageCode" element={<NoSidebarLayout><SomePage /></NoSidebarLayout>} />
+        <Route path="/latexpage/classnotes/:classCode" element={<NoSidebarLayout><SomePage /></NoSidebarLayout>} />
         <Route path="/assignments/:classCode" element={<NoSidebarLayout><AssignmentsHome /></NoSidebarLayout>} />
         <Route path="/assignment/:classCode/:assignmentId" element={<NoSidebarLayout><SingleAssignment /></NoSidebarLayout>} />
         <Route path="/dwave" element={<NoSidebarLayout><Dwave /></NoSidebarLayout>} />

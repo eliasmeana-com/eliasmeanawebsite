@@ -1,0 +1,62 @@
+
+  
+
+  
+  .latex-create-button {
+    position: inherit;
+    display: block;
+    margin: 0 auto 30px auto;
+    padding: 10px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    background-color: #1976d2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.25s ease;
+  
+    /* Move button 10% lower */
+    transform: translateY(10%);
+  }
+  
+  
+  .latex-create-button:hover {
+    background-color: #145ea8;
+  }
+  
+  /* Each note container will have some margin and separation */
+  .notes-page-wrapper > div.latex-container {
+    margin-bottom: 32px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+    background: #fff;
+    padding: 20px 24px;
+    border-radius: 10px;
+    transition: box-shadow 0.2s ease;
+  }
+  
+  .notes-page-wrapper > div.latex-container:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Responsive for smaller screens */
+  @media (max-width: 600px) {
+    .notes-page-wrapper {
+      padding: 0 12px 30px 12px;
+    }
+  
+    .notes-page-wrapper h2 {
+      font-size: 1.6rem;
+    }
+  
+    .latex-create-button {
+      width: 100%;
+      padding: 12px;
+      font-size: 1.1rem;
+    }
+  
+    .notes-page-wrapper > div.latex-container {
+      padding: 16px 16px;
+    }
+  }
+  

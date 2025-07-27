@@ -1,0 +1,89 @@
+.latex-container {
+    margin-bottom: 12px;
+    padding: 20px;
+    border-radius: 8px;
+    background: #fafafa;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: box-shadow 0.2s ease;
+    user-select: none;
+  }
+  
+  .latex-container.expanded {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .note-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #1976d2;
+  }
+  
+  .note-content {
+    margin-top: 8px;
+  }
+  
+  .note-content input[type='text'] {
+    margin-bottom: 8px;
+    width: 100%;
+    padding: 8px;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-family: inherit;
+  }
+  
+  .note-content textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-family: monospace;
+    resize: vertical;
+  }
+  
+  .button-container {
+    margin-top: 12px;
+    display: flex;
+    gap: 12px;
+    justify-content: flex-start;
+  }
+  
+  .latex-save-button,
+  .latex-delete-button,
+  .latex-cancel-button {
+    padding: 10px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.25s ease;
+  }
+  
+  .latex-save-button {
+    background-color: #1976d2;
+  }
+  
+  .latex-save-button:hover {
+    background-color: #145ea8;
+  }
+  
+  .latex-delete-button {
+    background-color: #d32f2f;
+  }
+  
+  .latex-delete-button:hover {
+    background-color: #9a2222;
+  }
+  
+  .latex-cancel-button {
+    background-color: #777;
+  }
+  
+  .latex-cancel-button:hover {
+    background-color: #444;
+  }
+  

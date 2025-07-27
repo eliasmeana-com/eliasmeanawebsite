@@ -9,6 +9,7 @@ const fetchSchedule = async () => {
   return await response.json();
 };
 
+
 function SchoolHome() {
   const [schedule, setSchedule] = useState([]);
   const [filterOngoing, setFilterOngoing] = useState(false);

@@ -14,7 +14,6 @@ const config = {
 
 export default function LatexDocumentRenderer({ latexScript }) {
   const blocks = parseLatex(latexScript);
-
   return (
     <MathJaxContext version={3} config={config}>
       <div className="latex-doc" style={{ padding: '20px' }}>

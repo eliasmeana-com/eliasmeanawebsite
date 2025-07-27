@@ -142,7 +142,6 @@ export function parseLatex(latex) {
 
 function parseInline(text) {
   const parts = [];
-  // Match \textbf{...}, inline math $...$, or regular text (no $ or \)
   const regex = /\\textbf{([^}]+)}|(\$[^$]+\$)|([^\$\\]+)/g;
 
   let match;

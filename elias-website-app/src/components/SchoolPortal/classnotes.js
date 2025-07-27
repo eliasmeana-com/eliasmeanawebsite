@@ -1,6 +1,4 @@
-// import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-// import LatexDocumentRenderer from '../../utils/latexUtils/LatexDocumentRenderer';
 import LatexEditor from '../../utils/latexUtils/LatexEditor';
 import useClassName from '../../utils/hooks/useClassName';
 import useLatexDocument from '../../utils/latexUtils/LatexPageFunctions';

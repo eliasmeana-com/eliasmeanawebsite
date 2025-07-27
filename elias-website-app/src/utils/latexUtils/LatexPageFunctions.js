@@ -3,7 +3,7 @@ import {BASE_URL} from '../../API/baseUrl';
 
 export default function useLatexDocument(routeInfo) {
     // routeInfo can be:
-    // { type: 'classnotes', pageCode }
+    // { type: 'classnotes', classCode }
     // or { type: 'assignment', classCode, assignmentCode }
 
     const [latexScript, setLatexScript] = useState('');
@@ -14,10 +14,10 @@ export default function useLatexDocument(routeInfo) {
     const [docExists, setDocExists] = useState(true);
     // Helper to build URLs dynamically:
     const buildUrls = () => {
-        if (routeInfo.type === 'classnotes' && routeInfo.pageCode) {
-            const pc = encodeURIComponent(routeInfo.pageCode);
+        if (routeInfo.type === 'classnotes' && routeInfo.classCode) {
+            const pc = encodeURIComponent(routeInfo.classCode);
             return {
-                fetchUrl: `${BASE_URL}/api/classnotes/object/pageCode/${pc}`,
+                fetchUrl: `${BASE_URL}/api/classnotes/object/classCode/${pc}`,
                 updateUrl: (id) => `${BASE_URL}/api/classnotes/object/update/${id}`,
                 createUrl: `${BASE_URL}/api/classnotes/object/create/${pc}`,
             };

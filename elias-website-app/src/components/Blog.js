@@ -1,11 +1,9 @@
 // AssignmentPage.js
 import React, { useEffect, useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
-import '../../styles/AssignmentsPage.css';
-import {BASE_URL} from '../../API/baseUrl'
-import AssignmentCard from '../SchoolPortal/SchoolComponents/AssignmentCard';
-
-
+import '../styles/AssignmentsPage.css';
+import {BASE_URL} from '../API/baseUrl'
+import AssignmentCard from './SchoolPortal/SchoolComponents/AssignmentCard';
 
 function AssignmentPage() {
   const { classCode } = useParams();

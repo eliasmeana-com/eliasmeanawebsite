@@ -17,6 +17,8 @@ import SchoolHome from './components/SchoolPortal/SchoolHome'
 import SomePage from './components/SchoolPortal/classnotes'
 import AssignmentsHome from './components/SchoolPortal/assignmentsHome'
 import SingleAssignment from './components/SchoolPortal/assignmentSingle'
+import Blog from './components/Blog'
+import Login from './API/AUTH/LoginPage'
 
 function App() {
   return (
@@ -28,6 +30,7 @@ function App() {
 
         {/* Routes without Sidebar*/}
         <Route path="/birla" element={<NoSidebarLayout><Birla /></NoSidebarLayout>} />
+        <Route path="/blog" element={<NoSidebarLayout><Blog /></NoSidebarLayout>} />
         <Route path="/schedule" element={<NoSidebarLayout><Schedule /></NoSidebarLayout>} />
         <Route path="/schoolhome" element={<NoSidebarLayout><SchoolHome /></NoSidebarLayout>} />
         <Route path="/latexpage/classnotes/:classCode" element={<NoSidebarLayout><SomePage /></NoSidebarLayout>} />
@@ -38,6 +41,7 @@ function App() {
         <Route path="/music" element={<NoSidebarLayout><Music /></NoSidebarLayout>} />
         <Route path="/" element={<NoSidebarLayout><Home /></NoSidebarLayout>} />
         <Route path="/trip" element={<NoSidebarLayout><Trip /></NoSidebarLayout>} />
+        <Route path="/login" element={<NoSidebarLayout><Login /></NoSidebarLayout>} />
       </Routes>
     </Router>
   );

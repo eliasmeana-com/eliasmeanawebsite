@@ -6,19 +6,27 @@ import useClassName from '../../utils/hooks/useClassName';
 import '../../styles/latexPage.css';
 import useAssignmentName from '../../utils/hooks/useAssignmentName';
 
+
 export default function LatexNotesPage() {
+    const token = localStorage.getItem('authToken');
+    console.log(token)
+
     const location = useLocation().pathname.split('/');
     const classCode = location[2];
     const assignmentCode = location[3];
     const [notes, setNotes] = useState([]);
     const [status, setStatus] = useState('');
     const { className } = useClassName(classCode);
-    const {assignmentName} = useAssignmentName(assignmentCode)
+    const { assignmentName } = useAssignmentName(assignmentCode)
 
     useEffect(() => {
         const fetchNotes = async () => {
             try {
-                const res = await fetch(`${BASE_URL}/api/assignmentNote/all/assignmentCode/${assignmentCode}`);
+                const res = await fetch(`${BASE_URL}/api/assignmentNote/all/assignmentCode/${assignmentCode}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
                 const data = await res.json();
                 setNotes(Array.isArray(data) ? data : []);
             } catch (err) {
@@ -38,7 +46,7 @@ export default function LatexNotesPage() {
         try {
             const res = await fetch(`${BASE_URL}/api/assignmentNote/create/${encodeURIComponent(assignmentCode)}`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                 body: JSON.stringify(newNote),
             });
 
@@ -55,7 +63,7 @@ export default function LatexNotesPage() {
         try {
             const res = await fetch(`${BASE_URL}/api/assignmentNote/update/${id}`, {
                 method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                 body: JSON.stringify({ latexCode, name }),
             });
 
@@ -71,6 +79,7 @@ export default function LatexNotesPage() {
     const deleteNote = async (id) => {
         try {
             const res = await fetch(`${BASE_URL}/api/assignmentNote/delete/${id}`, {
+                headers: { 'Authorization': `Bearer ${token}` },
                 method: 'DELETE',
             });
 
@@ -86,7 +95,15 @@ export default function LatexNotesPage() {
         <div className="notes-page-wrapper">
             <h2>Class Notes for {className || classCode}</h2>
             <h2>Assignment :  {assignmentName || assignmentCode}</h2>
-            <button onClick={createNote} className="latex-create-button">Add New Note</button>
+            {token && (
+                <button
+                    onClick={createNote}
+                    className="latex-create-button"
+                    id="create_assignment_note"
+                >
+                    Add New Note
+                </button>
+            )}
             {notes.map((note) => (
                 <NoteEditorWrapper
                     key={note._id}

@@ -85,6 +85,8 @@ function Navbar() {
           <li><Link to="/">Home</Link></li>
           <li><Link to="/resume">Resume</Link></li>
           <Dropdown title="Other Stuff" items={birlaMenuItems[0]} />
+          <li><Link to="/blog">Blog</Link></li>
+          <li><Link to="/login">Login</Link></li>
         </ul>
       </div>
     </nav>

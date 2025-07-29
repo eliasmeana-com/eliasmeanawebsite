@@ -52,10 +52,12 @@ const Gallery = ({ fetchImages }) => {
   // Modal navigation functions
   const openModal = (index) => {
     setSelectedImageIndex(index);
+    console.log(images[selectedImageIndex]);
   };
 
   const closeModal = () => {
     setSelectedImageIndex(null);
+    console.log(selectedImageIndex)
   };
 
   const goToPrevious = () => {
@@ -135,7 +137,7 @@ const Gallery = ({ fetchImages }) => {
             onClick={(e) => e.stopPropagation()}
           >
             <img
-              src={images[selectedImageIndex].url}
+              src={images[selectedImageIndex].urlFull}
               alt={`Selected ${selectedImageIndex}`}
             />
             <button className="close-btn" onClick={closeModal}>

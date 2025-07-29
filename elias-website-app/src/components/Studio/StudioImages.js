@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import Gallery from '../Gallery';
 import '../../styles/Gallery.css';
@@ -8,6 +7,7 @@ const StudioImages = () => {
   const [error, setError] = useState(null);
 
   const folderId = '1LsanyvMoY7ohh6c727CsOw1sBbcKaqW1';
+  // const folderId = '1T71KFg7tEDvpXyqBfUQsiK1jE0SA3pwP';
 
   const fetchImages = async (pageToken) => {
     try {
@@ -22,7 +22,7 @@ const StudioImages = () => {
 
   return (
     <div className="gallery-images-text">
-      <h2>Trip Out West</h2>
+      <h2>Music Studio</h2>
       {error ? <p>{error}</p> : <Gallery fetchImages={fetchImages} />}
     </div>
   );

@@ -10,7 +10,7 @@ const TripImages = () => {
 
   const fetchImages = async (pageToken) => {
     try {
-      await initGoogleDriveClient(); 
+      await initGoogleDriveClient();
       return await listImagesInFolderPaginated(folderId, pageToken);
     } catch (err) {
       console.error('Error in fetchImages:', err);

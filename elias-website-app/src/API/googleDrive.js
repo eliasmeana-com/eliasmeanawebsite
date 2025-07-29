@@ -46,7 +46,7 @@ export const listImagesInFolderPaginated = async (folderId, pageToken = null, pa
 
     const images = response.result.files.map(file => ({
       url: `https://drive.google.com/thumbnail?id=${file.id}&sz=w1000`,
-      urlFull : `https://drive.google.com/thumbnail?id=${file.id}&sz=w10000`,
+      urlFull : `https://drive.google.com/thumbnail?id=${file.id}&sz=w5000`,
       id: file.id,
     }));
     console.log(images.length);

@@ -55,7 +55,9 @@
   
   .control-button {
     background: none;
+    color: #6f4848;
     border: none;
+    z-index: 10;
     font-size: 1.5em;
     cursor: pointer;
     position: relative;

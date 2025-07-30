@@ -2,10 +2,13 @@
 .gallery-container {
   text-align: center;
   display: flex;
-  flex-direction: column; /* Stack gallery and show-more button vertically */
+  flex-direction: column;
+  /* Stack gallery and show-more button vertically */
   align-items: center;
-  width: 100%; /* Ensure full width */
+  width: 100%;
+  /* Ensure full width */
 }
+
 .gallery-images-text {
   text-align: center;
   padding: 20px;
@@ -14,14 +17,16 @@
 /* Gallery styling */
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Responsive grid */
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  /* Responsive grid */
   gap: 10px;
   justify-content: center;
-  margin-bottom: 20px; /* Space between images and the "Show More" button */
-  width: 100%; /* Ensure full width of the gallery */
+  margin-bottom: 20px;
+  /* Space between images and the "Show More" button */
+  width: 100%;
+  /* Ensure full width of the gallery */
 }
 
-/* Styling for individual image items */
 .image-item img {
   width: 100%;
   height: 200px;
@@ -32,16 +37,20 @@
 }
 
 .image-item:hover {
-  transform: scale(1.05); /* Slight zoom effect on hover */
+  transform: scale(1.05);
+  /* Slight zoom effect on hover */
 }
 
 /* Show More Button styling */
 .show-more-container {
   position: relative;
-  width: 100%; /* Ensure the container takes full width */
+  width: 100%;
+  /* Ensure the container takes full width */
   display: flex;
-  justify-content: center; /* Center the button */
-  margin-top: 20px; /* Add space between gallery and button */
+  justify-content: center;
+  /* Center the button */
+  margin-top: 20px;
+  /* Add space between gallery and button */
 }
 
 .show-more-btn {
@@ -59,38 +68,12 @@
   background-color: rgba(0, 0, 0, 0.9);
 }
 
-/* Modal Styling */
-.modal {
-  position:fixed;
-  margin-top: 10%;
-  margin-bottom: 10%;
-  /* top: 100; */
-  /* left: 0; */
-  /* width: 200%; */
-  /* height: 200%; */
-  /* background-color: rgba(0, 0, 0, 0.7); */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  position: fixed;
-  /* max-width: 100%; */
-  /* max-height: 100%; */
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  overflow: hidden;
-  box-sizing: border-box;
-}
 
 .modal-content img {
-  width: auto; 
-  max-width: 70%; 
+  width: auto;
+  max-width: 70%;
   /* height: auto;  */
-  max-height: 70%; 
+  max-height: 70%;
   border-radius: 10px;
 }
 
@@ -132,53 +115,30 @@ button {
 /* Media Queries for Responsiveness */
 
 /* For small screens (phones in portrait mode) */
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   .gallery {
-    grid-template-columns: repeat(2, 1fr); /* 2 columns on mobile */
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   }
 
   .image-item img {
-    height: 150px; /* Adjust image height on small screens */
+    height: 140px;
+  }
+
+  .modal-content img {
+    max-height: 60vh;
   }
 
   .show-more-btn {
     font-size: 14px;
     padding: 8px 16px;
   }
-
-  .modal-content {
-    padding: 15px;
-  }
-
-  button {
-    padding: 8px;
-  }
-}
-
-/* For medium screens (tablets or small desktop) */
-@media (max-width: 768px) {
-  .gallery {
-    grid-template-columns: repeat(2, 1fr); /* 2 columns on smaller tablets */
-  }
-
-  .image-item img {
-    height: 180px; 
-  }
-
-  .show-more-btn {
-    font-size: 15px;
-    padding: 9px 18px;
-  }
-
-  .modal-content {
-    padding: 18px;
-  }
 }
 
 /* For larger screens (desktops) */
 @media (min-width: 1024px) {
   .gallery {
-    grid-template-columns: repeat(4, 1fr); /* 4 columns on large screens */
+    grid-template-columns: repeat(4, 1fr);
+    /* 4 columns on large screens */
   }
 
   .image-item img {
@@ -192,5 +152,25 @@ button {
 
   .modal-content {
     padding: 25px;
+  }
+
+  .modal {
+    position: fixed;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  .modal-content {
+    position: fixed;
+
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-sizing: border-box;
   }
 }

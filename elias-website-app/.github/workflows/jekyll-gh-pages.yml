@@ -18,11 +18,14 @@ jobs:
         with:
           node-version: '16'
 
+      - name: Navigate to project directory
+        run: cd elias-website-app
+        
       - name: Install Dependencies
-        run: npm install
+        run: cd elias-website-app && npm install
 
       - name: Build Application
-        run: npm run build
+        run:  cd elias-website-app && npm run build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3

@@ -2,7 +2,15 @@ import React, { useState, useEffect } from 'react';
 import WeeklySchedule from './WeeklySchedule';
 import MonthlySchedule from './MonthlySchedule';
 import '../../styles/Schedule.css';
-import {BASE_URL} from '../../API/baseUrl'
+import { BASE_URL } from '../../API/baseUrl'
+
+const getWeekStartDate = (date) => {
+  const d = new Date(date);
+  d.setHours(0, 0, 0, 0);
+  d.setDate(d.getDate() - d.getDay());
+  return d;
+};
+
 
 const getMonthViewRange = (date) => {
   const year = date.getFullYear();
@@ -39,7 +47,6 @@ const fetchSchedule = async (targetDate, view) => {
     `${BASE_URL}/api/schedule/object/daterange?start=${startStr}&end=${endStr}`
   );
   const classData = await response.json();
-  console.log(classData)
   if (view === 'week') {
     const scheduleByDay = {};
     const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -115,6 +122,7 @@ const Schedule = () => {
   const [view, setView] = useState('week');
   const [selectedDay, setSelectedDay] = useState(null);
 
+  const weekStartDate = getWeekStartDate(currentDate);
   useEffect(() => {
     const load = async () => {
       setLoading(true);
@@ -213,7 +221,11 @@ const Schedule = () => {
       {loading ? (
         <div className="loading-container">Loading schedule...</div>
       ) : view === 'week' ? (
-        <WeeklySchedule schedule={schedule} setSelectedDay={setSelectedDay} />
+        <WeeklySchedule
+          schedule={schedule}
+          setSelectedDay={setSelectedDay}
+          weekStartDate={weekStartDate}
+        />
       ) : (
         <MonthlySchedule schedule={schedule} currentDate={currentDate} setSelectedDay={setSelectedDay} />
       )}

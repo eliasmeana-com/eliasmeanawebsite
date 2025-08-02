@@ -2,7 +2,11 @@ import React from 'react';
 
 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-const WeeklySchedule = ({ schedule, setSelectedDay }) => {
+const WeeklySchedule = ({ schedule, setSelectedDay, weekStartDate }) => {
+    const formatDate = (date) => {
+        return date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+    };
+    console.log(schedule)
     const formatTime = (timeString) => {
         if (!timeString) return '';
         const [hours, minutes] = timeString.split(':');
@@ -18,7 +22,10 @@ const WeeklySchedule = ({ schedule, setSelectedDay }) => {
 
     return (
         <div className="schedule-grid">
-            {days.map(day => {
+            {days.map((day, index) => {
+                const dateForDay = new Date(weekStartDate);
+                dateForDay.setDate(weekStartDate.getDate() + index);
+
                 const daySchedule = schedule.find(item => item.day === day) || { classes: [] };
                 const sortedClasses = sortByStartTime(daySchedule.classes);
 
@@ -28,7 +35,9 @@ const WeeklySchedule = ({ schedule, setSelectedDay }) => {
                         className={`schedule-day ${sortedClasses.length ? 'has-classes' : 'no-classes'}`}
                         onClick={() => setSelectedDay(day)}
                     >
-                        <h4>{day}</h4>
+                        <h4>
+                            {day} <span className="date-label">({formatDate(dateForDay)})</span>
+                        </h4>
                         {sortedClasses.length > 0 ? (
                             <>
                                 <ul>
@@ -51,6 +60,7 @@ const WeeklySchedule = ({ schedule, setSelectedDay }) => {
                     </div>
                 );
             })}
+
         </div>
     );
 };

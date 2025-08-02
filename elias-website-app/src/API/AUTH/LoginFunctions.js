@@ -20,3 +20,12 @@ export async function loginUser(username, password) {
     return { success: false, error: 'Network error' };
   }
 }
+
+export function logoutUser() {
+  try {
+    localStorage.removeItem('authToken');
+    return { success: true };
+  } catch (err) {
+    return { success: false, error: 'Network error' };
+  }
+}

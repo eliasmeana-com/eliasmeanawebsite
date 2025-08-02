@@ -74,6 +74,8 @@ function Navbar() {
       ]
     }
   ];
+  const login = !!(localStorage.authToken) ? 'Logout' : 'Login';
+  console.log(login)
 
   return (
     <nav className="navbar">
@@ -86,7 +88,7 @@ function Navbar() {
           <li><Link to="/resume">Resume</Link></li>
           <Dropdown title="Other Stuff" items={birlaMenuItems[0]} />
           <li><Link to="/blog">Blog</Link></li>
-          <li><Link to="/login">Login</Link></li>
+          <li><Link to="/login">{login}</Link></li>
         </ul>
       </div>
     </nav>

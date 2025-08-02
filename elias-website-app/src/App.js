@@ -2,6 +2,7 @@ import React from 'react';
 //import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import SidebarLayout from './layouts/SidebarLayout';
+import RestrictedPage from './layouts/LoginRestrictedPage';
 import NoSidebarLayout from './layouts/NoSidebarLayout';
 import Home from './components/Home';
 import Resume from './components/Resume';
@@ -31,11 +32,11 @@ function App() {
         {/* Routes without Sidebar*/}
         <Route path="/birla" element={<NoSidebarLayout><Birla /></NoSidebarLayout>} />
         <Route path="/blog" element={<NoSidebarLayout><Blog /></NoSidebarLayout>} />
-        <Route path="/schedule" element={<NoSidebarLayout><Schedule /></NoSidebarLayout>} />
-        <Route path="/schoolhome" element={<NoSidebarLayout><SchoolHome /></NoSidebarLayout>} />
-        <Route path="/latexpage/classnotes/:classCode" element={<NoSidebarLayout><SomePage /></NoSidebarLayout>} />
-        <Route path="/assignments/:classCode" element={<NoSidebarLayout><AssignmentsHome /></NoSidebarLayout>} />
-        <Route path="/assignment/:classCode/:assignmentId" element={<NoSidebarLayout><SingleAssignment /></NoSidebarLayout>} />
+        <Route path="/schedule" element={<RestrictedPage><Schedule /></RestrictedPage>} />
+        <Route path="/schoolhome" element={<RestrictedPage><SchoolHome /></RestrictedPage>} />
+        <Route path="/latexpage/classnotes/:classCode" element={<RestrictedPage><SomePage /></RestrictedPage>} />
+        <Route path="/assignments/:classCode" element={<RestrictedPage><AssignmentsHome /></RestrictedPage>} />
+        <Route path="/assignment/:classCode/:assignmentId" element={<RestrictedPage><SingleAssignment /></RestrictedPage>} />
         <Route path="/dwave" element={<NoSidebarLayout><Dwave /></NoSidebarLayout>} />
         <Route path="/research" element={<NoSidebarLayout><Research /></NoSidebarLayout>} />
         <Route path="/music" element={<NoSidebarLayout><Music /></NoSidebarLayout>} />

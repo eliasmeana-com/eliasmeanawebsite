@@ -31,7 +31,8 @@ function Content() {
       </div>
 
       <h2>Educational Background</h2>
-      <p><strong>2020-2021:</strong> Post-Baccalaureate Studies: Mathematics, Georgia State University</p>
+      <p><strong>2025-2026:</strong> Masters in mathematics, Universidad de Valencia, Politecnica de Valencia</p>
+      <p><strong>2020-2021:</strong> Post-Baccalaureate Studies in Mathematics, Georgia State University</p>
       <p><strong>2018-2019:</strong> Graduate Courses in Computer Engineering and Mathematics, Universitat Oberta de Catalunya, Barcelona, Spain <br />
         Research Topic: Random Matrices with Common Eigen-Properties</p>
       <p><strong>2017-2018:</strong> Graduate Courses in Advanced Mathematics, Universidad de Valencia/Universidad Politécnica de Valencia, Valencia, Spain <br />
@@ -40,10 +41,14 @@ function Content() {
       <p><strong>2011-2015:</strong> BS Degree, Physics, University of Georgia, Athens, GA</p>
 
       <h2>Additional Information</h2>
+      <h3>Nationality</h3>
       <div className="languages-list">
         <ul>
           <li className='citizenship'>Dual citizenship (US and Spain)</li>
         </ul>
+      </div>
+      <h3>Languages</h3>
+      <div className="languages-list">
         <ul>
           <li>English - Native</li>
           <li>Spanish - Native</li>

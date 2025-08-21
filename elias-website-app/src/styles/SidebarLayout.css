@@ -8,7 +8,15 @@
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden; /* Hide overflow content */
   }
-  
+  h1 {
+    font-size: 1.8em;
+    color: #ecf0f1;
+    border-bottom: 2px solid #ecf0f1;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
   .sidebar {
     background-color: #2C3E50;
     color: white;

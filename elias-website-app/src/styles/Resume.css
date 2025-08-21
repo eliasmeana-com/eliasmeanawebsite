@@ -1,159 +1,179 @@
-*, *::before, *::after {
-    box-sizing: border-box;
-  }
-  
-  .content {
-    max-width: 1100px;
-    margin: auto;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 30px;
-    line-height: 1.6;
-    color: #2C3E50;
-  }
-h2 {
-    font-size: 1.8em;
-    color: #34495E;
-    border-bottom: 2px solid #ecf0f1;
-    padding-bottom: 5px;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
+.content {
+  max-width: 1100px;
+  margin: auto;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  line-height: 1.6;
+  color: #2C3E50;
+}
+
+h2 {
+  font-size: 1.8em;
+  color: #34495E;
+  border-bottom: 2px solid #ecf0f1;
+  padding-bottom: 5px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+h3 {
+  font-size: 1.2em;
+  color: #34495E;
+  padding-bottom: 5px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
 
 p {
-    margin: 15px 0;
-    font-size: 1.1em;
-    color: #7f8c8d;
+  margin: 15px 0;
+  font-size: 1.1em;
+  color: #7f8c8d;
 }
 
 ul {
-    list-style-type: disc;
-    padding-left: 20px;
-    margin-bottom: 20px;
+  list-style-type: disc;
+  padding-left: 20px;
+  margin-bottom: 20px;
 }
 
 ul li {
-    margin-bottom: 10px;
-    font-size: 1.1em;
-    color: #34495E;
+  margin-bottom: 10px;
+  font-size: 1.1em;
+  color: #34495E;
 }
 
 .skills-list,
 .languages-list {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
 .skills-list ul,
 .languages-list ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    width: 48%;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  width: 48%;
 }
 
 .skills-list ul li,
 .languages-list ul li {
-    background-color: #ffffff;
-    /* Contrasting white background for items */
-    border: 1px solid #dfe6e9;
-    padding: 8px 12px;
-    border-radius: 8px;
-    color: #2C3E50;
-    margin-bottom: 8px;
-    margin-right: 0.5px;
-    margin-left: 0.5px;
-    font-size: 1em;
-    display: inline-block;
-    transition: transform 0.2s, box-shadow 0.2s;
+  background-color: #ffffff;
+  /* Contrasting white background for items */
+  border: 1px solid #dfe6e9;
+  padding: 8px 12px;
+  border-radius: 8px;
+  color: #2C3E50;
+  margin-bottom: 8px;
+  margin-right: 0.5px;
+  margin-left: 0.5px;
+  font-size: 1em;
+  display: inline-block;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .skills-list ul li:hover,
 .languages-list ul li:hover {
-    transform: translateY(-2px);
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .citizenship {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 a {
-    color: #3498db;
-    text-decoration: none;
-    font-weight: bold;
+  color: #3498db;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 a:hover {
-    text-decoration: underline;
-    color: #2980b9;
+  text-decoration: underline;
+  color: #2980b9;
 }
 
 
 .teaching-examples {
-    margin-top: 40px;
-    list-style-type: space-counter ;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-wrap: wrap; /* Allow items to wrap to the next line */
-    gap: 15px; /* Space between items */
-    justify-content: center; /* Center the items horizontally */
-  }
-  
-  .teaching-examples h2 {
-    font-size: 2em;
-    color: #2C3E50;
-    border-bottom: 2px solid #ecf0f1;
-    padding-bottom: 5px;
-    margin-bottom: 20px;
-  }
-  
+  margin-top: 40px;
+  list-style-type: space-counter;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  /* Allow items to wrap to the next line */
+  gap: 15px;
+  /* Space between items */
+  justify-content: center;
+  /* Center the items horizontally */
+}
 
-  
-  .teaching-examples li {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    width: 230px; /* Fixed width for each video card */
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    cursor: pointer;
-    margin-bottom: 20px; /* Ensures some space between items when wrapping */
-  }
-  
-  .teaching-examples li:hover {
-    transform: translateY(-5px); /* Lift the card on hover */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Darker shadow for hover effect */
-  }
-  
-  .teaching-examples li img {
-    width: 100%;
-    height: 100px; /* Thumbnail height */
-    object-fit: cover; /* Ensures the image fills the space without distortion */
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .teaching-examples li:hover img {
-    transform: scale(1.05); /* Slight zoom effect on hover */
-  }
-  
-  .teaching-examples li a {
-    display: block;
-    padding: 10px 15px;
-    text-decoration: none;
-    color: #2C3E50;
-    font-size: 0.7em;
-    font-weight: bold;
-    text-align: center;
-    transition: color 0.3s ease-in-out;
-  }
-  
-  .teaching-examples li a:hover {
-    color: #3498db;
-  }
-  
+.teaching-examples h2 {
+  font-size: 2em;
+  color: #2C3E50;
+  border-bottom: 2px solid #ecf0f1;
+  padding-bottom: 5px;
+  margin-bottom: 20px;
+}
+
+
+
+.teaching-examples li {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 230px;
+  /* Fixed width for each video card */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  cursor: pointer;
+  margin-bottom: 20px;
+  /* Ensures some space between items when wrapping */
+}
+
+.teaching-examples li:hover {
+  transform: translateY(-5px);
+  /* Lift the card on hover */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  /* Darker shadow for hover effect */
+}
+
+.teaching-examples li img {
+  width: 100%;
+  height: 100px;
+  /* Thumbnail height */
+  object-fit: cover;
+  /* Ensures the image fills the space without distortion */
+  transition: transform 0.3s ease-in-out;
+}
+
+.teaching-examples li:hover img {
+  transform: scale(1.05);
+  /* Slight zoom effect on hover */
+}
+
+.teaching-examples li a {
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: #2C3E50;
+  font-size: 0.7em;
+  font-weight: bold;
+  text-align: center;
+  transition: color 0.3s ease-in-out;
+}
+
+.teaching-examples li a:hover {
+  color: #3498db;
+}

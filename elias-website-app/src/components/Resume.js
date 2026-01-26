@@ -22,7 +22,7 @@ function Content() {
           <li>Elastic Search</li>
           <li>Postman</li>
           <li>Mathematica</li>
-          <li>Java</li>
+          <li>Java </li>
           <li>LaTeX</li>
           <li>Matlab</li>
           <li>Node.js</li>

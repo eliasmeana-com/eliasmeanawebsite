@@ -13,6 +13,7 @@ function Sidebar() {
 
       <h1>Links</h1>
       <p><a href="https://www.linkedin.com/in/elias-meana-5206981ab/" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
+      <p><a href="https://github.com/eliasmeana132/" target="_blank" rel="noopener noreferrer">Github</a></p>
     </div>
   );
 }

@@ -11,12 +11,14 @@ function Content() {
           <li>C#</li>
           <li>C/C++</li>
           <li>SQL Server / Postgres</li>
+          <li>R</li>
           <li>Javascript</li>
           <li>HTML/CSS</li>
           <li>Couchbase/N1QL</li>
           <li>Splunk</li>
           <li>Datadog</li>
           <li>RabbitMQ</li>
+          <li>MongoDB</li>
           <li>Elastic Search</li>
           <li>Postman</li>
           <li>Mathematica</li>
@@ -24,14 +26,17 @@ function Content() {
           <li>LaTeX</li>
           <li>Matlab</li>
           <li>Node.js</li>
+          <li>Neural Networks</li>
           <li>Typescript</li>
           <li>BoltJS (Slack Framework)</li>
           <li>REST APIs</li>
+          <li>Git</li>
         </ul>
       </div>
 
       <h2>Educational Background</h2>
-      <p><strong>2025-2026:</strong> Masters in mathematics, Universidad de Valencia, Politecnica de Valencia</p>
+      <p><strong>2025-2026:</strong> Masters in mathematics, Universidad de Valencia, Politecnica de Valencia<br />
+      Research Topic: The stochastic wave equation in spaces of mean square convergent stochastic processes</p>
       <p><strong>2020-2021:</strong> Post-Baccalaureate Studies in Mathematics, Georgia State University</p>
       <p><strong>2018-2019:</strong> Graduate Courses in Computer Engineering and Mathematics, Universitat Oberta de Catalunya, Barcelona, Spain <br />
         Research Topic: Random Matrices with Common Eigen-Properties</p>
@@ -61,7 +66,7 @@ function Content() {
       </div>
 
       <h2>Selected Employment Experience</h2>
-      <p><strong>Application Engineer</strong> (11/2021 - Present) <br />
+      <p><strong>Application Engineer</strong> (11/2021 - 10/2025) <br />
         Cvent, Remote (Based in Atlanta, GA) <br />
         Working as an application engineer proficient in several languages and technologies.</p>
 

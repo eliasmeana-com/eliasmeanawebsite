@@ -51,6 +51,7 @@ function Navbar() {
           title: 'Research',
           link: '/research',
           submenu: [
+            { title: 'Peeling Method', link: '/pel' },
             { title: 'Birla Poster', link: '/birla' },
             { title: 'D-wave Proposal', link: '/dwave' }
           ],

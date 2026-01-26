@@ -8,9 +8,10 @@ import Home from './components/Home';
 import Resume from './components/Resume';
 import './styles/App.css';
 import Navbar from './components/Navbar';
-import Birla from './components/Birla';
+import Birla from './components/papers/Birla';
+import PEL from './components/papers/PEL';
 import Schedule from './components/Schedule/Schedule'
-import Dwave from './components/Dwave';
+import Dwave from './components/papers/Dwave';
 import Research from './components/Research'
 import Music from './components/Studio/Music'
 import Trip from './components/TripGallery/TripGallery'
@@ -31,6 +32,7 @@ function App() {
 
         {/* Routes without Sidebar*/}
         <Route path="/birla" element={<NoSidebarLayout><Birla /></NoSidebarLayout>} />
+        <Route path="/pel" element={<NoSidebarLayout><PEL /></NoSidebarLayout>} />
         <Route path="/blog" element={<NoSidebarLayout><Blog /></NoSidebarLayout>} />
         <Route path="/schedule" element={<RestrictedPage><Schedule /></RestrictedPage>} />
         <Route path="/schoolhome" element={<RestrictedPage><SchoolHome /></RestrictedPage>} />

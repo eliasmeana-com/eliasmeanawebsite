@@ -5,12 +5,16 @@ function PDFGridPage() {
   const pdfs = [
     {
       id: '1vj9vYSrcaZ7p1OLMdLYno9c1G8GVUtRN',
-      title: 'PDF Viewer',
+      title: 'Birla Poster',
     },
     {
       id: '1SHqMXz4oj9Oc89eHzcooO-KIaRF4f3Mt',
-      title: 'Proposal D-Wave Device',
+      title: 'D-Wave Device',
     },
+    {
+      id: '1mbQlYNcR740wijmbLK77iOBTw521K2rG',
+      title: 'Peeling Algorithm',
+    }
   ];
 
   return (

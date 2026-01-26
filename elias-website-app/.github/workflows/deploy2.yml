@@ -3,11 +3,16 @@ name: Deploy Application
 on:
   push:
     branches:
-      - master  
+      - master  # Verify your branch is 'master' and not 'main'
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    
+    # This sets the base directory for all 'run' commands
+    defaults:
+      run:
+        working-directory: elias-website-app
 
     steps:
       - name: Checkout Repository
@@ -18,19 +23,17 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Navigate to project directory
-        run: cd elias-website-app
-        
       - name: Install Dependencies
-        run: cd elias-website-app && npm install
+        run: npm install
 
       - name: Build Application
-        run:  cd elias-website-app && npm run build
+        run: npm run build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
+          # Path points specifically to the build folder inside your sub-directory
+          publish_dir: ./elias-website-app/build 
           cname: www.eliasmeana.com
-          keep_files: true  
+          keep_files: true

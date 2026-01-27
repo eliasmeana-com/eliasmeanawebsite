@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/static/css/main.ccd14db8.css",
-    "main.js": "/static/js/main.a38d9e8a.js",
-    "static/js/453.b13f295c.chunk.js": "/static/js/453.b13f295c.chunk.js",
+    "main.css": "/static/css/main.7d399add.css",
+    "main.js": "/static/js/main.42824352.js",
+    "static/js/453.eca54fd9.chunk.js": "/static/js/453.eca54fd9.chunk.js",
     "static/media/House Music.mp3": "/static/media/House Music.7e874cfb4aa41939f173.mp3",
     "static/media/elias-profile-pic.png": "/static/media/elias-profile-pic.e3bc5a1398aa22d2bf5c.png",
     "static/media/Note To.mp3": "/static/media/Note To.2301390e17f16d4fba46.mp3",
@@ -17,12 +17,12 @@
     "static/media/Bad Man.jpg": "/static/media/Bad Man.cc40c1dbd352295d1c87.jpg",
     "static/media/Note To.png": "/static/media/Note To.dcc01e1edfdd273b3b7c.png",
     "index.html": "/index.html",
-    "main.ccd14db8.css.map": "/static/css/main.ccd14db8.css.map",
-    "main.a38d9e8a.js.map": "/static/js/main.a38d9e8a.js.map",
-    "453.b13f295c.chunk.js.map": "/static/js/453.b13f295c.chunk.js.map"
+    "main.7d399add.css.map": "/static/css/main.7d399add.css.map",
+    "main.42824352.js.map": "/static/js/main.42824352.js.map",
+    "453.eca54fd9.chunk.js.map": "/static/js/453.eca54fd9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ccd14db8.css",
-    "static/js/main.a38d9e8a.js"
+    "static/css/main.7d399add.css",
+    "static/js/main.42824352.js"
   ]
 }

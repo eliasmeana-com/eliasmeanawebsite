@@ -105,6 +105,7 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  min-width: 150px; 
 }
 
 .mega-header {
@@ -115,6 +116,13 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 8px;
+  cursor: pointer; 
+  transition: color 0.2s;
+  display: inline-block;
+}
+
+.mega-column:hover .mega-header {
+  color: var(--accent);
 }
 
 .mega-sublist {
@@ -124,6 +132,19 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  
+  /* Hiding Logic */
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transform: translateY(-10px); 
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.mega-column:hover .mega-sublist {
+  max-height: 500px; 
+  opacity: 1;
+  transform: translateY(0); 
 }
 
 .mega-sublink {

@@ -37,13 +37,22 @@ const Navbar = () => {
             { label: 'D-wave Proposal', path: '/dwave' }
           ]
         },
+        {
+          label: 'Blog',
+          path:'/blogs',
+          children: [
+            { label: 'Politics', path: '/blogs/politics' },
+            { label: 'Current Events', path: '/blogs/current-events' },
+            { label: 'Math', path: '/blogs/math' },
+            { label: 'General', path: '/blogs/general' },
+          ]
+        },
         { label: 'Music', path: '/music' },
         { label: 'Trip', path: '/trip' },
         { label: 'Schedule', path: '/schedule' },
         { label: 'Class Home', path: '/schoolhome' }
       ]
     },
-    { label: 'Blog', path: '/blog' },
     { label: authToken ? 'Logout' : 'Login', path: '/login' }
   ];
 

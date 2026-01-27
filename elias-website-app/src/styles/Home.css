@@ -51,6 +51,15 @@
   margin-bottom: 30px;
 }
 
+.firstname {
+  color:#3286b6;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-size: 1.9rem;
+  margin-bottom: 30px;
+}
+
 .bio-content {
   text-align: left;
   line-height: 1.7;
@@ -113,6 +122,40 @@ code {
   color: var(--accent);
   text-decoration: none;
   font-weight: 500;
+}
+.math-container {
+  /* Layout & Sizing */
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+
+  /* Centering */
+  display: flex;
+  justify-content: center; /* Centers the equation horizontally */
+  align-items: center;
+
+  /* Responsive Magic */
+  overflow-x: auto;       /* Adds a scrollbar ONLY if the equation is too wide */
+  overflow-y: hidden;     /* Hides vertical overflow */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+
+  /* Spacing */
+  margin: 1.5rem 0;       /* Breathing room above and below */
+  padding: 0.5rem;        /* Prevents clipping of tall integral symbols */
+}
+
+/* Optional: Style the scrollbar to be subtle */
+.math-container::-webkit-scrollbar {
+  height: 4px; /* Thin scrollbar */
+}
+
+.math-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.math-container::-webkit-scrollbar-thumb {
+  background-color: #c1c1c1; /* Light gray handle */
+  border-radius: 4px;
 }
 
 @media (max-width: 600px) {

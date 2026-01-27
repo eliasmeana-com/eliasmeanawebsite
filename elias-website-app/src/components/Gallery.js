@@ -1,165 +1,140 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import '../styles/Gallery.css';
 
 const Gallery = ({ fetchImages }) => {
-  const [images, setImages] = useState([]); // Stores the list of images
-  const [nextPageToken, setNextPageToken] = useState(null); // Pagination token
-  const [loading, setLoading] = useState(false); // Loading state
-  const [selectedImageIndex, setSelectedImageIndex] = useState(null); // Modal state
-  const loaderRef = useRef(null); // Ref for lazy loading
+  const [images, setImages] = useState([]);
+  const [nextPageToken, setNextPageToken] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(null);
+  const loaderRef = useRef(null);
 
-  // Function to load more images
-  const loadMoreImages = async () => {
-    if (loading) return; // Prevent duplicate fetches
+  const loadMoreImages = useCallback(async () => {
+    if (loading) return;
     setLoading(true);
 
     try {
       const { images: newImages, nextPageToken: token } = await fetchImages(nextPageToken);
-      setImages((prev) => [...prev, ...newImages]);
+      
+      setImages((prev) => {
+        const combined = [...prev, ...newImages];
+        const unique = Array.from(new Map(combined.map(img => [img.id, img])).values());
+        return unique;
+      });
+
       setNextPageToken(token);
     } catch (err) {
-      console.error('Error loading images:', err);
+      console.error(err);
     } finally {
       setLoading(false);
     }
-  };
+  }, [loading, nextPageToken, fetchImages]);
 
-  // Intersection Observer for lazy loading
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting && nextPageToken) {
+        if (entries[0].isIntersecting && nextPageToken && !loading) {
           loadMoreImages();
         }
       },
-      { threshold: 1.0 }
+      { threshold: 0.1 }
     );
 
     if (loaderRef.current) observer.observe(loaderRef.current);
-
     return () => {
       if (loaderRef.current) observer.unobserve(loaderRef.current);
     };
-  }, [nextPageToken]);
+  }, [nextPageToken, loading, loadMoreImages]);
 
-
-  // Initial load of images
   useEffect(() => {
-    loadMoreImages();
+    if (images.length === 0) {
+      loadMoreImages();
+    }
   }, []);
 
-  // Modal navigation functions
-  const openModal = (index) => {
-    setSelectedImageIndex(index);
-    console.log(images[selectedImageIndex]);
+  const handleNext = (e) => {
+    e.stopPropagation();
+    if (selectedImageIndex === images.length - 1 && nextPageToken) {
+      loadMoreImages().then(() => {
+        setSelectedImageIndex(prev => prev + 1);
+      });
+    } else {
+      setSelectedImageIndex(prev => (prev === images.length - 1 ? 0 : prev + 1));
+    }
   };
 
-  const closeModal = () => {
-    setSelectedImageIndex(null);
-    console.log(selectedImageIndex)
+  const handlePrev = (e) => {
+    e.stopPropagation();
+    setSelectedImageIndex(prev => (prev === 0 ? images.length - 1 : prev - 1));
   };
 
-  const goToPrevious = () => {
-    setSelectedImageIndex((prevIndex) =>
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+  useEffect(() => {
+    if (selectedImageIndex === null) return;
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') setSelectedImageIndex(null);
+      if (e.key === 'ArrowRight') handleNext(e);
+      if (e.key === 'ArrowLeft') handlePrev(e);
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedImageIndex, images.length, nextPageToken]);
+
+  const Modal = () => {
+    if (selectedImageIndex === null || !images[selectedImageIndex]) return null;
+
+    return ReactDOM.createPortal(
+      <div className="modal-backdrop" onClick={() => setSelectedImageIndex(null)}>
+        <button className="modal-close" onClick={() => setSelectedImageIndex(null)}>
+          ×
+        </button>
+        
+        <button className="modal-nav prev" onClick={handlePrev}>
+          ‹
+        </button>
+
+        <div className="modal-image-container" onClick={e => e.stopPropagation()}>
+          <img 
+            src={images[selectedImageIndex].urlFull} 
+            alt="" 
+          />
+        </div>
+
+        <button className="modal-nav next" onClick={handleNext}>
+          ›
+        </button>
+      </div>,
+      document.body
     );
   };
 
-  const goToNext = async () => {
-    if (selectedImageIndex === images.length - 1 && nextPageToken) {
-      // Try to load more images when we reach the last image and there's a next page token
-      await loadMoreImages();
-    } else {
-      // Otherwise, navigate to the next image
-      setSelectedImageIndex((prevIndex) =>
-        prevIndex === images.length - 1 ? 0 : prevIndex + 1
-      );
-    }
-  };
-  
-  // Inside the component, update modal logic to handle keyboard navigation
-  useEffect(() => {
-    if (selectedImageIndex !== null) {
-      const handleKeyDown = (event) => {
-        if (event.key === "ArrowRight") {
-          goToNext();
-        } else if (event.key === "ArrowLeft") {
-          goToPrevious();
-        } else if (event.key === "Escape") {
-          closeModal();
-        }
-      };
-
-      // Add keydown event listener
-      window.addEventListener("keydown", handleKeyDown);
-
-      // Cleanup event listener when modal closes
-      return () => {
-        window.removeEventListener("keydown", handleKeyDown);
-      };
-    }
-  }, [selectedImageIndex, goToNext, goToPrevious, closeModal]);
-
   return (
     <div className="gallery-container">
-      <h2>Gallery</h2>
-      <div className="gallery">
+      <div className="gallery-grid">
         {images.map((image, index) => (
-          <div
-            key={index}
-            className="image-item"
-            onClick={() => openModal(index)}
+          <div 
+            key={image.id} 
+            className="gallery-item"
+            onClick={() => setSelectedImageIndex(index)}
           >
-            <img src={image.url} alt={`Gallery ${index + 1}`} />
+            <img src={image.url} alt="" loading="lazy" />
           </div>
         ))}
       </div>
+      
+      <div ref={loaderRef} className="loader-area">
+        {loading && <div className="spinner"></div>}
+      </div>
 
-      {/* Loader */}
-      {nextPageToken && (
-        <div className="show-more-container" ref={loaderRef}>
-          {loading ? (
-            <p>Loading...</p>
-          ) : (
-            <button onClick={loadMoreImages} className="show-more-btn">
-              Show More
-            </button>
-          )}
-        </div>
-      )}
-
-      {/* Modal */}
-      {selectedImageIndex !== null && (
-        <div className="modal" onClick={closeModal}>
-          <div
-            className="modal-content"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <img
-              src={images[selectedImageIndex].urlFull}
-              alt={`Selected ${selectedImageIndex}`}
-            />
-            <button className="close-btn" onClick={closeModal}>
-              X
-            </button>
-
-            {/* Navigation Arrows */}
-            <button className="prev-btn" onClick={goToPrevious}>
-              &#8592;
-            </button>
-            <button className="next-btn" onClick={goToNext}>
-              &#8594;
-            </button>
-          </div>
-        </div>
-      )}
+      <Modal />
     </div>
   );
 };
 
 Gallery.propTypes = {
-  fetchImages: PropTypes.func.isRequired, // Function to fetch images
+  fetchImages: PropTypes.func.isRequired,
 };
 
 export default Gallery;

@@ -1,8 +1,7 @@
 import { gapi } from 'gapi-script';
 
 
-// Replace 'YOUR_API_KEY' with the valid API key
-const API_KEY = process.env.REACT_APP_API_KEY; // Make sure this is your valid API Key
+const API_KEY = process.env.REACT_APP_API_KEY; 
 
 export const loadGapi = async () => {
   return new Promise((resolve, reject) => {

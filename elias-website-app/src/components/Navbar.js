@@ -1,99 +1,152 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import '../styles/Navbar.css';
 
-function Dropdown({ title, items }) {
+const Navbar = () => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSubmenu, setActiveSubmenu] = useState(null);
+  const location = useLocation();
+  const authToken = localStorage.getItem('authToken');
+
+  useEffect(() => {
+    setMobileMenuOpen(false);
+    setActiveSubmenu(null);
+  }, [location]);
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+    setActiveSubmenu(null);
+  };
+
+  const toggleSubmenu = (index) => {
+    setActiveSubmenu(activeSubmenu === index ? null : index);
+  };
+
+  const menuItems = [
+    { label: 'Home', path: '/' },
+    { label: 'Resume', path: '/resume' },
+    {
+      label: 'Other Stuff',
+      children: [
+        {
+          label: 'Research',
+          path: '/research',
+          children: [
+            { label: 'Peeling Method', path: '/pel' },
+            { label: 'Birla Poster', path: '/birla' },
+            { label: 'D-wave Proposal', path: '/dwave' }
+          ]
+        },
+        { label: 'Music', path: '/music' },
+        { label: 'Trip', path: '/trip' },
+        { label: 'Schedule', path: '/schedule' },
+        { label: 'Class Home', path: '/schoolhome' }
+      ]
+    },
+    { label: 'Blog', path: '/blog' },
+    { label: authToken ? 'Logout' : 'Login', path: '/login' }
+  ];
+
   return (
-    <li className="dropdown">
-      <span className="dropdown-title">
-        {items.link ? (<Link to={items.link}>{items.title}</Link>) : (items.title)}
-      </span>
-      {items.submenu && (
-        <ul className="dropdown-menu">
-          {items.submenu.map((item, index) => (
-            <li key={index} className="dropdown-item">
-              {item.submenu ? (
-                <>
-                  <span className="dropdown-item-title">
-                    {item.link ? (<Link to={item.link}>{item.title}</Link>) : (item.title)}
-                  </span>
-                  <ul className="submenu">
-                    {item.submenu.map((subitem, subIndex) => (
-                      <li key={subIndex} className="submenu-item">
-                        <span>{subitem.link ? (<Link to={subitem.link}>{subitem.title}</Link>) : (subitem.title)}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </>
-              ) : (
-                <Link to={item.link}>{item.title}</Link>
+    <header className="site-header">
+      <div className="header-inner">
+        <div className="logo-area">
+          <Link to="/" className="site-logo">EM</Link>
+        </div>
+
+        <nav className="desktop-nav">
+          <ul className="desktop-list">
+            {menuItems.map((item, index) => (
+              <li key={index} className="desktop-item">
+                <Link to={item.path} className="desktop-link">
+                  {item.label}
+                </Link>
+                
+                {item.children && (
+                  <div className="mega-dropdown">
+                    <div className="mega-content">
+                      {item.children.map((child, childIndex) => (
+                        <div key={childIndex} className="mega-column">
+                          <Link to={child.path} className="mega-header">
+                            {child.label}
+                          </Link>
+                          {child.children && (
+                            <ul className="mega-sublist">
+                              {child.children.map((sub, subIndex) => (
+                                <li key={subIndex}>
+                                  <Link to={sub.path} className="mega-sublink">
+                                    {sub.label}
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <button 
+          className={`mobile-toggle ${mobileMenuOpen ? 'active' : ''}`}
+          onClick={toggleMobileMenu}
+        >
+          <span className="toggle-line"></span>
+          <span className="toggle-line"></span>
+        </button>
+      </div>
+
+      <div className={`mobile-dropdown ${mobileMenuOpen ? 'open' : ''}`}>
+        <ul className="mobile-list">
+          {menuItems.map((item, index) => (
+            <li key={index} className="mobile-item">
+              <div className="mobile-row">
+                <Link to={item.path} className="mobile-link">
+                  {item.label}
+                </Link>
+                {item.children && (
+                  <button 
+                    className={`mobile-expand ${activeSubmenu === index ? 'expanded' : ''}`}
+                    onClick={(e) => {
+                      e.preventDefault(); 
+                      toggleSubmenu(index);
+                    }}
+                  >
+                    +
+                  </button>
+                )}
+              </div>
+              
+              {item.children && (
+                <div className={`mobile-submenu ${activeSubmenu === index ? 'visible' : ''}`}>
+                  {item.children.map((child, cIndex) => (
+                    <div key={cIndex} className="mobile-subgroup">
+                      <Link to={child.path} className="mobile-sub-header">
+                        {child.label}
+                      </Link>
+                      {child.children && (
+                        <div className="mobile-nested-links">
+                          {child.children.map((sub, sIndex) => (
+                            <Link key={sIndex} to={sub.path} className="mobile-nested-link">
+                              {sub.label}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
               )}
             </li>
           ))}
         </ul>
-      )}
-    </li>
-  );
-}
-
-function Navbar() {
-  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(!isMobileMenuOpen);
-  };
-
-  const birlaMenuItems = [
-    {
-      title: 'Other Stuff',
-      submenu: [
-        {
-          title: 'Research',
-          link: '/research',
-          submenu: [
-            { title: 'Peeling Method', link: '/pel' },
-            { title: 'Birla Poster', link: '/birla' },
-            { title: 'D-wave Proposal', link: '/dwave' }
-          ],
-        },
-        {
-          title: 'Music',
-          link: '/music'
-        },
-        {
-          title: 'Trip',
-          link: '/trip'
-        },
-        {
-          title: 'Schedule',
-          link: '/schedule'
-        },
-        {
-          title: 'Class Home',
-          link: '/schoolhome'
-        }
-      ]
-    }
-  ];
-  const login = !!(localStorage.authToken) ? 'Logout' : 'Login';
-  console.log(login)
-
-  return (
-    <nav className="navbar">
-      <div className="navbar-header">
-        <button className="hamburger" onClick={toggleMobileMenu}>
-          &#9776;
-        </button>
-        <ul className={`navbar-links ${isMobileMenuOpen ? 'active' : ''}`}>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/resume">Resume</Link></li>
-          <Dropdown title="Other Stuff" items={birlaMenuItems[0]} />
-          <li><Link to="/blog">Blog</Link></li>
-          <li><Link to="/login">{login}</Link></li>
-        </ul>
       </div>
-    </nav>
+    </header>
   );
-}
+};
 
 export default Navbar;

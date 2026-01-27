@@ -1,13 +1,45 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Howl, Howler } from 'howler';
-import { FaPlay, FaPause, FaStepBackward, FaStepForward } from 'react-icons/fa';
+import { Howl } from 'howler';
+import { FaPlay, FaPause, FaStepBackward, FaStepForward, FaMusic } from 'react-icons/fa';
 import '../../styles/MusicPlayer.css';
 
-const songs = require.context('../../Music', false, /\.mp3$/);
-const songPaths = songs.keys().map(song => ({
-  title: song.replace('./', '').replace('.mp3', ''),
-  url: songs(song),
-}));
+const musicReq = require.context('../../Music', false, /\.mp3$/);
+
+const imageReq = require.context('../../Music', false, /\.(png|jpe?g)$/);
+
+const songPaths = musicReq.keys().map(songKey => {
+  const baseName = songKey.replace('./', '').replace('.mp3', '');
+  
+  let coverUrl = null;
+  const possibleImages = [`./${baseName}.jpg`, `./${baseName}.jpeg`, `./${baseName}.png`];
+  
+  for (const imgPath of possibleImages) {
+    if (imageReq.keys().includes(imgPath)) {
+      coverUrl = imageReq(imgPath);
+      break;
+    }
+  }
+
+  return {
+    title: baseName,
+    url: musicReq(songKey),
+    cover: coverUrl, 
+  };
+});
+
+const formatTime = (seconds) => {
+  const minutes = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+  return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+};
+
+const Visualizer = ({ isPlaying }) => (
+  <div className={`visualizer-container ${isPlaying ? 'active' : ''}`}>
+    {[...Array(6)].map((_, i) => (
+      <div key={i} className="bar"></div>
+    ))}
+  </div>
+);
 
 const MusicPlayer = () => {
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
@@ -15,28 +47,27 @@ const MusicPlayer = () => {
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   const [sound, setSound] = useState(null);
-
-  const canvasRef = useRef(null);
+  
   const animationRef = useRef(null);
-
   const currentTrack = songPaths[currentTrackIndex];
 
   useEffect(() => {
-    if (sound) {
-      sound.unload();
-    }
+    if (sound) sound.unload();
 
     const newSound = new Howl({
       src: [currentTrack.url],
       html5: true,
       onend: handleNext,
       onload: () => setDuration(newSound.duration()),
+      onplay: () => requestAnimationFrame(updateProgress),
     });
 
     setSound(newSound);
     setProgress(0);
-    if (isPlaying) newSound.play();
-
+    
+    if (isPlaying) {
+      newSound.play();
+    }
 
     return () => {
       newSound.unload();
@@ -44,129 +75,122 @@ const MusicPlayer = () => {
     };
   }, [currentTrackIndex]);
 
-  const handlePlayPause = () => {
-    if (!sound) return;
-
-    if (isPlaying) {
-      sound.pause();
-      cancelAnimationFrame(animationRef.current);
-    } else {
-      sound.play();
-      updateProgress();
-    }
-
-    setIsPlaying(!isPlaying);
-  };
-
-  const handleNext = () => {
-    setCurrentTrackIndex((currentTrackIndex + 1) % songPaths.length);
-    setIsPlaying(false);
-  };
-
-  const handlePrevious = () => {
-    setCurrentTrackIndex(
-      (currentTrackIndex - 1 + songPaths.length) % songPaths.length
-    );
-    setIsPlaying(false);
-  };
-
   const updateProgress = () => {
-    if (sound && isPlaying) {
+    if (sound && sound.playing()) {
       setProgress(sound.seek());
       animationRef.current = requestAnimationFrame(updateProgress);
     }
   };
 
-  const handleSeek = (value) => {
+  const handlePlayPause = () => {
+    if (!sound) return;
+    if (isPlaying) {
+      sound.pause();
+      cancelAnimationFrame(animationRef.current);
+    } else {
+      sound.play();
+      requestAnimationFrame(updateProgress);
+    }
+    setIsPlaying(!isPlaying);
+  };
+
+  const handleNext = () => {
+    setCurrentTrackIndex((prev) => (prev + 1) % songPaths.length);
+  };
+
+  const handlePrevious = () => {
+    setCurrentTrackIndex((prev) => (prev - 1 + songPaths.length) % songPaths.length);
+  };
+
+  const handleSeek = (e) => {
+    const value = parseFloat(e.target.value);
     if (sound) {
-      sound.seek((value / 100) * duration);
-      setProgress((value / 100) * duration);
+      sound.seek(value);
+      setProgress(value);
     }
   };
 
-  // Waveform visualizer setup (commented out)
-  // const setupWaveformVisualizer = (soundInstance) => {
-  //   const canvas = canvasRef.current;
-  //   const ctx = canvas.getContext('2d');
-  //   const analyser = Howler.ctx.createAnalyser();
-  //   const source = Howler.ctx.createMediaElementSource(soundInstance._sounds[0]._node);
-
-  //   source.connect(analyser);
-  //   analyser.connect(Howler.ctx.destination);
-  //   analyser.fftSize = 512;
-
-  //   const bufferLength = analyser.frequencyBinCount;
-  //   const dataArray = new Uint8Array(bufferLength);
-
-  //   const drawWaveform = () => {
-  //     analyser.getByteFrequencyData(dataArray);
-
-  //     ctx.clearRect(0, 0, canvas.width, canvas.height);
-  //     ctx.fillStyle = '#222';
-  //     ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  //     const barWidth = (canvas.width / bufferLength) * 2.5;
-  //     let x = 0;
-
-  //     for (let i = 0; i < bufferLength; i++) {
-  //       const barHeight = dataArray[i] / 2;
-  //       ctx.fillStyle = `rgb(${barHeight + 100}, 50, 50)`;
-  //       ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
-  //       x += barWidth + 1;
-  //     }
-
-  //     animationRef.current = requestAnimationFrame(drawWaveform);
-  //   };
-
-  //   drawWaveform();
-  // };
-
   return (
-    <div className="music-player">
-      <h2 className="track-title">{currentTrack.title}</h2>
+    <div className="player-wrapper">
+      <div className="player-main"> 
+        <div className="album-art">
+          {currentTrack.cover ? (
+             <img src={currentTrack.cover} alt="Album Art" className="cover-image" />
+          ) : (
+             <FaMusic className="default-icon" />
+          )}
+          <Visualizer isPlaying={isPlaying} />
+          {currentTrack.cover && <div className="art-overlay"></div>}
+        </div>
 
-      {/* Waveform Visualizer (commented out) */}
-      {/* <canvas ref={canvasRef} className="waveform" width="500" height="100" /> */}
+        <div className="track-info">
+          <h3>{currentTrack.title}</h3>
+          <span className="artist-label">Original Composition</span>
+        </div>
 
-      {/* Progress Bar */}
-      <div className="progress-bar-container">
-        <input
-          type="range"
-          className="progress-bar"
-          min="0"
-          max="100"
-          value={(progress / duration) * 100 || 0}
-          onChange={(e) => handleSeek(e.target.value)}
-        />
+        <div className="progress-area">
+          <div className="time-stamps">
+            <span>{formatTime(progress)}</span>
+            <span>{formatTime(duration)}</span>
+          </div>
+          <input
+            type="range"
+            className="seek-slider"
+            min="0"
+            max={duration || 0}
+            step="0.1"
+            value={progress}
+            onChange={handleSeek}
+            style={{
+              backgroundSize: `${(progress / duration) * 100}% 100%`
+            }}
+          />
+        </div>
+
+        <div className="controls-row">
+          <button className="ctrl-btn secondary" onClick={handlePrevious}>
+            <FaStepBackward />
+          </button>
+          <button className={`ctrl-btn primary ${isPlaying ? 'playing' : ''}`} onClick={handlePlayPause}>
+            {isPlaying ? <FaPause /> : <FaPlay />}
+          </button>
+          <button className="ctrl-btn secondary" onClick={handleNext}>
+            <FaStepForward />
+          </button>
+        </div>
       </div>
 
-      {/* Controls */}
-      <div className="controls">
-        <button onClick={handlePrevious} className="control-button">
-          <FaStepBackward />
-        </button>
-        <button onClick={handlePlayPause} className="control-button">
-          {isPlaying ? <FaPause /> : <FaPlay />}
-        </button>
-        <button onClick={handleNext} className="control-button">
-          <FaStepForward />
-        </button>
+      <div className="playlist-side">
+        <h4>Up Next</h4>
+        <ul className="song-list">
+          {songPaths.map((song, index) => (
+            <li
+              key={index}
+              className={`song-item ${index === currentTrackIndex ? 'active' : ''}`}
+              onClick={() => {
+                setCurrentTrackIndex(index);
+                setIsPlaying(true);
+              }}
+            >
+              <div className="song-index">
+                {song.cover && index !== currentTrackIndex ? (
+                   <img src={song.cover} alt="" style={{width: '25px', borderRadius: '4px'}}/>
+                ) : (
+                   index + 1
+                )}
+              </div>
+              <div className="song-details">
+                <span className="song-name">{song.title}</span>
+              </div>
+              {index === currentTrackIndex && isPlaying && (
+                <div className="mini-equalizer">
+                  <span></span><span></span><span></span>
+                </div>
+              )}
+            </li>
+          ))}
+        </ul>
       </div>
-
-      {/* Track List */}
-      <ul className="track-list">
-        {songPaths.map((song, index) => (
-          <li
-            key={song.title}
-            className={`track-item ${
-              index === currentTrackIndex ? 'active-track' : ''
-            }`}
-            onClick={() => setCurrentTrackIndex(index)}
-          >
-            {song.title}
-          </li>
-        ))}
-      </ul>
     </div>
   );
 };

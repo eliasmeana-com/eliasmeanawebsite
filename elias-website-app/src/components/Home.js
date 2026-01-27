@@ -14,10 +14,9 @@ function Home() {
       <div className="home-card">
         <header className="profile-header">
           <div className="image-cropper">
-            {/* Replace with your actual photo file in the public folder */}
             <img src={profileImg} alt="Elias Meana" className="profile-pic" />
           </div>
-          <h1>Elias Meana</h1>
+          <h1 className='firstname'>Elias Meana</h1>
           <p className="tagline">Application Engineer & Math Graduate Student</p>
         </header>
 

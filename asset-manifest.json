@@ -1,28 +1,32 @@
 {
   "files": {
-    "main.css": "/static/css/main.1b68a311.css",
-    "main.js": "/static/js/main.42824352.js",
+    "main.css": "/static/css/main.a7629f91.css",
+    "main.js": "/static/js/main.2a131aaf.js",
     "static/js/453.eca54fd9.chunk.js": "/static/js/453.eca54fd9.chunk.js",
+    "static/media/Step Bravely.mp3": "/static/media/Step Bravely.c3983b4b06fd830e2430.mp3",
     "static/media/House Music.mp3": "/static/media/House Music.7e874cfb4aa41939f173.mp3",
+    "static/media/Step Bravely.png": "/static/media/Step Bravely.ff874ebd6858ced831e2.png",
     "static/media/elias-profile-pic.png": "/static/media/elias-profile-pic.e3bc5a1398aa22d2bf5c.png",
     "static/media/Note To.mp3": "/static/media/Note To.2301390e17f16d4fba46.mp3",
     "static/media/Liminal Song.mp3": "/static/media/Liminal Song.4355e1e4f2148d83187d.mp3",
     "static/media/Bad Man.mp3": "/static/media/Bad Man.80b24b119e3eae5fb947.mp3",
+    "static/media/Space Song.mp3": "/static/media/Space Song.047f4f41dc882aefa997.mp3",
     "static/media/House Music.png": "/static/media/House Music.4cda86960f91f314f8c0.png",
     "static/media/Cobalt Theme Main.mp3": "/static/media/Cobalt Theme Main.af9d95a41e8cf26302c2.mp3",
     "static/media/Voice 8 From Cascando.png": "/static/media/Voice 8 From Cascando.aaf80286fe4c9086450b.png",
     "static/media/Cobalt Theme Main.png": "/static/media/Cobalt Theme Main.1ea3f8651482b848cadf.png",
     "static/media/Voice 8 From Cascando.mp3": "/static/media/Voice 8 From Cascando.01e2e8436225d38903b5.mp3",
     "static/media/Liminal Song.png": "/static/media/Liminal Song.0047fb8b9ed3b84a417d.png",
-    "static/media/Bad Man.jpg": "/static/media/Bad Man.cc40c1dbd352295d1c87.jpg",
+    "static/media/Space Song.png": "/static/media/Space Song.d0e6c38c063a44bb76fe.png",
+    "static/media/Bad Man.jpg": "/static/media/Bad Man.ef1abf2183d627353e26.jpg",
     "static/media/Note To.png": "/static/media/Note To.dcc01e1edfdd273b3b7c.png",
     "index.html": "/index.html",
-    "main.1b68a311.css.map": "/static/css/main.1b68a311.css.map",
-    "main.42824352.js.map": "/static/js/main.42824352.js.map",
+    "main.a7629f91.css.map": "/static/css/main.a7629f91.css.map",
+    "main.2a131aaf.js.map": "/static/js/main.2a131aaf.js.map",
     "453.eca54fd9.chunk.js.map": "/static/js/453.eca54fd9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1b68a311.css",
-    "static/js/main.42824352.js"
+    "static/css/main.a7629f91.css",
+    "static/js/main.2a131aaf.js"
   ]
 }

@@ -8,10 +8,10 @@ const imageReq = require.context('../../Music', false, /\.(png|jpe?g)$/);
 
 const songPaths = musicReq.keys().map(songKey => {
   const baseName = songKey.replace('./', '').replace('.mp3', '');
-  
+
   let coverUrl = null;
   const possibleImages = [`./${baseName}.jpg`, `./${baseName}.jpeg`, `./${baseName}.png`];
-  
+
   for (const imgPath of possibleImages) {
     if (imageReq.keys().includes(imgPath)) {
       coverUrl = imageReq(imgPath);
@@ -22,7 +22,7 @@ const songPaths = musicReq.keys().map(songKey => {
   return {
     title: baseName,
     url: musicReq(songKey),
-    cover: coverUrl, 
+    cover: coverUrl,
   };
 });
 
@@ -32,53 +32,95 @@ const formatTime = (seconds) => {
   return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
 };
 
+const MobileVisualizer = ({ isPlaying }) => {
+  const styles = {
+    container: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      height: '100%',
+      width: '100%',
+      gap: '6px',
+    },
+    pill: {
+      width: '8px',
+      height: '15px',
+      backgroundColor: 'var(--accent-color, #058b87)',
+      borderRadius: '10px',
+      opacity: 0.8,
+      boxShadow: '0 0 10px var(--accent-color, #058b87)',
+      animationName: 'mobilePulse',
+      animationDuration: '1.2s',
+      animationIterationCount: 'infinite',
+      animationTimingFunction: 'ease-in-out',
+      animationPlayState: isPlaying ? 'running' : 'paused',
+    }
+  };
+
+  return (
+    <div style={styles.container}>
+      <style>
+        {`
+          @keyframes mobilePulse {
+            0%, 100% { height: 15px; opacity: 0.5; }
+            50% { height: 45px; opacity: 1; }
+          }
+        `}
+      </style>
+      {[0, 1, 2, 3, 4, 5].map((i) => (
+        <div
+          key={i}
+          style={{
+            ...styles.pill,
+            animationDelay: `${Math.sin(i * 0.5) * 0.5}s`
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+
 const Visualizer = ({ isPlaying }) => {
   const barsRef = useRef([]);
   const analyserRef = useRef(null);
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-  // --- CONFIGURATION ---
-  const TOTAL_BARS = 40; 
-  const CENTER_FREQ = 1000; 
-  const OCTAVE_WIDTH = 4; 
+  const TOTAL_BARS = 40;
+  const CENTER_FREQ = 1000;
+  const OCTAVE_WIDTH = 4;
 
-  // 1. SAFE INITIALIZATION
-  // We wait until 'isPlaying' is true to ensure Howler.ctx is ready.
   useEffect(() => {
-    // Stop if we are not playing, if it's already set up, or if Howler isn't ready.
-    if (!isPlaying || analyserRef.current || !Howler.ctx) return;
+    if (isMobile || !isPlaying || analyserRef.current || !Howler.ctx) return;
 
     try {
-      const ctx = Howler.ctx; 
+      const ctx = Howler.ctx;
       const analyser = ctx.createAnalyser();
-      
-      analyser.fftSize = 4096; 
-      analyser.smoothingTimeConstant = 0.85; 
-      
+
+      analyser.fftSize = 4096;
+      analyser.smoothingTimeConstant = 0.85;
+
       Howler.masterGain.connect(analyser);
       analyserRef.current = analyser;
     } catch (e) {
-      console.warn("Audio Context not ready yet:", e);
+      console.warn(e);
     }
-  }, [isPlaying]);
+  }, [isPlaying, isMobile]);
 
-  // 2. ANIMATION LOOP
   useEffect(() => {
     let animationId;
-    
-    // If the analyser isn't ready yet, don't try to run the loop logic
+
+    if (isMobile) return;
     if (!analyserRef.current || !Howler.ctx) return;
 
     const analyser = analyserRef.current;
     const dataArray = new Uint8Array(analyser.frequencyBinCount);
 
-    // Calculate frequency bounds based on your settings
     const lowerFreq = CENTER_FREQ / Math.pow(2, OCTAVE_WIDTH / 2);
     const upperFreq = CENTER_FREQ * Math.pow(2, OCTAVE_WIDTH / 2);
 
-    // Pre-calculate the index map
     const indexMap = [];
-    const sampleRate = Howler.ctx.sampleRate; 
-    const binSize = sampleRate / analyser.fftSize; 
+    const sampleRate = Howler.ctx.sampleRate;
+    const binSize = sampleRate / analyser.fftSize;
 
     for (let i = 0; i < TOTAL_BARS; i++) {
       const fraction = i / (TOTAL_BARS - 1);
@@ -88,12 +130,11 @@ const Visualizer = ({ isPlaying }) => {
     }
 
     const renderFrame = () => {
-      // If stopped or analyzer not ready, reset bars to flat
       if (!isPlaying || !analyserRef.current) {
         barsRef.current.forEach(bar => {
           if (bar) bar.style.transform = 'scaleY(0.1)';
         });
-        return; 
+        return;
       }
 
       analyser.getByteFrequencyData(dataArray);
@@ -102,15 +143,11 @@ const Visualizer = ({ isPlaying }) => {
         if (!bar) return;
 
         const index = indexMap[i];
-        
-        // Safety check
         const safeIndex = Math.min(index, dataArray.length - 1);
-        
-        // Normalize 0-255 to 0.0-1.0
+
         let value = dataArray[safeIndex] / 255;
 
-        // "Pink Noise" Compensation
-        const trebleBoost = 1 + (i / TOTAL_BARS); 
+        const trebleBoost = 1 + (i / TOTAL_BARS);
         value = value * trebleBoost;
 
         const height = Math.max(0.1, Math.min(1, value));
@@ -125,18 +162,22 @@ const Visualizer = ({ isPlaying }) => {
     } else {
       cancelAnimationFrame(animationId);
       barsRef.current.forEach(bar => {
-         if (bar) bar.style.transform = 'scaleY(0.1)';
+        if (bar) bar.style.transform = 'scaleY(0.1)';
       });
     }
 
     return () => cancelAnimationFrame(animationId);
-  }, [isPlaying, CENTER_FREQ, OCTAVE_WIDTH]);
+  }, [isPlaying, isMobile, CENTER_FREQ, OCTAVE_WIDTH]);
+
+  if (isMobile) {
+    return <MobileVisualizer isPlaying={isPlaying} />;
+  }
 
   return (
     <div className={`visualizer-container ${isPlaying ? 'active' : ''}`}>
       {[...Array(TOTAL_BARS)].map((_, i) => (
-        <div 
-          key={i} 
+        <div
+          key={i}
           className="bar"
           ref={el => barsRef.current[i] = el}
         ></div>
@@ -150,15 +191,15 @@ const MusicPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
-  
-  // 1. We keep 'sound' in state for UI updates, but use a Ref for logic
+
   const [sound, setSound] = useState(null);
-  const soundRef = useRef(null); 
-  
+  const soundRef = useRef(null);
+
   const animationRef = useRef(null);
   const currentTrack = songPaths[currentTrackIndex];
 
-  // 2. This function now looks at soundRef.current (which is always up to date)
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
   const updateProgress = () => {
     if (soundRef.current && soundRef.current.playing()) {
       setProgress(soundRef.current.seek());
@@ -167,32 +208,28 @@ const MusicPlayer = () => {
   };
 
   useEffect(() => {
-    // Cleanup previous sound using the Ref
     if (soundRef.current) {
       soundRef.current.unload();
     }
-    
-    // Stop any running animation frame to prevent conflicts
+
     if (animationRef.current) {
       cancelAnimationFrame(animationRef.current);
     }
 
     const newSound = new Howl({
       src: [currentTrack.url],
-      html5: false,
+      html5: isMobile,
       onend: handleNext,
       onload: () => setDuration(newSound.duration()),
       onplay: () => {
-        // Start the loop
         animationRef.current = requestAnimationFrame(updateProgress);
       },
     });
 
-    // 3. Update both the Ref (immediate) and State (trigger render)
     soundRef.current = newSound;
     setSound(newSound);
     setProgress(0);
-    
+
     if (isPlaying) {
       newSound.play();
     }
@@ -204,7 +241,6 @@ const MusicPlayer = () => {
   }, [currentTrackIndex]);
 
   const handlePlayPause = () => {
-    // Use Ref for logic
     if (!soundRef.current) return;
 
     if (isPlaying) {
@@ -227,7 +263,6 @@ const MusicPlayer = () => {
 
   const handleSeek = (e) => {
     const value = parseFloat(e.target.value);
-    // Use Ref for logic
     if (soundRef.current) {
       soundRef.current.seek(value);
       setProgress(value);
@@ -236,12 +271,12 @@ const MusicPlayer = () => {
 
   return (
     <div className="player-wrapper">
-      <div className="player-main"> 
+      <div className="player-main">
         <div className="album-art">
           {currentTrack.cover ? (
-             <img src={currentTrack.cover} alt="Album Art" className="cover-image" />
+            <img src={currentTrack.cover} alt="Album Art" className="cover-image" />
           ) : (
-             <FaMusic className="default-icon" />
+            <FaMusic className="default-icon" />
           )}
           <Visualizer isPlaying={isPlaying} />
           {currentTrack.cover && <div className="art-overlay"></div>}
@@ -249,7 +284,7 @@ const MusicPlayer = () => {
 
         <div className="track-info">
           <h3>{currentTrack.title}</h3>
-          <span className="artist-label">Elias Meana</span>
+          <span className="artist-label">Original Composition</span>
         </div>
 
         <div className="progress-area">
@@ -298,9 +333,9 @@ const MusicPlayer = () => {
             >
               <div className="song-index">
                 {song.cover && index !== currentTrackIndex ? (
-                   <img src={song.cover} alt="" style={{width: '25px', borderRadius: '4px'}}/>
+                  <img src={song.cover} alt="" style={{ width: '25px', borderRadius: '4px' }} />
                 ) : (
-                   index + 1
+                  index + 1
                 )}
               </div>
               <div className="song-details">

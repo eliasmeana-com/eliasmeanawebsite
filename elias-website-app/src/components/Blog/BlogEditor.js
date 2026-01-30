@@ -25,8 +25,9 @@ export default function BlogEditor({ onSave, existingPost }) {
   const [title, setTitle] = useState(existingPost?.title || '');
   const [summary, setSummary] = useState(existingPost?.summary || '');
   const [content, setContent] = useState(existingPost?.content || '');
-  const [category, setCategory] = useState(existingPost?.category || 'general'); // New State
+  const [category, setCategory] = useState(existingPost?.category || 'general');
   const [coverImage, setCoverImage] = useState(existingPost?.coverImage || '');
+  const [author, setAuthor] = useState(existingPost?.author || ''); // New author state
   const [isCodeView, setIsCodeView] = useState(false);
   const [status, setStatus] = useState({ type: '', message: '' });
   const quillRef = useRef(null);
@@ -109,8 +110,9 @@ export default function BlogEditor({ onSave, existingPost }) {
       return;
     }
     setStatus({ type: 'loading', message: 'Saving...' });
-    // Added category to postData
-    const postData = { title, summary, content, coverImage, category }; 
+    // Added author to postData
+    const postData = { title, summary, content, coverImage, category, author }; 
+    console.log(postData)
     const token = localStorage.getItem('authToken');
     const url = existingPost 
       ? `${BASE_URL}/api/blogs/update/${existingPost._id}` 
@@ -147,6 +149,15 @@ export default function BlogEditor({ onSave, existingPost }) {
       )}
 
       <input type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
+      
+      {/* Author input field */}
+      <input 
+        type="text" 
+        placeholder="Author Name" 
+        value={author} 
+        onChange={(e) => setAuthor(e.target.value)}
+        style={{ width: '100%', padding: '14px', marginBottom: '12px', borderRadius: '8px', border: '1px solid var(--border)' }}
+      />
       
       {/* Category Dropdown */}
       <select 

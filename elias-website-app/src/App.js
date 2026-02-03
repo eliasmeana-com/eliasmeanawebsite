@@ -23,6 +23,7 @@ import BlogList from './components/Blog/BlogList';
 import BlogPage from './components/Blog/BlogPage';
 import BlogEditor from './components/Blog/BlogEditor';
 import EditBlogPage from './components/Blog/EditBlogPage';
+import CloudManager from './components/Cloud/CloudManager';
 
 function App() {
   return (
@@ -35,16 +36,19 @@ function App() {
         {/* 2. Blog Ecosystem (Wrapped in NoSidebar for layout consistency) */}
         {/* General/Main List */}
         <Route path="/blogs" element={<NoSidebarLayout><BlogList /></NoSidebarLayout>} />
-        
+
         {/* Categorized Lists (e.g., /blogs/politics) */}
         <Route path="/blogs/:subject" element={<NoSidebarLayout><BlogList /></NoSidebarLayout>} />
-        
+
         {/* Single View */}
         <Route path="/blog/:id" element={<NoSidebarLayout><BlogPage /></NoSidebarLayout>} />
-        
+
         {/* Admin Tools */}
         <Route path="/admin/create-blog" element={<NoSidebarLayout><BlogEditor /></NoSidebarLayout>} />
         <Route path="/admin/edit/:id" element={<NoSidebarLayout><EditBlogPage /></NoSidebarLayout>} />
+
+        <Route path="/cloud" element={<NoSidebarLayout><CloudManager /></NoSidebarLayout>} />
+
 
         {/* 3. Restricted School Portal Group */}
         <Route path="/schedule" element={<RestrictedPage><Schedule /></RestrictedPage>} />
@@ -61,7 +65,7 @@ function App() {
         <Route path="/music" element={<NoSidebarLayout><Music /></NoSidebarLayout>} />
         <Route path="/trip" element={<NoSidebarLayout><Trip /></NoSidebarLayout>} />
         <Route path="/login" element={<NoSidebarLayout><Login /></NoSidebarLayout>} />
-        
+
         {/* Landing Page */}
         <Route path="/" element={<NoSidebarLayout><Home /></NoSidebarLayout>} />
       </Routes>

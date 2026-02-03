@@ -17,6 +17,7 @@
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "gapi-script": "^1.2.0",
+    "heic2any": "^0.0.4",
     "howler": "^2.2.4",
     "katex": "^0.16.22",
     "mongoose": "^8.16.4",

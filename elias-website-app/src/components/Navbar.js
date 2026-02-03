@@ -53,7 +53,8 @@ const Navbar = () => {
         { label: 'Class Home', path: '/schoolhome' }
       ]
     },
-    { label: authToken ? 'Logout' : 'Login', path: '/login' }
+    { label: authToken ? 'Logout' : 'Login', path: '/login' },
+    { label: authToken ? 'Cloud' : '',path:'/cloud'}
   ];
 
   return (

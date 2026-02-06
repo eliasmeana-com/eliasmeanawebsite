@@ -20,7 +20,6 @@ const TripImages = () => {
 
   return (
     <div className="gallery-images-text">
-      <h2>Trip Out West</h2>
       {error ? (
         <p className="error-message">{error}</p>
       ) : (

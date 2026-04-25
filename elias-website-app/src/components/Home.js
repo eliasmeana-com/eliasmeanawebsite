@@ -40,11 +40,7 @@ function Home() {
             as well as my <a href="https://github.com/eliasmeana132" target="_blank" rel="noreferrer" className="bio-link">GitHub</a>.
           </p>
           <p>
-            I'm also a voracious reader and political organizer. I firmly believe in the power of the
-            working class, and am determined to live to see a free Palestine 🇵🇸.
-          </p>
-          <p>
-            When I'm not working or organizing, I'm usually outside running or swimming,
+            When I'm not working, I'm usually outside running or swimming,
             practicing languages, or writing music. I’m always happy to connect with others
             interested in the intersection of math and computing.
           </p>

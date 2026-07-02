@@ -46,7 +46,7 @@ export const uploadToCloudinary = async (file) => {
     if (!res.ok) throw new Error('Upload failed');
 
     const data = await res.json();
-    return data.secure_url; // This URL gets inserted into the blog HTML
+    return data.secure_url; 
   } catch (error) {
     console.error('Cloudinary Upload Error:', error);
     throw error;

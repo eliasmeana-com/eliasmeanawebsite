@@ -50,7 +50,8 @@ const Navbar = () => {
         { label: 'Music', path: '/music' },
         { label: 'Trip', path: '/trip' },
         { label: 'Schedule', path: '/schedule' },
-        { label: 'Class Home', path: '/schoolhome' }
+        { label: 'Class Home', path: '/schoolhome' },
+        { label: authToken ? 'Sportsite' : '', path: '/sportsite' }
       ]
     },
     { label: authToken ? 'Logout' : 'Login', path: '/login' },

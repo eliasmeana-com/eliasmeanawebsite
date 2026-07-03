@@ -24,6 +24,7 @@ import BlogPage from './components/Blog/BlogPage';
 import BlogEditor from './components/Blog/BlogEditor';
 import EditBlogPage from './components/Blog/EditBlogPage';
 import CloudManager from './components/Cloud/CloudManager';
+import Sportsite from './components/Sportsite';
 
 function App() {
   return (
@@ -56,6 +57,7 @@ function App() {
         <Route path="/latexpage/classnotes/:classCode" element={<RestrictedPage><SomePage /></RestrictedPage>} />
         <Route path="/assignments/:classCode" element={<RestrictedPage><AssignmentsHome /></RestrictedPage>} />
         <Route path="/assignment/:classCode/:assignmentId" element={<RestrictedPage><SingleAssignment /></RestrictedPage>} />
+        <Route path="/sportsite" element={<RestrictedPage><Sportsite /></RestrictedPage>} />
 
         {/* 4. General "No Sidebar" Pages */}
         <Route path="/birla" element={<NoSidebarLayout><Birla /></NoSidebarLayout>} />

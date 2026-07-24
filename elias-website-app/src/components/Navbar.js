@@ -34,7 +34,8 @@ const Navbar = () => {
           children: [
             { label: 'Peeling Method', path: '/pel' },
             { label: 'Birla Poster', path: '/birla' },
-            { label: 'D-wave Proposal', path: '/dwave' }
+            { label: 'D-wave Proposal', path: '/dwave' },
+            { label: 'Masters Thesis', path: '/tfm' }
           ]
         },
         {

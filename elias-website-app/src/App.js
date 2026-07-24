@@ -9,6 +9,7 @@ import './styles/App.css';
 import Navbar from './components/Navbar';
 import Birla from './components/papers/Birla';
 import PEL from './components/papers/PEL';
+import TFM from './components/papers/TFM';
 import Schedule from './components/Schedule/Schedule';
 import Dwave from './components/papers/Dwave';
 import Research from './components/Research';
@@ -62,6 +63,7 @@ function App() {
         {/* 4. General "No Sidebar" Pages */}
         <Route path="/birla" element={<NoSidebarLayout><Birla /></NoSidebarLayout>} />
         <Route path="/pel" element={<NoSidebarLayout><PEL /></NoSidebarLayout>} />
+        <Route path="/tfm" element={<NoSidebarLayout><TFM /></NoSidebarLayout>} />
         <Route path="/dwave" element={<NoSidebarLayout><Dwave /></NoSidebarLayout>} />
         <Route path="/research" element={<NoSidebarLayout><Research /></NoSidebarLayout>} />
         <Route path="/music" element={<NoSidebarLayout><Music /></NoSidebarLayout>} />

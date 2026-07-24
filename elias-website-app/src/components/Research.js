@@ -14,6 +14,10 @@ function PDFGridPage() {
     {
       id: '1mbQlYNcR740wijmbLK77iOBTw521K2rG',
       title: 'Peeling Algorithm',
+    },
+    {
+      id: '1rpKTwmBN90cxHMcKR9qkPtE0WYMQKLjF',
+      title: 'Masters Thesis',
     }
   ];
 

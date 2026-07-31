@@ -57,7 +57,7 @@ const Navbar = () => {
           ]
         },
         { label: 'Music', path: '/music' },
-        { label: 'Trip', path: '/trip' },
+        { label: 'Pics', path: '/pics' },
         { label: 'Schedule', path: '/schedule' },
         { label: 'Class Home', path: '/schoolhome' },
         { label: authToken ? 'Sportsite' : '', path: '/sportsite' }

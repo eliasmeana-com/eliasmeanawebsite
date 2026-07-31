@@ -12,6 +12,8 @@ import Schedule from './components/Schedule/Schedule';
 import Research from './components/Research';
 import Music from './components/Studio/Music';
 import Trip from './components/TripGallery/TripGallery';
+import Pics from './components/Pics/Pics';
+import PicsAlbum from './components/Pics/PicsAlbum';
 import SchoolHome from './components/SchoolPortal/SchoolHome';
 import SomePage from './components/SchoolPortal/classnotes';
 import AssignmentsHome from './components/SchoolPortal/assignmentsHome';
@@ -53,6 +55,10 @@ function App() {
         <Route path="/research" element={<NoSidebarLayout><Research /></NoSidebarLayout>} />
         <Route path="/music" element={<NoSidebarLayout><Music /></NoSidebarLayout>} />
         <Route path="/trip" element={<NoSidebarLayout><Trip /></NoSidebarLayout>} />
+        <Route path="/travel" element={<NoSidebarLayout><Pics /></NoSidebarLayout>} />
+        <Route path="/travel/:albumId" element={<NoSidebarLayout><PicsAlbum /></NoSidebarLayout>} />
+        <Route path="/pics" element={<NoSidebarLayout><Pics /></NoSidebarLayout>} />
+        <Route path="/pics/:albumId" element={<NoSidebarLayout><PicsAlbum /></NoSidebarLayout>} />
         <Route path="/login" element={<NoSidebarLayout><Login /></NoSidebarLayout>} />
 
         {/* Landing Page */}

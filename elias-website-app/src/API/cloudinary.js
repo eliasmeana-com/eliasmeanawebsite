@@ -12,12 +12,38 @@ const CATEGORIES = {
   thesis: 'Theses',
 };
 
-let papersCache = null;
-let papersPromise = null;
-
 export function getCategories() {
   return CATEGORIES;
 }
+
+export function getAlbumDescription(albumId) {
+  try {
+    const raw = localStorage.getItem('album_descriptions');
+    if (!raw) return '';
+    const descriptions = JSON.parse(raw);
+    return descriptions[albumId] || '';
+  } catch {
+    return '';
+  }
+}
+
+export function saveAlbumDescription(albumId, description) {
+  const raw = localStorage.getItem('album_descriptions');
+  const descriptions = raw ? JSON.parse(raw) : {};
+  descriptions[albumId] = description;
+  localStorage.setItem('album_descriptions', JSON.stringify(descriptions));
+}
+
+export function labelFromTag(tag) {
+  return tag
+    .replace(/[-_]/g, ' ')
+    .replace(/\b\w/g, c => c.toUpperCase());
+}
+
+/* ---- Papers ---- */
+
+let papersCache = null;
+let papersPromise = null;
 
 export async function fetchPapers(tag) {
   const cacheKey = tag || '_all';
@@ -44,6 +70,45 @@ export async function fetchPapers(tag) {
 
   return papersPromise[cacheKey];
 }
+
+/* ---- Pics ---- */
+
+const PICS_BASE_TAG = 'web_pics';
+
+let picsCache = null;
+let picsPromise = null;
+
+export async function fetchPics() {
+  if (picsCache) return picsCache;
+  if (picsPromise) return picsPromise;
+
+  picsPromise = fetch(`${BACKEND_URL}/api/pics`).then(async (res) => {
+    if (!res.ok) throw new Error('Failed to fetch pics');
+    const data = await res.json();
+    picsCache = data;
+    picsPromise = null;
+    return data;
+  }).catch((err) => {
+    picsPromise = null;
+    throw err;
+  });
+
+  return picsPromise;
+}
+
+export function extractAlbums(images) {
+  const tagsByKey = {};
+  for (const img of images) {
+    const folderTags = (img.tags || []).filter(t => t !== PICS_BASE_TAG);
+    for (const tag of folderTags) {
+      if (!tagsByKey[tag]) tagsByKey[tag] = { key: tag, label: labelFromTag(tag), images: [] };
+      tagsByKey[tag].images.push(img);
+    }
+  }
+  return Object.values(tagsByKey).sort((a, b) => a.label.localeCompare(b.label));
+}
+
+/* ---- Legacy / direct Cloudinary ---- */
 
 export const listImagesInTag = async (tagName) => {
   try {

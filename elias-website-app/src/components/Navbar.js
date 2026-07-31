@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import '../styles/Navbar.css';
+import { fetchPapers } from '../API/cloudinary';
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSubmenu, setActiveSubmenu] = useState(null);
+  const [papers, setPapers] = useState([]);
   const location = useLocation();
   const authToken = localStorage.getItem('authToken');
 
@@ -12,6 +14,12 @@ const Navbar = () => {
     setMobileMenuOpen(false);
     setActiveSubmenu(null);
   }, [location]);
+
+  useEffect(() => {
+    fetchPapers()
+      .then(setPapers)
+      .catch(() => setPapers([]));
+  }, []);
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -22,7 +30,12 @@ const Navbar = () => {
     setActiveSubmenu(activeSubmenu === index ? null : index);
   };
 
-  const menuItems = [
+  const researchChildren = useMemo(() =>
+    papers.map(p => ({ label: p.title, path: `/paper/${p.slug}` })),
+    [papers]
+  );
+
+  const menuItems = useMemo(() => [
     { label: 'Home', path: '/' },
     { label: 'Resume', path: '/resume' },
     {
@@ -31,12 +44,7 @@ const Navbar = () => {
         {
           label: 'Research',
           path: '/research',
-          children: [
-            { label: 'Peeling Method', path: '/pel' },
-            { label: 'Birla Poster', path: '/birla' },
-            { label: 'D-wave Proposal', path: '/dwave' },
-            { label: 'Masters Thesis', path: '/tfm' }
-          ]
+          children: researchChildren
         },
         {
           label: 'Blog',
@@ -57,7 +65,7 @@ const Navbar = () => {
     },
     { label: authToken ? 'Logout' : 'Login', path: '/login' },
     { label: authToken ? 'Cloud' : '',path:'/cloud'}
-  ];
+  ], [authToken, researchChildren]);
 
   return (
     <header className="site-header">

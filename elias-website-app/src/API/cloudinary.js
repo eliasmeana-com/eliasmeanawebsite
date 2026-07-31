@@ -1,5 +1,50 @@
 const CLOUD_NAME = process.env.REACT_APP_CLOUDINARY_CLOUD_NAME;
 
+const BACKEND_URL =
+  window.location.hostname === 'localhost'
+    ? 'http://localhost:8080'
+    : 'https://eliasmeanawebsite.onrender.com';
+
+const CATEGORIES = {
+  preprint: 'Preprints',
+  published: 'Published',
+  'school-project': 'School Projects',
+  thesis: 'Theses',
+};
+
+let papersCache = null;
+let papersPromise = null;
+
+export function getCategories() {
+  return CATEGORIES;
+}
+
+export async function fetchPapers(tag) {
+  const cacheKey = tag || '_all';
+  if (papersCache && papersCache[cacheKey]) return papersCache[cacheKey];
+  if (papersPromise && papersPromise[cacheKey]) return papersPromise[cacheKey];
+
+  if (!papersPromise) papersPromise = {};
+  if (!papersCache) papersCache = {};
+
+  const url = tag
+    ? `${BACKEND_URL}/api/papers?tag=${encodeURIComponent(tag)}`
+    : `${BACKEND_URL}/api/papers`;
+
+  papersPromise[cacheKey] = fetch(url).then(async (res) => {
+    if (!res.ok) throw new Error('Failed to fetch papers');
+    const data = await res.json();
+    papersCache[cacheKey] = data;
+    papersPromise[cacheKey] = null;
+    return data;
+  }).catch((err) => {
+    papersPromise[cacheKey] = null;
+    throw err;
+  });
+
+  return papersPromise[cacheKey];
+}
+
 export const listImagesInTag = async (tagName) => {
   try {
     const response = await fetch(
@@ -22,7 +67,7 @@ export const listImagesInTag = async (tagName) => {
 
     return {
       images: uniqueImages,
-      nextPageToken: null 
+      nextPageToken: null
     };
   } catch (error) {
     console.error('Cloudinary Fetch Error:', error);
@@ -31,7 +76,7 @@ export const listImagesInTag = async (tagName) => {
 };
 
 export const uploadToCloudinary = async (file) => {
-  const UPLOAD_PRESET = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET || "blog images"; 
+  const UPLOAD_PRESET = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET || "blog images";
 
   const formData = new FormData();
   formData.append('file', file);
@@ -46,7 +91,7 @@ export const uploadToCloudinary = async (file) => {
     if (!res.ok) throw new Error('Upload failed');
 
     const data = await res.json();
-    return data.secure_url; 
+    return data.secure_url;
   } catch (error) {
     console.error('Cloudinary Upload Error:', error);
     throw error;

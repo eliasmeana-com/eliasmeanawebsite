@@ -7,11 +7,8 @@ import Home from './components/Home';
 import Resume from './components/Resume';
 import './styles/App.css';
 import Navbar from './components/Navbar';
-import Birla from './components/papers/Birla';
-import PEL from './components/papers/PEL';
-import TFM from './components/papers/TFM';
+import PaperViewer from './components/papers/PaperViewer';
 import Schedule from './components/Schedule/Schedule';
-import Dwave from './components/papers/Dwave';
 import Research from './components/Research';
 import Music from './components/Studio/Music';
 import Trip from './components/TripGallery/TripGallery';
@@ -35,22 +32,13 @@ function App() {
         {/* 1. Sidebar Layout Group */}
         <Route path="/resume" element={<SidebarLayout><Resume /></SidebarLayout>} />
 
-        {/* 2. Blog Ecosystem (Wrapped in NoSidebar for layout consistency) */}
-        {/* General/Main List */}
+        {/* 2. Blog Ecosystem */}
         <Route path="/blogs" element={<NoSidebarLayout><BlogList /></NoSidebarLayout>} />
-
-        {/* Categorized Lists (e.g., /blogs/politics) */}
         <Route path="/blogs/:subject" element={<NoSidebarLayout><BlogList /></NoSidebarLayout>} />
-
-        {/* Single View */}
         <Route path="/blog/:id" element={<NoSidebarLayout><BlogPage /></NoSidebarLayout>} />
-
-        {/* Admin Tools */}
         <Route path="/admin/create-blog" element={<NoSidebarLayout><BlogEditor /></NoSidebarLayout>} />
         <Route path="/admin/edit/:id" element={<NoSidebarLayout><EditBlogPage /></NoSidebarLayout>} />
-
         <Route path="/cloud" element={<NoSidebarLayout><CloudManager /></NoSidebarLayout>} />
-
 
         {/* 3. Restricted School Portal Group */}
         <Route path="/schedule" element={<RestrictedPage><Schedule /></RestrictedPage>} />
@@ -61,10 +49,7 @@ function App() {
         <Route path="/sportsite" element={<RestrictedPage><Sportsite /></RestrictedPage>} />
 
         {/* 4. General "No Sidebar" Pages */}
-        <Route path="/birla" element={<NoSidebarLayout><Birla /></NoSidebarLayout>} />
-        <Route path="/pel" element={<NoSidebarLayout><PEL /></NoSidebarLayout>} />
-        <Route path="/tfm" element={<NoSidebarLayout><TFM /></NoSidebarLayout>} />
-        <Route path="/dwave" element={<NoSidebarLayout><Dwave /></NoSidebarLayout>} />
+        <Route path="/paper/:slug" element={<NoSidebarLayout><PaperViewer /></NoSidebarLayout>} />
         <Route path="/research" element={<NoSidebarLayout><Research /></NoSidebarLayout>} />
         <Route path="/music" element={<NoSidebarLayout><Music /></NoSidebarLayout>} />
         <Route path="/trip" element={<NoSidebarLayout><Trip /></NoSidebarLayout>} />

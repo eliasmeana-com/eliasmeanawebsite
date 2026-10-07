@@ -1,55 +1,58 @@
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
 .content {
   max-width: 1100px;
-  margin: auto;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-  padding: 30px;
+  margin: 0 auto;
   line-height: 1.6;
-  color: #2C3E50;
+}
+
+.resume-inner {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: 40px;
 }
 
 h2 {
-  font-size: 1.8em;
-  color: #34495E;
-  border-bottom: 2px solid #ecf0f1;
-  padding-bottom: 5px;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  font-size: 1.5rem;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 10px;
+  margin: 36px 0 20px;
+  letter-spacing: 0.2px;
+}
+
+h2:first-child {
+  margin-top: 0;
 }
 
 h3 {
-  font-size: 1.2em;
-  color: #34495E;
-  padding-bottom: 5px;
-  margin-bottom: 20px;
+  font-size: 1.05rem;
+  color: var(--accent-strong);
+  margin: 24px 0 12px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
+  font-family: var(--font-sans);
+  font-weight: 700;
 }
 
 p {
-  margin: 15px 0;
-  font-size: 1.1em;
-  color: #7f8c8d;
+  margin: 14px 0;
+  color: var(--text-secondary);
+}
+
+p strong {
+  color: var(--text);
 }
 
 ul {
   list-style-type: disc;
-  padding-left: 20px;
+  padding-left: 22px;
   margin-bottom: 20px;
 }
 
 ul li {
   margin-bottom: 10px;
-  font-size: 1.1em;
-  color: #34495E;
+  color: var(--text-secondary);
 }
 
 .skills-list,
@@ -64,116 +67,81 @@ ul li {
   list-style-type: none;
   padding: 0;
   margin: 0;
-  width: 48%;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .skills-list ul li,
 .languages-list ul li {
-  background-color: #ffffff;
-  /* Contrasting white background for items */
-  border: 1px solid #dfe6e9;
-  padding: 8px 12px;
-  border-radius: 8px;
-  color: #2C3E50;
-  margin-bottom: 8px;
-  margin-right: 0.5px;
-  margin-left: 0.5px;
-  font-size: 1em;
-  display: inline-block;
-  transition: transform 0.2s, box-shadow 0.2s;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  padding: 8px 16px;
+  border-radius: 999px;
+  color: var(--text);
+  margin: 0;
+  font-size: 0.92rem;
+  transition: all var(--transition);
 }
 
 .skills-list ul li:hover,
 .languages-list ul li:hover {
   transform: translateY(-2px);
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  border-color: var(--accent);
+  box-shadow: 0 4px 14px var(--accent-glow);
 }
 
 .citizenship {
-  font-weight: bold;
+  font-weight: 600;
 }
-
-a {
-  color: #3498db;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-a:hover {
-  text-decoration: underline;
-  color: #2980b9;
-}
-
 
 .teaching-examples {
-  margin-top: 40px;
-  list-style-type: space-counter;
+  margin: 20px 0 0;
+  list-style-type: none;
   padding: 0;
-  margin: 0;
-  display: flex;
-  flex-wrap: wrap;
-  /* Allow items to wrap to the next line */
-  gap: 15px;
-  /* Space between items */
-  justify-content: center;
-  /* Center the items horizontally */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
 }
-
-.teaching-examples h2 {
-  font-size: 2em;
-  color: #2C3E50;
-  border-bottom: 2px solid #ecf0f1;
-  padding-bottom: 5px;
-  margin-bottom: 20px;
-}
-
-
 
 .teaching-examples li {
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: var(--bg-elevated);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
   overflow: hidden;
-  width: 230px;
-  /* Fixed width for each video card */
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  cursor: pointer;
-  margin-bottom: 20px;
-  /* Ensures some space between items when wrapping */
+  transition: all var(--transition);
 }
 
 .teaching-examples li:hover {
-  transform: translateY(-5px);
-  /* Lift the card on hover */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  /* Darker shadow for hover effect */
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: var(--shadow);
 }
 
 .teaching-examples li img {
   width: 100%;
-  height: 100px;
-  /* Thumbnail height */
+  height: 110px;
   object-fit: cover;
-  /* Ensures the image fills the space without distortion */
-  transition: transform 0.3s ease-in-out;
-}
-
-.teaching-examples li:hover img {
-  transform: scale(1.05);
-  /* Slight zoom effect on hover */
 }
 
 .teaching-examples li a {
   display: block;
-  padding: 10px 15px;
+  padding: 12px 14px;
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  font-weight: 600;
   text-decoration: none;
-  color: #2C3E50;
-  font-size: 0.7em;
-  font-weight: bold;
-  text-align: center;
-  transition: color 0.3s ease-in-out;
+  line-height: 1.4;
+  transition: color var(--transition);
 }
 
 .teaching-examples li a:hover {
-  color: #3498db;
+  color: var(--text);
+}
+
+@media (max-width: 600px) {
+  .resume-inner {
+    padding: 24px 18px;
+  }
 }

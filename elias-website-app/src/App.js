@@ -25,12 +25,16 @@ import BlogEditor from './components/Blog/BlogEditor';
 import EditBlogPage from './components/Blog/EditBlogPage';
 import CloudManager from './components/Cloud/CloudManager';
 import Sportsite from './components/Sportsite';
+import Teaching from './components/Teaching';
+import { MusicProvider } from './context/MusicContext';
+import MiniPlayer from './components/Studio/MiniPlayer';
 
 function App() {
   return (
     <Router>
-      <Navbar />
-      <Routes>
+      <MusicProvider>
+        <Navbar />
+        <Routes>
         {/* 1. Sidebar Layout Group */}
         <Route path="/resume" element={<SidebarLayout><Resume /></SidebarLayout>} />
 
@@ -54,6 +58,7 @@ function App() {
         <Route path="/paper/:slug" element={<NoSidebarLayout><PaperViewer /></NoSidebarLayout>} />
         <Route path="/research" element={<NoSidebarLayout><Research /></NoSidebarLayout>} />
         <Route path="/music" element={<NoSidebarLayout><Music /></NoSidebarLayout>} />
+        <Route path="/teaching" element={<NoSidebarLayout><Teaching /></NoSidebarLayout>} />
         <Route path="/trip" element={<NoSidebarLayout><Trip /></NoSidebarLayout>} />
         <Route path="/travel" element={<NoSidebarLayout><Pics /></NoSidebarLayout>} />
         <Route path="/travel/:albumId" element={<NoSidebarLayout><PicsAlbum /></NoSidebarLayout>} />
@@ -64,6 +69,8 @@ function App() {
         {/* Landing Page */}
         <Route path="/" element={<NoSidebarLayout><Home /></NoSidebarLayout>} />
       </Routes>
+        <MiniPlayer />
+      </MusicProvider>
     </Router>
   );
 }

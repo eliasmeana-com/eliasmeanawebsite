@@ -1,11 +1,11 @@
 /* Gallery reuses CSS variables defined here or inherited from page stylesheets */
 
 :root {
-  --gallery-border: #e2e5ef;
-  --gallery-accent: #2c3e50;
-  --gallery-radius: 12px;
-  --gallery-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
-  --gallery-shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.12);
+  --gallery-border: var(--border);
+  --gallery-accent: var(--accent);
+  --gallery-radius: 16px;
+  --gallery-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --gallery-shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.45);
 }
 
 .gallery-container {

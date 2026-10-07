@@ -9,7 +9,7 @@
     padding: 10px 24px;
     font-size: 1rem;
     font-weight: 600;
-    background-color: #1976d2;
+    background-color: var(--accent);
     color: white;
     border: none;
     border-radius: 8px;
@@ -22,14 +22,14 @@
   
   
   .latex-create-button:hover {
-    background-color: #145ea8;
+    background-color: var(--accent-strong);
   }
   
   /* Each note container will have some margin and separation */
   .notes-page-wrapper > div.latex-container {
     margin-bottom: 32px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
-    background: #fff;
+    background: var(--surface);
     padding: 20px 24px;
     border-radius: 10px;
     transition: box-shadow 0.2s ease;

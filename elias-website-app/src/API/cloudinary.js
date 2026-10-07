@@ -2,7 +2,7 @@ const CLOUD_NAME = process.env.REACT_APP_CLOUDINARY_CLOUD_NAME;
 
 const BACKEND_URL =
   window.location.hostname === 'localhost'
-    ? 'http://localhost:8080'
+    ? 'https://eliasmeanawebsite.onrender.com'
     : 'https://eliasmeanawebsite.onrender.com';
 
 const CATEGORIES = {

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FaPlay, FaPause, FaStepBackward, FaStepForward, FaMusic } from 'react-icons/fa';
+import { FaPlay, FaPause, FaStepBackward, FaStepForward, FaMusic, FaTimes } from 'react-icons/fa';
 import { useMusic, formatTime } from '../../context/MusicContext';
 import '../../styles/MiniPlayer.css';
 
@@ -16,12 +16,30 @@ const MiniPlayer = () => {
     previous,
   } = useMusic();
   const location = useLocation();
+  const [visible, setVisible] = useState(false);
 
-  // Hide the mini player on the full music page (the full player is there)
   if (location.pathname === '/music') return null;
   if (!hasTrack) return null;
 
   const progressPct = duration ? (progress / duration) * 100 : 0;
+
+  if (!visible) {
+    return (
+      <button
+        className="mini-player-toggle"
+        onClick={() => setVisible(true)}
+        aria-label="Show music player"
+      >
+        {currentTrack.cover ? (
+          <img src={currentTrack.cover} alt="" className="mini-player-toggle-img" />
+        ) : (
+          <FaMusic />
+        )}
+        <span className="mini-player-toggle-label">{currentTrack.title}</span>
+        <span className="mini-player-toggle-icon">{isPlaying ? <FaPause /> : <FaPlay />}</span>
+      </button>
+    );
+  }
 
   return (
     <div className="mini-player">
@@ -49,6 +67,9 @@ const MiniPlayer = () => {
           </button>
           <button className="mini-btn" onClick={next} aria-label="Next">
             <FaStepForward />
+          </button>
+          <button className="mini-btn mini-btn-close" onClick={() => setVisible(false)} aria-label="Hide player">
+            <FaTimes />
           </button>
         </div>
       </div>

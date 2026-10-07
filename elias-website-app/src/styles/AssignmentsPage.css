@@ -4,15 +4,15 @@
   margin: 0 auto;
   padding: 2rem 1rem;
   font-family: 'Segoe UI', sans-serif;
-  color: #1c1c1c;
-  background-color: #fafafa;
+  color: var(--text);
+  background-color: var(--bg);
 }
 
 .assignment-page h1 {
   text-align: center;
   font-size: 2rem;
   margin-bottom: 1.5rem;
-  color: #333;
+  color: var(--text);
 }
 
 /* CREATE BUTTON */
@@ -22,7 +22,7 @@
   margin: 0 auto 2rem auto;
   padding: 0.75rem 1.5rem;
   font-size: 1rem;
-  background-color: #2563eb;
+  background-color: var(--accent);
   color: #fff;
   border: none;
   border-radius: 6px;
@@ -31,7 +31,7 @@
 }
 
 .new-assignment-button:hover {
-  background-color: #1e40af;
+  background-color: var(--accent-strong);
 }
 
 /* FILTER BAR */
@@ -49,7 +49,7 @@
   width: 220px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  background: white;
+  background: var(--surface);
 }
 
 /* CARD GRID */
@@ -61,7 +61,7 @@
 
 /* ASSIGNMENT CARD */
 .assignment-card {
-  background: #ffffff;
+  background: var(--surface);
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 1rem 1.2rem;
@@ -88,7 +88,7 @@
 
 .toggle-icon {
   font-size: 1.4rem;
-  color: #666;
+  color: var(--text-secondary);
   margin-left: 0.5rem;
 }
 
@@ -96,7 +96,7 @@
 .card-details {
   margin-top: 1rem;
   font-size: 0.95rem;
-  color: #444;
+  color: var(--text-secondary);
 }
 
 .card-details p {
@@ -104,7 +104,7 @@
 }
 
 .card-details a {
-  color: #2563eb;
+  color: var(--accent-strong);
   text-decoration: none;
 }
 
@@ -125,7 +125,7 @@
 
 /* MODAL CONTAINER */
 .modal {
-  background: #ffffff;
+  background: var(--surface);
   padding: 2rem;
   width: 90%;
   max-width: 500px;
@@ -152,7 +152,7 @@
 
 .modal-body label {
   font-size: 0.95rem;
-  color: #333;
+  color: var(--text);
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
@@ -197,12 +197,12 @@
 
 .modal-buttons .cancel {
   position: relative;
-  background-color: #e5e7eb;
-  color: #333;
+  background-color: var(--surface-2);
+  color: var(--text);
 }
 
 .modal-buttons .cancel:hover {
-  background-color: #cbd5e1;
+  background-color: var(--surface-3);
 }
 
 .delete-assignment-button {

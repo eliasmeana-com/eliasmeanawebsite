@@ -1,36 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Howl, Howler } from 'howler';
+import React, { useRef, useEffect } from 'react';
+import { Howler } from 'howler';
 import { FaPlay, FaPause, FaStepBackward, FaStepForward, FaMusic } from 'react-icons/fa';
 import '../../styles/MusicPlayer.css';
-
-const musicReq = require.context('../../Music', false, /\.mp3$/);
-const imageReq = require.context('../../Music', false, /\.(png|jpe?g)$/);
-
-const songPaths = musicReq.keys().map(songKey => {
-  const baseName = songKey.replace('./', '').replace('.mp3', '');
-
-  let coverUrl = null;
-  const possibleImages = [`./${baseName}.jpg`, `./${baseName}.jpeg`, `./${baseName}.png`];
-
-  for (const imgPath of possibleImages) {
-    if (imageReq.keys().includes(imgPath)) {
-      coverUrl = imageReq(imgPath);
-      break;
-    }
-  }
-
-  return {
-    title: baseName,
-    url: musicReq(songKey),
-    cover: coverUrl,
-  };
-});
-
-const formatTime = (seconds) => {
-  const minutes = Math.floor(seconds / 60);
-  const secs = Math.floor(seconds % 60);
-  return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
-};
+import { useMusic, formatTime } from '../../context/MusicContext';
 
 const MobileVisualizer = ({ isPlaying }) => {
   const styles = {
@@ -45,10 +17,10 @@ const MobileVisualizer = ({ isPlaying }) => {
     pill: {
       width: '8px',
       height: '15px',
-      backgroundColor: 'var(--accent-color, #058b87)',
+      backgroundColor: 'var(--accent-color, #2563eb)',
       borderRadius: '10px',
       opacity: 0.8,
-      boxShadow: '0 0 10px var(--accent-color, #058b87)',
+      boxShadow: '0 0 10px var(--accent-color, #2563eb)',
       animationName: 'mobilePulse',
       animationDuration: '1.2s',
       animationIterationCount: 'infinite',
@@ -187,87 +159,19 @@ const Visualizer = ({ isPlaying }) => {
 };
 
 const MusicPlayer = () => {
-  const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const [duration, setDuration] = useState(0);
-
-  const [sound, setSound] = useState(null);
-  const soundRef = useRef(null);
-
-  const animationRef = useRef(null);
-  const currentTrack = songPaths[currentTrackIndex];
-
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-  const updateProgress = () => {
-    if (soundRef.current && soundRef.current.playing()) {
-      setProgress(soundRef.current.seek());
-      animationRef.current = requestAnimationFrame(updateProgress);
-    }
-  };
-
-  useEffect(() => {
-    if (soundRef.current) {
-      soundRef.current.unload();
-    }
-
-    if (animationRef.current) {
-      cancelAnimationFrame(animationRef.current);
-    }
-
-    const newSound = new Howl({
-      src: [currentTrack.url],
-      html5: isMobile,
-      onend: handleNext,
-      onload: () => setDuration(newSound.duration()),
-      onplay: () => {
-        animationRef.current = requestAnimationFrame(updateProgress);
-      },
-    });
-
-    soundRef.current = newSound;
-    setSound(newSound);
-    setProgress(0);
-
-    if (isPlaying) {
-      newSound.play();
-    }
-
-    return () => {
-      newSound.unload();
-      cancelAnimationFrame(animationRef.current);
-    };
-  }, [currentTrackIndex]);
-
-  const handlePlayPause = () => {
-    if (!soundRef.current) return;
-
-    if (isPlaying) {
-      soundRef.current.pause();
-      cancelAnimationFrame(animationRef.current);
-    } else {
-      soundRef.current.play();
-      animationRef.current = requestAnimationFrame(updateProgress);
-    }
-    setIsPlaying(!isPlaying);
-  };
-
-  const handleNext = () => {
-    setCurrentTrackIndex((prev) => (prev + 1) % songPaths.length);
-  };
-
-  const handlePrevious = () => {
-    setCurrentTrackIndex((prev) => (prev - 1 + songPaths.length) % songPaths.length);
-  };
-
-  const handleSeek = (e) => {
-    const value = parseFloat(e.target.value);
-    if (soundRef.current) {
-      soundRef.current.seek(value);
-      setProgress(value);
-    }
-  };
+  const {
+    songPaths,
+    currentTrack,
+    currentTrackIndex,
+    isPlaying,
+    progress,
+    duration,
+    toggle,
+    next,
+    previous,
+    seek,
+    selectTrack,
+  } = useMusic();
 
   return (
     <div className="player-wrapper">
@@ -299,7 +203,7 @@ const MusicPlayer = () => {
             max={duration || 0}
             step="0.1"
             value={progress}
-            onChange={handleSeek}
+            onChange={(e) => seek(parseFloat(e.target.value))}
             style={{
               backgroundSize: `${(progress / duration) * 100}% 100%`
             }}
@@ -307,13 +211,13 @@ const MusicPlayer = () => {
         </div>
 
         <div className="controls-row">
-          <button className="ctrl-btn secondary" onClick={handlePrevious}>
+          <button className="ctrl-btn secondary" onClick={previous}>
             <FaStepBackward />
           </button>
-          <button className={`ctrl-btn primary ${isPlaying ? 'playing' : ''}`} onClick={handlePlayPause}>
+          <button className={`ctrl-btn primary ${isPlaying ? 'playing' : ''}`} onClick={toggle}>
             {isPlaying ? <FaPause /> : <FaPlay />}
           </button>
-          <button className="ctrl-btn secondary" onClick={handleNext}>
+          <button className="ctrl-btn secondary" onClick={next}>
             <FaStepForward />
           </button>
         </div>
@@ -326,10 +230,7 @@ const MusicPlayer = () => {
             <li
               key={index}
               className={`song-item ${index === currentTrackIndex ? 'active' : ''}`}
-              onClick={() => {
-                setCurrentTrackIndex(index);
-                setIsPlaying(true);
-              }}
+              onClick={() => selectTrack(index)}
             >
               <div className="song-index">
                 {song.cover && index !== currentTrackIndex ? (

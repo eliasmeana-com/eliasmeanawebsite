@@ -1,16 +1,16 @@
 /* --- VARIABLES --- */
 :root {
-  /* CHANGE THIS COLOR to change the whole theme (e.g., #ff4757 for red, #2ecc71 for green) */
-  --accent-color: #9e0000; 
-  
+  /* CHANGE THIS COLOR to change the whole theme */
+  --accent-color: #2563eb;
+
   /* Backgrounds */
-  --bg-card: rgba(15, 28, 40, 0.805); /* Deep dark blue-black */
-  --bg-hover: rgba(255, 255, 255, 0.08);
-  --bg-active: rgba(0, 242, 234, 0.1); /* Low opacity version of accent */
-  
+  --bg-card: rgba(255, 255, 255, 0.85);
+  --bg-hover: rgba(37, 99, 235, 0.06);
+  --bg-active: rgba(37, 99, 235, 0.12);
+
   /* Text */
-  --text-main: #262222e2;
-  --text-muted: #94a3b8; /* Cool gray */
+  --text-main: #111827;
+  --text-muted: #4b5563;
 }
 
 /* --- LAYOUT --- */
@@ -20,10 +20,10 @@
   gap: 30px;
   background: var(--bg-card);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border);
   border-radius: 24px;
   padding: 35px;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+  box-shadow: var(--shadow-lg);
 }
 
 /* --- LEFT: PLAYER MAIN --- */
@@ -40,17 +40,16 @@
 .album-art {
   width: 100%;
   height: 250px;
-  /* Cool gradient background */
-  background: linear-gradient(135deg, #1e293b, #0f172a);
+  background: linear-gradient(135deg, var(--surface-2), var(--surface-3));
   border-radius: 18px;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 25px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  box-shadow: var(--shadow-sm);
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
 }
 
 /* Add these new rules to MusicPlayer.css */
@@ -82,7 +81,7 @@
 }
 .default-icon {
   font-size: 3.5rem;
-  color: rgba(255, 255, 255, 0.05);
+  color: var(--text-muted);
 }
 
 .track-info h3 {
@@ -101,7 +100,7 @@
   margin-top: 8px;
   display: block;
   font-weight: 600;
-  text-shadow: 0 0 10px rgba(0, 242, 234, 0.3);
+  text-shadow: 0 0 10px var(--accent-glow);
 }
 
 /* --- VISUALIZER --- */
@@ -208,7 +207,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  color: white;
+  color: var(--text-main);
   transition: all 0.2s;
   display: flex;
   align-items: center;
@@ -230,15 +229,15 @@
   height: 65px;
   border-radius: 50%;
   background: var(--accent-color);
-  color: #0f172a; /* Dark text on bright button */
+  color: #fff;
   font-size: 1.2rem;
-  box-shadow: 0 0 20px rgba(0, 242, 234, 0.4);
+  box-shadow: 0 0 20px var(--accent-glow);
 }
 
 .ctrl-btn.primary:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 30px rgba(0, 242, 234, 0.6);
-  background: #fff;
+  box-shadow: 0 0 30px var(--accent-glow);
+  background: var(--accent-strong);
 }
 
 /* --- RIGHT: PLAYLIST --- */

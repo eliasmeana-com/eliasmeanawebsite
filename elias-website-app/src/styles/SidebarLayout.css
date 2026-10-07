@@ -1,66 +1,85 @@
-/* SidebarLayout.css */
-
 .container {
-    display: flex; /* Sidebar and content side by side */
-    max-width: 1300px;
-    margin: 40px auto;
-    background-color: white;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden; /* Hide overflow content */
-  }
-  h1 {
-    font-size: 1.8em;
-    color: #ecf0f1;
-    border-bottom: 2px solid #ecf0f1;
-    padding-bottom: 5px;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+  display: flex;
+  max-width: 1300px;
+  margin: 32px auto;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.sidebar {
+  background: var(--bg-elevated);
+  width: 270px;
+  flex-shrink: 0;
+  padding: 28px 26px;
+  border-right: 1px solid var(--border);
+}
+
+.sidebar-name {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  margin: 0 0 24px;
+  color: var(--text);
+}
+
+.sidebar-heading {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  margin: 28px 0 12px;
+  color: var(--text);
+}
+
+.sidebar-section {
+  margin-bottom: 18px;
+}
+
+.sidebar-label {
+  margin: 0 0 2px;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--text-muted);
+}
+
+.sidebar-value {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+.sidebar p {
+  margin: 8px 0;
+}
+
+.sidebar a {
+  color: var(--accent-strong);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+.sidebar a:hover {
+  color: var(--accent-2);
+}
+
+.content {
+  padding: 32px;
+  flex-grow: 1;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    margin: 16px;
   }
   .sidebar {
-    background-color: #2C3E50;
-    color: white;
-    padding: 20px;
-    width: 250px;
-    flex-shrink: 0;
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
   }
-  
-  .sidebar h1 {
-    font-size: 1.8em;
-    margin-bottom: 10px;
-  }
-  
-  .sidebar p {
-    margin: 10px 0;
-    color: #ecf0f1;
-  }
-  
-  .sidebar a {
-    color: #ecdbff;
-    text-decoration: none;
-  }
-  
-  .sidebar a:hover {
-    text-decoration: underline;
-  }
-  
   .content {
-    padding: 20px;
-    flex-grow: 1; /* Content takes the remaining space */
+    width: 100%;
   }
-  
-  /* Add responsiveness for SidebarLayout */
-  @media (max-width: 768px) {
-    .container {
-      flex-direction: column; /* Stack sidebar and content vertically */
-    }
-  
-    .sidebar {
-      width: 100%; /* Sidebar spans the full width */
-    }
-  
-    .content {
-      width: 100%; /* Content spans the full width */
-    }
-  }
-  
+}

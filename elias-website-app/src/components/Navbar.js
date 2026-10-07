@@ -6,6 +6,7 @@ import { fetchPapers } from '../API/cloudinary';
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSubmenu, setActiveSubmenu] = useState(null);
+  const [openMegaSubmenus, setOpenMegaSubmenus] = useState({});
   const [papers, setPapers] = useState([]);
   const location = useLocation();
   const authToken = localStorage.getItem('authToken');
@@ -30,6 +31,10 @@ const Navbar = () => {
     setActiveSubmenu(activeSubmenu === index ? null : index);
   };
 
+  const toggleMegaSubmenu = (key) => {
+    setOpenMegaSubmenus((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
+
   const researchChildren = useMemo(() =>
     papers.map(p => ({ label: p.title, path: `/paper/${p.slug}` })),
     [papers]
@@ -38,6 +43,7 @@ const Navbar = () => {
   const menuItems = useMemo(() => [
     { label: 'Home', path: '/' },
     { label: 'Resume', path: '/resume' },
+    { label: 'Teaching', path: '/teaching' },
     {
       label: 'Other Stuff',
       children: [
@@ -85,24 +91,39 @@ const Navbar = () => {
                 {item.children && (
                   <div className="mega-dropdown">
                     <div className="mega-content">
-                      {item.children.map((child, childIndex) => (
-                        <div key={childIndex} className="mega-column">
-                          <Link to={child.path} className="mega-header">
-                            {child.label}
-                          </Link>
-                          {child.children && (
-                            <ul className="mega-sublist">
-                              {child.children.map((sub, subIndex) => (
-                                <li key={subIndex}>
-                                  <Link to={sub.path} className="mega-sublink">
-                                    {sub.label}
-                                  </Link>
-                                </li>
-                              ))}
-                            </ul>
-                          )}
-                        </div>
-                      ))}
+                      {item.children.map((child, childIndex) => {
+                        const childKey = `${index}-${childIndex}`;
+                        const hasChildren = child.children && child.children.length > 0;
+                        const isOpen = openMegaSubmenus[childKey];
+                        return (
+                          <div key={childIndex} className="mega-column">
+                            {hasChildren ? (
+                              <button
+                                className={`mega-header mega-toggle ${isOpen ? 'open' : ''}`}
+                                onClick={() => toggleMegaSubmenu(childKey)}
+                              >
+                                {child.label}
+                                <span className="mega-caret">▾</span>
+                              </button>
+                            ) : (
+                              <Link to={child.path} className="mega-header">
+                                {child.label}
+                              </Link>
+                            )}
+                            {hasChildren && (
+                              <ul className={`mega-sublist ${isOpen ? 'open' : ''}`}>
+                                {child.children.map((sub, subIndex) => (
+                                  <li key={subIndex}>
+                                    <Link to={sub.path} className="mega-sublink">
+                                      {sub.label}
+                                    </Link>
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                 )}

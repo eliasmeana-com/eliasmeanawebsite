@@ -16,20 +16,19 @@ function Home() {
           <div className="image-cropper">
             <img src={profileImg} alt="Elias Meana" className="profile-pic" />
           </div>
-          <h1 className='firstname'>Elias Meana</h1>
+          <h1 className="firstname">Elias Meana</h1>
           <p className="tagline">Application Engineer & Math Graduate Student</p>
         </header>
 
         <section className="bio-content">
           <p>
-            I’m a developer and student currently based in Spain, where I'm diving deep into
+            I'm a developer and student currently based in Spain, where I'm diving deep into
             <strong> functional analysis</strong> and <strong>stochastic differential equations</strong>.
             I'm currently working on studying the properties of solutions to the stochastic wave equation
             in the space of mean square convergent stochastic processes:
             <div className="math-container">
-            <LatexDocumentRenderer latexScript={mathBio} />
-          </div>
-          
+              <LatexDocumentRenderer latexScript={mathBio} />
+            </div>
           </p>
           <p>
             On the engineering side, I work as an application engineer building tools with
@@ -37,11 +36,11 @@ function Home() {
             <code>difusion_lib</code>, a library for simulating diffusion on graphs, and
             experimenting with network analysis and scrapers. You can check out my
             <a href="https://eliasmeana132-difusion-en-grafos-app-refactor-app-jvzhvp.streamlit.app/#graph-diffusion-simulator" target="_blank" rel="noreferrer" className="bio-link"> Graph Diffusion Simulator</a>
-            as well as my <a href="https://github.com/eliasmeana132" target="_blank" rel="noreferrer" className="bio-link">GitHub</a>.
+            {' '}as well as my <a href="https://github.com/eliasmeana132" target="_blank" rel="noreferrer" className="bio-link">GitHub</a>.
           </p>
           <p>
             When I'm not working, I'm usually outside running or swimming,
-            practicing languages, or writing music. I’m always happy to connect with others
+            practicing languages, or writing music. I'm always happy to connect with others
             interested in the intersection of math and computing.
           </p>
         </section>

@@ -4,6 +4,7 @@ import '../styles/Resume.css'
 function Content() {
   return (
     <div className="content">
+      <div className="resume-inner">
       <h2>Key Skills and Competencies</h2>
       <div className="skills-list">
         <ul>
@@ -141,6 +142,7 @@ function Content() {
           </a>
         </li>
       </ul>
+      </div>
     </div>
   );
 }

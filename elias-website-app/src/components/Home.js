@@ -33,12 +33,11 @@ function Home() {
             </a>.
           </p>
           <p>
-            When I'm not working, I'm usually outside running or swimming,
-            practicing languages, or writing music. I'm always happy to connect with others
-            interested in the intersection of math and computing.
+            When I'm not working, I'm usually outside running or swimming, building stuff, working on cars, 
+            practicing languages, or writing music.
           </p>
           <p>
-            I consider myself a dialectical materialist and you should too. 
+            I'm American, Spanish, and Iranian. Politics is central to my life. I consider myself a staunch anti-imperialist dialectical materialist and you should too ;). 
           </p>
         </section>
       </div>

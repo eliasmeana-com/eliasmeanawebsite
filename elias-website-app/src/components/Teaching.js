@@ -51,10 +51,8 @@ function Teaching() {
       <div className="teaching-content">
         <section className="teaching-intro">
           <p>
-            I taught mathematics and computer science at the secondary level for
-            several years, serving as the lead teacher for A-Level Mathematics and
-            Further Mathematics. Here I collect the videos, explanations, and
-            materials I've produced — designed to build intuition before technique.
+            I taught mathematics, physics, and computer science for many years. Here I will attempt to collect the videos, explanations, and
+            materials I've produced. My style is generally to build intuition before gradually transititioning my students into rigor.
           </p>
         </section>
 
@@ -99,9 +97,7 @@ function Teaching() {
           <div className="teaching-placeholder-inner">
             <h2>More coming soon</h2>
             <p>
-              This page will grow into a full library of teaching resources —
-              worksheets, lecture notes, and guided problem sets across calculus,
-              differential equations, and further mathematics.
+              This page will hopefully grow as I compile more of my teaching materials. If you have any questions or suggestions, feel free to reach out!
             </p>
           </div>
         </section>

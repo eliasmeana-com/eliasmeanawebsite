@@ -148,16 +148,16 @@ function Teaching() {
 
         <a
           className="calc3-banner"
-          href="https://eliasmeana132.github.io/Visual-Calc-3/"
+          href="https://eliasmeana132.github.io/visual-calculus/"
           target="_blank"
           rel="noopener noreferrer"
         >
           <div className="calc3-banner-icon" aria-hidden="true">∇</div>
           <div className="calc3-banner-body">
-            <h2>Visual Calc 3</h2>
-            <p>Interactive visualizations covering all of multivariable calculus.</p>
+            <h2>Visual Calculus</h2>
+            <p>Interactive visualizations covering all of undergraduate calculus.</p>
           </div>
-          <span className="calc3-banner-cta">Open visualizer ↗</span>
+          <span className="calc3-banner-cta">↗</span>
         </a>
 
         <h2 className="teaching-section-title">Video Lessons</h2>

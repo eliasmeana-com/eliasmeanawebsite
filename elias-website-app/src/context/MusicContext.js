@@ -38,11 +38,16 @@ export function MusicProvider({ children }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [hasTrack, setHasTrack] = useState(false);
+  const [hasPlayed, setHasPlayed] = useState(false);
+  const [dismissed, setDismissed] = useState(false);
+  const [volume, setVolume] = useState(0.8);
+  const [muted, setMuted] = useState(false);
 
   const soundRef = useRef(null);
   const animationRef = useRef(null);
   const isPlayingRef = useRef(false);
+  const volumeRef = useRef(0.8);
+  const mutedRef = useRef(false);
 
   const currentTrack = songPaths[currentTrackIndex];
 
@@ -71,6 +76,7 @@ export function MusicProvider({ children }) {
     const newSound = new Howl({
       src: [currentTrack.url],
       html5: isMobile,
+      volume: mutedRef.current ? 0 : volumeRef.current,
       onend: handleNext,
       onload: () => setDuration(newSound.duration()),
       onplay: () => {
@@ -83,13 +89,13 @@ export function MusicProvider({ children }) {
 
     soundRef.current = newSound;
     setProgress(0);
-    setHasTrack(true);
 
     if (isPlayingRef.current) {
       newSound.play();
     }
 
     return () => {
+      newSound.unload();
       cancelAnimationFrame(animationRef.current);
     };
   }, [currentTrackIndex, isMobile, updateProgress, handleNext, currentTrack.url]);
@@ -99,6 +105,8 @@ export function MusicProvider({ children }) {
     soundRef.current.play();
     setIsPlaying(true);
     isPlayingRef.current = true;
+    setHasPlayed(true);
+    setDismissed(false);
     animationRef.current = requestAnimationFrame(updateProgress);
   }, [updateProgress]);
 
@@ -137,6 +145,34 @@ export function MusicProvider({ children }) {
     setCurrentTrackIndex(index);
     setIsPlaying(true);
     isPlayingRef.current = true;
+    setHasPlayed(true);
+    setDismissed(false);
+  }, []);
+
+  const dismissMini = useCallback(() => {
+    setDismissed(true);
+  }, []);
+
+  const changeVolume = useCallback((value) => {
+    const clamped = Math.max(0, Math.min(1, value));
+    volumeRef.current = clamped;
+    setVolume(clamped);
+    if (clamped > 0) {
+      mutedRef.current = false;
+      setMuted(false);
+    }
+    if (soundRef.current) {
+      soundRef.current.volume(clamped);
+    }
+  }, []);
+
+  const toggleMute = useCallback(() => {
+    const nextMuted = !mutedRef.current;
+    mutedRef.current = nextMuted;
+    setMuted(nextMuted);
+    if (soundRef.current) {
+      soundRef.current.volume(nextMuted ? 0 : volumeRef.current);
+    }
   }, []);
 
   const value = useMemo(() => ({
@@ -146,7 +182,10 @@ export function MusicProvider({ children }) {
     isPlaying,
     progress,
     duration,
-    hasTrack,
+    hasPlayed,
+    dismissed,
+    volume,
+    muted,
     play,
     pause,
     toggle,
@@ -154,7 +193,10 @@ export function MusicProvider({ children }) {
     previous,
     seek,
     selectTrack,
-  }), [currentTrack, currentTrackIndex, isPlaying, progress, duration, hasTrack, play, pause, toggle, next, previous, seek, selectTrack]);
+    dismissMini,
+    changeVolume,
+    toggleMute,
+  }), [currentTrack, currentTrackIndex, isPlaying, progress, duration, hasPlayed, dismissed, volume, muted, play, pause, toggle, next, previous, seek, selectTrack, dismissMini, changeVolume, toggleMute]);
 
   return <MusicContext.Provider value={value}>{children}</MusicContext.Provider>;
 }

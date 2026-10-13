@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { Howler } from 'howler';
-import { FaPlay, FaPause, FaStepBackward, FaStepForward, FaMusic } from 'react-icons/fa';
+import { FaPlay, FaPause, FaStepBackward, FaStepForward, FaMusic, FaVolumeUp, FaVolumeMute } from 'react-icons/fa';
 import '../../styles/MusicPlayer.css';
 import { useMusic, formatTime } from '../../context/MusicContext';
 
@@ -166,11 +166,15 @@ const MusicPlayer = () => {
     isPlaying,
     progress,
     duration,
+    volume,
+    muted,
     toggle,
     next,
     previous,
     seek,
     selectTrack,
+    changeVolume,
+    toggleMute,
   } = useMusic();
 
   return (
@@ -220,6 +224,23 @@ const MusicPlayer = () => {
           <button className="ctrl-btn secondary" onClick={next}>
             <FaStepForward />
           </button>
+
+          <div className="volume-control">
+            <button className="ctrl-btn secondary" onClick={toggleMute} aria-label={muted ? 'Unmute' : 'Mute'}>
+              {muted || volume === 0 ? <FaVolumeMute /> : <FaVolumeUp />}
+            </button>
+            <input
+              type="range"
+              className="volume-slider"
+              min="0"
+              max="1"
+              step="0.01"
+              value={muted ? 0 : volume}
+              onChange={(e) => changeVolume(parseFloat(e.target.value))}
+              aria-label="Volume"
+              style={{ backgroundSize: `${(muted ? 0 : volume) * 100}% 100%` }}
+            />
+          </div>
         </div>
       </div>
 

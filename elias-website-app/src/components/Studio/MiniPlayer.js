@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FaPlay, FaPause, FaStepBackward, FaStepForward, FaMusic, FaTimes } from 'react-icons/fa';
+import { FaPlay, FaPause, FaStepBackward, FaStepForward, FaMusic, FaTimes, FaVolumeUp, FaVolumeMute } from 'react-icons/fa';
 import { useMusic, formatTime } from '../../context/MusicContext';
 import '../../styles/MiniPlayer.css';
 
@@ -10,36 +10,23 @@ const MiniPlayer = () => {
     isPlaying,
     progress,
     duration,
-    hasTrack,
+    hasPlayed,
+    dismissed,
+    volume,
+    muted,
     toggle,
     next,
     previous,
+    dismissMini,
+    changeVolume,
+    toggleMute,
   } = useMusic();
   const location = useLocation();
-  const [visible, setVisible] = useState(false);
 
   if (location.pathname === '/music') return null;
-  if (!hasTrack) return null;
+  if (!hasPlayed || dismissed) return null;
 
   const progressPct = duration ? (progress / duration) * 100 : 0;
-
-  if (!visible) {
-    return (
-      <button
-        className="mini-player-toggle"
-        onClick={() => setVisible(true)}
-        aria-label="Show music player"
-      >
-        {currentTrack.cover ? (
-          <img src={currentTrack.cover} alt="" className="mini-player-toggle-img" />
-        ) : (
-          <FaMusic />
-        )}
-        <span className="mini-player-toggle-label">{currentTrack.title}</span>
-        <span className="mini-player-toggle-icon">{isPlaying ? <FaPause /> : <FaPlay />}</span>
-      </button>
-    );
-  }
 
   return (
     <div className="mini-player">
@@ -68,7 +55,25 @@ const MiniPlayer = () => {
           <button className="mini-btn" onClick={next} aria-label="Next">
             <FaStepForward />
           </button>
-          <button className="mini-btn mini-btn-close" onClick={() => setVisible(false)} aria-label="Hide player">
+
+          <div className="mini-volume">
+            <button className="mini-btn" onClick={toggleMute} aria-label={muted ? 'Unmute' : 'Mute'}>
+              {muted || volume === 0 ? <FaVolumeMute /> : <FaVolumeUp />}
+            </button>
+            <input
+              type="range"
+              className="mini-volume-slider"
+              min="0"
+              max="1"
+              step="0.01"
+              value={muted ? 0 : volume}
+              onChange={(e) => changeVolume(parseFloat(e.target.value))}
+              aria-label="Volume"
+              style={{ backgroundSize: `${(muted ? 0 : volume) * 100}% 100%` }}
+            />
+          </div>
+
+          <button className="mini-btn mini-btn-close" onClick={dismissMini} aria-label="Close player">
             <FaTimes />
           </button>
         </div>

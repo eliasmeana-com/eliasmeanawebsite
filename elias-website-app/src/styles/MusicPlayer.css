@@ -240,6 +240,48 @@
   background: var(--accent-strong);
 }
 
+.volume-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.volume-slider {
+  -webkit-appearance: none;
+  width: 90px;
+  height: 4px;
+  background: var(--surface-3);
+  border-radius: 4px;
+  cursor: pointer;
+  background-image: linear-gradient(var(--accent-color), var(--accent-color));
+  background-repeat: no-repeat;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+  border: 2px solid var(--accent-color);
+  box-shadow: 0 0 10px var(--accent-glow);
+}
+
+.volume-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+@media (max-width: 600px) {
+  .volume-slider {
+    width: 60px;
+  }
+  .controls-row {
+    gap: 18px;
+  }
+}
+
 /* --- RIGHT: PLAYLIST --- */
 .playlist-side {
   display: flex;
